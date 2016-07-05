@@ -1,0 +1,13 @@
+intranet website
+database - part number, price, duty percentage, discount, family code
+input part number, qty => total price (also show duty percentage, and discount)
+allow 10 rows in interface for query
+data ingestion through excel (multiple sheets, non-standard cell structure)
+make it in such a way that contents of web page cannot be copied
+
+outside scope:
+is there a way to restrict file copy operations within a server but can open the file to view
+
+possible update:
+internet capability (security - encryption, login, etc.)
+
