@@ -1,5 +1,8 @@
-- turning on db properties
+- turned on db properties
 - created items_master table
 - created index.jsp
 - created items_query_result.jsp
 - established connection to table and POC results
+- established standardised field names for excel file
+- established ExcelReader class, added Excel reading library
+- added sample Excel reading code, crafted pseudocode for ingesting Excel file
