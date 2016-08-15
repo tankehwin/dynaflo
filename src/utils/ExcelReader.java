@@ -2,6 +2,7 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -15,35 +16,42 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
+import data.*;
+
 public class ExcelReader {
 
 	public void ingestExcelFile(String filePath) throws Exception {
 		
 		// Open workbook
 		Workbook dynafloBook = Workbook.getWorkbook(new File("DYNAFLO PRICE 2016.xls")); // TODO: Modify this to get from uploaded file
+		// Instantiate hard-coded master file for field name schemes
+		FieldNameScheme fnsScroll = new FieldNameScheme();
 		// Start loop
 		for(int i=0; i<dynafloBook.getNumberOfSheets(); i++){
-		// 		Access next worksheet
+			// Access next worksheet
 			Sheet sheet = dynafloBook.getSheet(i);
-		// 		Find out which worksheet it is based on worksheet name (Kawasaki, EUROTECH, Hosco, PHALBOK etc.)
+			// Find out which worksheet it is based on worksheet name (Kawasaki, EUROTECH, Hosco, PHALBOK etc.)
 			String dynafloSheetName = sheet.getName();
-			
-		// 		Retrieve the appropriate field name scheme (hard-coded or properties file)
-		// 		Start loop
-		// 			Find cells associated with each field name according to field name scheme for that worksheet, taking into account column numbers
-		// 			Store in a field name array
-		// 		End loop
-		// 		Find the row from which all data starts
-		// 		Start loop
-		// 			Does the row have data? if so, continue. Otherwise, end loop
-		// 			Based on field name array created earlier, read in data into product object
-		// 			Go to next row
-		// 		End loop
-		//		Write all product objects into database. Overwrite where necessary if there is a product code match
-		//		Should there be code to check for items to delete?
+			// Retrieve the appropriate field name scheme (hard-coded or properties file)
+			ArrayList arrFieldNames = fnsScroll.getColumns(dynafloSheetName);
+			if(arrFieldNames == null) {
+				throw new Exception("This worksheet is not recognised. Please contact this programme's designer to fix this.");
+			}
+			// Start loop
+				// Find cells associated with each field name according to field name scheme for that worksheet, taking into account column numbers
+				// Store in a field name array
+			// End loop
+			// Find the row from which all data starts
+			// Start loop
+				// Does the row have data? if so, continue. Otherwise, end loop
+				// Based on field name array created earlier, read in data into product object
+				// Go to next row
+			// End loop
+			// Write all product objects into database. Overwrite where necessary if there is a product code match
+			// Should there be code to check for items to delete?
 		// End loop
 		}
-		
+					
 		// Example code follows
 		WritableWorkbook wworkbook;
 		wworkbook = Workbook.createWorkbook(new File("output.xls"));

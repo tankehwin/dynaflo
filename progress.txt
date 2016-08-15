@@ -6,3 +6,6 @@
 - established standardised field names for excel file
 - established ExcelReader class, added Excel reading library
 - added sample Excel reading code, crafted pseudocode for ingesting Excel file
+- created Item model
+- created hard-coded field name schemes list
+- ExcelReader can now determine which set of field names to use based on worksheet encountered
