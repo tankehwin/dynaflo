@@ -9,3 +9,5 @@
 - created Item model
 - created hard-coded field name schemes list
 - ExcelReader can now determine which set of field names to use based on worksheet encountered
+- introduced bug; wrong understanding of jxl.Sheet.getCell - assumed the String parameter meant value within the cell, 
+looks like that was wrong. Need to find out what it really means before can proceed

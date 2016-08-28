@@ -32,12 +32,16 @@ HEADER
 	Double price1 = null;
 	Double duty1 = null;
 	Double discount1 = null;
+	/*
 	while(rs.next()) {
 		partNum1 = rs.getString("part_id");
 		price1 = rs.getDouble("price");
 		duty1 = rs.getDouble("duty");
 		discount1 = rs.getDouble("discount");
 	}
+	*/
+	ExcelReader excelBook = new ExcelReader();
+	excelBook.ingestExcelFile("");
 	
 %>
 <table class="formtable">
