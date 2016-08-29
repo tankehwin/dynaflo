@@ -62,18 +62,31 @@ public class ExcelReader {
 			int currentRow = headerRow + 1;
 			// Start loop
 			boolean endOfData = false;
+			System.out.println("Number of columns detected: " + arrFieldColumns.size());
+			System.out.println("Initial currentRow: " + currentRow);
 			while(endOfData==false){
 				// Does the row have data? if so, continue. Otherwise, end loop
-				Cell cellData = sheet.getCell(currentRow, 1);
+				Cell cellData = sheet.getCell(1, currentRow);
 				if(cellData.getContents().trim().equals("")){
+					System.out.println("No more data rows detected: " + currentRow);
 					endOfData = true;
 					break;
 				}
 				// Based on field name array created earlier, read in data into product object
 				for(int k=0;k<arrFieldColumns.size();k++){
 					int colNumber = (int) arrFieldColumns.get(k);
-					cellData = sheet.getCell(currentRow, colNumber);
-					System.out.println(cellData.getContents().trim());
+					String cellValue = "";
+					if(k==0){ // This if statement is because the first column (PART NUMBER) actually contains 2 cells of info, so requires concatenation
+						cellData = sheet.getCell(colNumber, currentRow);
+						cellValue = cellData.getContents().trim();
+						cellData = sheet.getCell(colNumber + 1, currentRow);
+						cellValue += cellData.getContents().trim();
+					}
+					else{
+						cellData = sheet.getCell(colNumber, currentRow);
+						cellValue = cellData.getContents().trim();
+					}					
+					System.out.println(cellValue);
 				}
 				System.out.println("==========");
 				// Go to next row

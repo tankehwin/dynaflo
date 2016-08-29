@@ -13,3 +13,7 @@
 looks like that was wrong. Need to find out what it really means before can proceed
 - proposed findCell as replacement to usage of getCell from before; requires testing
 - http://jexcelapi.sourceforge.net/resources/javadocs/2_6_10/docs/index.html is documentation for jexcelapi
+- problems with working excel file: wrong spelling of ADDITIONAL INFORMATION 1 field (needs to be fixed)
+- findCell tested; works
+- added field name constants to FieldNameSchemes and removed previous field name ArrayList
+- added code to handle PART NUMBER field that actually consists of 2 concatenated fields
