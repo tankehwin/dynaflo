@@ -51,7 +51,7 @@ public class ExcelReader {
 				// Find cells associated with each field name according to field name scheme for that worksheet, taking into account column numbers
 				String fieldName = (String) arrFieldNames.get(j);
 				System.out.println("Column name is: " + fieldName);
-				Cell cellColumn = sheet.getCell(fieldName);
+				Cell cellColumn = sheet.findCell(fieldName);
 				// Store in a field name array
 				arrFieldColumns.add(cellColumn.getColumn());
 				// Keep row of where headers start
