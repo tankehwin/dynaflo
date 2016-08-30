@@ -3,6 +3,7 @@ package utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.sql.Connection;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -15,12 +16,12 @@ import jxl.write.Number;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
-
+import model.ItemModel;
 import data.*;
 
 public class ExcelReader {
 
-	public void ingestExcelFile(String filePath) throws Exception {
+	public void ingestExcelFile(String filePath, Connection conn) throws Exception {
 		
 		// Open workbook
 		Workbook dynafloBook = Workbook.getWorkbook(new File("C:/Users/tankehwin/Desktop/DYNAFLO PRICE 2016 - 8.8.16.xls")); // TODO: Modify this to get from uploaded file
@@ -43,7 +44,7 @@ public class ExcelReader {
 			else{
 				System.out.println(dynafloSheetName + " has " + arrFieldNames.size() + " columns.");
 			}
-			// Create field name array
+			// Create column number array
 			ArrayList arrFieldColumns = new ArrayList();
 			int headerRow = 0;
 			// Start loop
@@ -52,7 +53,7 @@ public class ExcelReader {
 				String fieldName = (String) arrFieldNames.get(j);
 				System.out.println("Column name is: " + fieldName);
 				Cell cellColumn = sheet.findCell(fieldName);
-				// Store in a field name array
+				// Store in a column number array
 				arrFieldColumns.add(cellColumn.getColumn());
 				// Keep row of where headers start
 				headerRow = cellColumn.getRow();
@@ -60,10 +61,13 @@ public class ExcelReader {
 			}		
 			// Find the row from which all data starts
 			int currentRow = headerRow + 1;
-			// Start loop
+			
 			boolean endOfData = false;
 			System.out.println("Number of columns detected: " + arrFieldColumns.size());
 			System.out.println("Initial currentRow: " + currentRow);
+			// Create product object collection
+			ArrayList arrProdList = new ArrayList();
+			// Start loop
 			while(endOfData==false){
 				// Does the row have data? if so, continue. Otherwise, end loop
 				Cell cellData = sheet.getCell(1, currentRow);
@@ -72,6 +76,8 @@ public class ExcelReader {
 					endOfData = true;
 					break;
 				}
+				// Create product object
+				ItemModel itmObj = new ItemModel();
 				// Based on field name array created earlier, read in data into product object
 				for(int k=0;k<arrFieldColumns.size();k++){
 					int colNumber = (int) arrFieldColumns.get(k);
@@ -85,7 +91,11 @@ public class ExcelReader {
 					else{
 						cellData = sheet.getCell(colNumber, currentRow);
 						cellValue = cellData.getContents().trim();
-					}					
+					}
+					// Depending on which column it belongs to, add it to appropriate property
+					itmObj.setFieldValue((String) arrFieldNames.get(k), cellValue);
+					// Add to product object collection
+					arrProdList.add(itmObj);
 					System.out.println(cellValue);
 				}
 				System.out.println("==========");
@@ -93,32 +103,18 @@ public class ExcelReader {
 				currentRow++;
 			// End loop
 			}
-			// Write all product objects into database. Overwrite where necessary if there is a product code match
-			// Should there be code to check for items to delete?
-		// End loop
+			// Delete all items
+			ItemManager.clearTable(conn);
+			// Start loop
+			for(int m=0;m<arrProdList.size();m++){
+				// Write all product objects into database. Overwrite where necessary if there is a product code match
+				ItemModel writeObj = (ItemModel) arrProdList.get(m);
+				ItemManager.insertObject(writeObj, conn);
+			// End loop
+			}
 		}
 		dynafloBook.close();	
 		
-		/*
-		// Example code follows
-		WritableWorkbook wworkbook;
-		wworkbook = Workbook.createWorkbook(new File("output.xls"));
-		WritableSheet wsheet = wworkbook.createSheet("First Sheet", 0);
-		Label label = new Label(0, 2, "A label record");
-		wsheet.addCell(label);
-		Number number = new Number(3, 4, 3.1459);
-		wsheet.addCell(number);
-		wworkbook.write();
-		wworkbook.close();
-	
-		Workbook workbook = Workbook.getWorkbook(new File("output.xls"));
-		Sheet sheet = workbook.getSheet(0);
-		Cell cell1 = sheet.getCell(0, 2);
-		System.out.println(cell1.getContents());
-		Cell cell2 = sheet.getCell(3, 4);
-		System.out.println(cell2.getContents());
-		workbook.close();
-		*/
 	}
 	
 }

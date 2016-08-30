@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Timestamp;
 
+import data.FieldNameScheme;
+
 public class ItemModel {
 
 	public static final String COLNAME_PARTNUMBER = "part_number";
@@ -25,6 +27,8 @@ public class ItemModel {
 	public static final String COLNAME_GRACOSTDDISCOUNT = "graco_std_discount";
 	public static final String COLNAME_SUPPLIERCODE = "supplier_code";
 	
+	public static final String TABLENAME = "items_master";
+	
 	private String partNumber;
 	private String description;
 	private String addInfo1;
@@ -45,6 +49,93 @@ public class ItemModel {
 	private String gracoStdDiscountCode;
 	private Double gracoStdDiscount;
 	private String supplierCode;
+	
+	public ItemModel() {
+		this.partNumber = "";
+		this.description = "";
+		this.addInfo1 = "";
+		this.addInfo2 = "";
+		this.addInfo3 = "";
+		this.duties = new Double(0);
+		this.sellingPrice = new Double(0);
+		this.leadTimeARO = new Integer(0);
+		this.dynafloDiscountCode = "";
+		this.oldPartNumber = "";
+		this.latestDatePurchased = Timestamp.valueOf("1970-01-01 00:00:01");
+		this.supplier = "";
+		this.itemReference = "";
+		this.equipmentPackageReference = "";
+		this.gracoReference = "";
+		this.gracoFamType = "";
+		this.gracoFamDiscount = new Double(0);
+		this.gracoStdDiscountCode = "";
+		this.gracoStdDiscount = new Double(0);
+		this.supplierCode = "";
+	}
+	
+	public void setFieldValue(String fieldName, Object value) {
+		if(FieldNameScheme.FIELDNAME_PART_NUMBER.equals(fieldName)){
+			this.partNumber = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_DESCRIPTION.equals(fieldName)){
+			this.description = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_1.equals(fieldName)){
+			this.addInfo1 = (String) value;		
+		}
+		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_2.equals(fieldName)){
+			this.addInfo2 = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_3.equals(fieldName)){
+			this.addInfo3 = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_DUTIES.equals(fieldName)){
+			this.duties = (Double) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_SELLING_PRICE.equals(fieldName)){
+			this.sellingPrice = (Double) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_LEAD_TIME.equals(fieldName)){
+			this.leadTimeARO = (Integer) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_DYNAFLO_DISCOUNT_CODE.equals(fieldName)){
+			this.dynafloDiscountCode = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_OLD_PART_NUMBER.equals(fieldName)){
+			this.oldPartNumber = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_LATEST_DATE_PURCHASED.equals(fieldName)){
+			this.latestDatePurchased = (Timestamp) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_SUPPLIER.equals(fieldName)){
+			this.supplier = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_ITEM_REF.equals(fieldName)){
+			this.itemReference = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_EQUIPMENT_PACKAGE_REF.equals(fieldName)){
+			this.equipmentPackageReference = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_GRACO_REF.equals(fieldName)){
+			this.gracoReference = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_TYPE.equals(fieldName)){
+			this.gracoFamType = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_DISCOUNT.equals(fieldName)){
+			this.gracoFamDiscount = (Double) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT_CODE.equals(fieldName)){
+			this.gracoStdDiscountCode = (String) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT.equals(fieldName)){
+			this.gracoStdDiscount = (Double) value;
+		}
+		else if(FieldNameScheme.FIELDNAME_SUPPLIER_CODE.equals(fieldName)){
+			this.supplierCode = (String) value;
+		}
+	}
+	
 	public String getPartNumber() {
 		return partNumber;
 	}
