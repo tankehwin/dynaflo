@@ -117,7 +117,7 @@ public class ExcelReader {
 				}
 				// Start loop
 				for(int m=0;m<arrProdList.size();m++){
-					// Write all product objects into database. Overwrite where necessary if there is a product code match
+					// Write all product objects into database
 					ItemModel writeObj = (ItemModel) arrProdList.get(m);
 					ItemManager.insertObject(writeObj, conn);
 					importCount++;

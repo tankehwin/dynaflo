@@ -4,8 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link href="jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<script src="jquery/js/jquery-1.10.2.js"></script>
+<script src="jquery/js/jquery-ui-1.10.4.custom.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Dynaflow</title>
+<title>Dynaflo</title>
 </head>
 <body>
 <header>
@@ -28,10 +32,10 @@ HEADER
 		String partNum5 = request.getParameter("partnum5");	
 		String qty5 = request.getParameter("qty5");	
 		String redirectURL = "items_query_result.jsp?partnum1="+partNum1+"&qty1="+qty1
-				+"partnum2="+partNum2+"&qty2="+qty2
-				+"partnum3="+partNum3+"&qty3="+qty3
-				+"partnum4="+partNum4+"&qty4="+qty4
-				+"partnum5="+partNum5+"&qty5="+qty5;
+				+"&partnum2="+partNum2+"&qty2="+qty2
+				+"&partnum3="+partNum3+"&qty3="+qty3
+				+"&partnum4="+partNum4+"&qty4="+qty4
+				+"&partnum5="+partNum5+"&qty5="+qty5;
 		response.sendRedirect(redirectURL);
 	}
 	else if(action != null && action.equals("importData")) {
@@ -47,9 +51,16 @@ HEADER
 	}
 	
 %>
+<table class="formtable">
+<tr>
+<td>
 <form action="index.jsp" method="post" accept-charset=utf-8>
 <input type="hidden" name="action" value="calculateItemPrice">
-<table class="formtable">
+<table class="gridtable">
+	<tr>
+		<td colspan="2">Search Item
+		</td>
+	</tr>
 	<tr>
 		<td>Part Number
 		</td>
@@ -57,33 +68,33 @@ HEADER
 		</td>
 	</tr>
 	<tr>
-		<td><input type="text" name="partnum1" />
+		<td><input type="text" class="partNumber" name="partnum1" />
 		</td>
-		<td><input type="text" name="qty1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" name="partnum2" />
-		</td>
-		<td><input type="text" name="qty2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		<td><input type="text" class="qty" name="qty1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
 		</td>
 	</tr>
 	<tr>
-		<td><input type="text" name="partnum3" />
+		<td><input type="text" class="partNumber" name="partnum2" />
 		</td>
-		<td><input type="text" name="qty3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" name="partnum4" />
-		</td>
-		<td><input type="text" name="qty4" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		<td><input type="text" class="qty" name="qty2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
 		</td>
 	</tr>
 	<tr>
-		<td><input type="text" name="partnum5" />
+		<td><input type="text" class="partNumber" name="partnum3" />
 		</td>
-		<td><input type="text" name="qty5" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		<td><input type="text" class="qty" name="qty3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		</td>
+	</tr>
+	<tr>
+		<td><input type="text" class="partNumber" name="partnum4" />
+		</td>
+		<td><input type="text" class="qty" name="qty4" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		</td>
+	</tr>
+	<tr>
+		<td><input type="text" class="partNumber" name="partnum5" />
+		</td>
+		<td><input type="text" class="qty" name="qty5" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
 		</td>
 	</tr>
 	<tr>
@@ -97,11 +108,9 @@ HEADER
 <br />
 <form action="index.jsp" method="post" accept-charset=utf-8>
 <input type="hidden" name="action" value="importData">
-<table class="formtable">
+<table class="gridtable">
 	<tr>
-		<td>Import New Data File
-		</td>
-		<td>&nbsp;
+		<td colspan="2">Import New Data File
 		</td>
 	</tr>
 	<tr>
@@ -116,14 +125,21 @@ HEADER
 		<td>&nbsp;
 		</td>
 	</tr>
+<%
+	if(!importResults.trim().equals("")){
+%>
 	<tr>
-		<td><%=importResults %>
-		</td>
-		<td>&nbsp;
+		<td colspan="2"><%=importResults %>
 		</td>
 	</tr>
+<%
+	}
+%>
 </table>
 </form>
+</td>	
+</tr>	
+</table>
 <footer>
 FOOTER
 </footer>

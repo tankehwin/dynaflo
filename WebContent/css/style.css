@@ -41,5 +41,13 @@ table.formtable td {
 	padding: 8px;
 	background-color: #ffffff;
 }
+
+input.qty {
+	width: 100px;
+}
+
+input.partNumber {
+	width: 300px;
+}
 </style>
 

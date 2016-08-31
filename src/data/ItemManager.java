@@ -73,7 +73,7 @@ public class ItemManager {
 		String sql = "SELECT * FROM " + ItemModel.TABLENAME + " WHERE " + ItemModel.COLNAME_PARTNUMBER + " LIKE '%" +
 				partNumber + "%' LIMIT 1;";
 		Statement st = conn.createStatement();
-		System.out.println(sql);
+		// System.out.println(sql);
 		ResultSet rs = st.executeQuery(sql);
 		ItemModel itemObj = new ItemModel();
 		while(rs.next()) {
