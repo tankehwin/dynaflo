@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -130,16 +131,29 @@ public class ItemModel {
 			result = result.replaceAll("'", "''");
 			this.oldPartNumber = result;
 		}
-		else if(FieldNameScheme.FIELDNAME_LATEST_DATE_PURCHASED.equals(fieldName)){
+		else if(FieldNameScheme.FIELDNAME_LATEST_DATE_PURCHASED.equals(fieldName)){			
+			// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
+			// This code counteracts this issue, but we cannot be sure that this will always be the case
+			// Currently just a workaround
+			Calendar calendar = Calendar.getInstance();
+			int slashIndex = value.toString().indexOf("/");
+			int dayOfYear = new Integer(value.toString().substring(0, slashIndex)).intValue();
+			slashIndex = value.toString().lastIndexOf("/");
+			int year = new Integer(value.toString().substring(slashIndex+1)).intValue();
+			calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+			calendar.set(Calendar.YEAR, year);
+			Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+			/*// This is a more conventional method of saving date data, assuming the data extracted from Excel is conventional
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		    Date parsedDate;
 		    try{
-		    	parsedDate = dateFormat.parse((String) value);
+		    	parsedDate = dateFormat.parse((String) value);	    	
 		    }
 		    catch(Exception e){
 		    	throw e;
 		    }	    
 		    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+		    */			
 			this.latestDatePurchased = timestamp;
 		}
 		else if(FieldNameScheme.FIELDNAME_SUPPLIER.equals(fieldName)){

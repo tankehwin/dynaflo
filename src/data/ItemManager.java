@@ -56,7 +56,7 @@ public class ItemManager {
 				value.getSupplierCode().trim() + 
 				"');";
 		Statement st = conn.createStatement();
-		System.out.println(sql);
+		// System.out.println(sql);
 		st.executeUpdate(sql);
 
 	}
@@ -64,7 +64,7 @@ public class ItemManager {
 	public static void clearTable(Connection conn) throws Exception {
 		String sql = "DELETE FROM " + ItemModel.TABLENAME + ";";
 		Statement st = conn.createStatement();
-		System.out.println(sql);
+		// System.out.println(sql);
 		st.executeUpdate(sql);
 	}
 	

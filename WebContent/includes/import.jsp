@@ -1,4 +1,6 @@
 <%@ page import="utils.*"%>
+<%@ page import="data.*"%>
+<%@ page import="model.*"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>

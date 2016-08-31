@@ -37,4 +37,11 @@ looks like that was wrong. Need to find out what it really means before can proc
 - EXCEL FILE ERROR: wrong spelling of ADDITIONAL INFORMATION 1 field (kremlin)
 - EXCEL FILE ERROR: wrong spelling of ADDITIONAL INFORMATION 1, ADDITIONAL INFORMATION 1 fields (SAMES)
 - EXCEL FILE ERROR: repeated part number J93005891 (IWATA)
-- EXCEL FILE ERROR: problem with values detected in GRACO FAMILY DISCOUNT and GRACO STD. DISCOUNT fields - invalid number values (GRACO) 
+- EXCEL FILE ERROR: problem with values detected in GRACO FAMILY DISCOUNT and GRACO STD. DISCOUNT fields - invalid number values (GRACO)
+- disabled right-click capability on items_query_result.jsp 
+- added file upload function to index.jsp
+- user can now select file to upload
+- wrapped whole ExcelReader.ingestExcelFile method in exception block to streamline error messages
+- EXCEL FILE ERROR: to make this easier, LAST DATE PURCHASED field should use dd/MM/yyyy format (LOCAL)
+- adjusted LAST DATE PURCHASED extraction code in ItemModel to handle peculiar Excel date extraction results
+- worked on items_query_result.jsp to start returning search results 

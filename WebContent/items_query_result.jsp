@@ -11,6 +11,40 @@
 <header>
 HEADER
 </header>
+<script language=JavaScript>
+//Disable right mouse click Script
+//By Maximus (maximus@nsimail.com) w/ mods by DynamicDrive
+//For full source code, visit http://www.dynamicdrive.com
+var message="Function Disabled!";
+
+///////////////////////////////////
+function clickIE4(){
+if (event.button==2){
+//alert(message);
+return false;
+}
+}
+
+function clickNS4(e){
+if (document.layers||document.getElementById&&!document.all){
+if (e.which==2||e.which==3){
+//alert(message);
+return false;
+}
+}
+}
+
+if (document.layers){
+document.captureEvents(Event.MOUSEDOWN);
+document.onmousedown=clickNS4;
+}
+else if (document.all&&!document.getElementById){
+document.onmousedown=clickIE4;
+}
+
+//document.oncontextmenu=new Function("alert(message);return false")
+document.oncontextmenu=new Function("return false")
+</script>
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
 	String partNum1 = request.getParameter("partnum1");	
@@ -23,16 +57,15 @@ HEADER
 	String qty4 = request.getParameter("qty4");	
 	String partNum5 = request.getParameter("partnum5");	
 	String qty5 = request.getParameter("qty5");	
-	
-	String sql = "SELECT * FROM items_master WHERE part_id = '" +
+	/*
+	String sql = "SELECT * FROM items_master WHERE part_number = '" +
 			partNum1 + "'";
-	//Statement st= conn.createStatement();
-	System.out.println(sql);
-	//ResultSet rs = st.executeQuery(sql);
+	Statement st= conn.createStatement();
+	ResultSet rs = st.executeQuery(sql);
 	Double price1 = null;
 	Double duty1 = null;
 	Double discount1 = null;
-	/*
+	
 	while(rs.next()) {
 		partNum1 = rs.getString("part_id");
 		price1 = rs.getDouble("price");
@@ -40,8 +73,20 @@ HEADER
 		discount1 = rs.getDouble("discount");
 	}
 	*/
-	ExcelReader excelBook = new ExcelReader();
-	excelBook.ingestExcelFile("", conn);
+	ItemModel itmObj1 = new ItemModel();
+	ItemModel itmObj2 = new ItemModel();
+	ItemModel itmObj3 = new ItemModel();
+	ItemModel itmObj4 = new ItemModel();
+	ItemModel itmObj5 = new ItemModel();
+	if(!partNum1.trim().equals("")){
+		int iQty1 = 1;
+		if(!qty1.trim().equals("")){
+			iQty1 = new Integer(qty1).intValue();
+		}
+		itmObj1 = ItemManager.getObject(partNum1, iQty1, conn);
+	}
+	
+	
 	
 %>
 <table class="formtable">
