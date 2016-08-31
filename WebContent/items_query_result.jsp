@@ -26,9 +26,9 @@ HEADER
 	
 	String sql = "SELECT * FROM items_master WHERE part_id = '" +
 			partNum1 + "'";
-	Statement st= conn.createStatement();
+	//Statement st= conn.createStatement();
 	System.out.println(sql);
-	ResultSet rs = st.executeQuery(sql);
+	//ResultSet rs = st.executeQuery(sql);
 	Double price1 = null;
 	Double duty1 = null;
 	Double discount1 = null;
@@ -41,7 +41,7 @@ HEADER
 	}
 	*/
 	ExcelReader excelBook = new ExcelReader();
-	excelBook.ingestExcelFile("");
+	excelBook.ingestExcelFile("", conn);
 	
 %>
 <table class="formtable">

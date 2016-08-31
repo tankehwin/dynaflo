@@ -22,3 +22,19 @@ looks like that was wrong. Need to find out what it really means before can proc
 - create constructor and default values for ItemModel
 - added method to ItemModel to manage which value goes into which property
 - added ItemManager class to handle DB operations
+- added getObject SQL method to ItemManager
+- finalised items_master table columns
+- EXCEL FILE ERROR: repeated part number YHAB-T04F1-0T-06, YHAB-T10F2-0T (LOCAL)
+- EXCEL FILE ERROR: many items are missing part numbers and only have old part numbers (LOCAL)
+- EXCEL FILE ERROR: a number of fields are missing part numbers (Irac)
+- EXCEL FILE ERROR: wrong spelling of DUTIES (%) field (ITW)
+- EXCEL FILE ERROR: wrong spelling of DUTIES (%) field (Irac)
+- EXCEL FILE ERROR: many missing values in DUTIES (%) field (Irac)
+- EXCEL FILE ERROR: repeated part number TA1-12"-16-SS (Irac)
+- EXCEL FILE ERROR: repeated part number W1011382, W11352.15, W3755.10, W90105/W (Walmec)
+- EXCEL FILE ERROR: repeated part number BD152 (Bando)
+- EXCEL FILE ERROR: wrong spelling of ADDITIONAL INFORMATION 1 field (IPM)
+- EXCEL FILE ERROR: wrong spelling of ADDITIONAL INFORMATION 1 field (kremlin)
+- EXCEL FILE ERROR: wrong spelling of ADDITIONAL INFORMATION 1, ADDITIONAL INFORMATION 1 fields (SAMES)
+- EXCEL FILE ERROR: repeated part number J93005891 (IWATA)
+- EXCEL FILE ERROR: problem with values detected in GRACO FAMILY DISCOUNT and GRACO STD. DISCOUNT fields - invalid number values (GRACO) 

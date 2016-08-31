@@ -1,6 +1,8 @@
 package model;
 
+import java.util.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import data.FieldNameScheme;
 
@@ -73,66 +75,135 @@ public class ItemModel {
 		this.supplierCode = "";
 	}
 	
-	public void setFieldValue(String fieldName, Object value) {
+	public void setFieldValue(String fieldName, Object value) throws Exception {
 		if(FieldNameScheme.FIELDNAME_PART_NUMBER.equals(fieldName)){
-			this.partNumber = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.partNumber = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_DESCRIPTION.equals(fieldName)){
-			this.description = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.description = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_1.equals(fieldName)){
-			this.addInfo1 = (String) value;		
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.addInfo1 = result;		
 		}
 		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_2.equals(fieldName)){
-			this.addInfo2 = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.addInfo2 = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_3.equals(fieldName)){
-			this.addInfo3 = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.addInfo3 = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_DUTIES.equals(fieldName)){
-			this.duties = (Double) value;
+			String result = value.toString();
+			result = result.replaceAll("%", "");
+			if(result.trim().equals("")){
+				result = "0.0";
+			}
+			this.duties = new Double(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_SELLING_PRICE.equals(fieldName)){
-			this.sellingPrice = (Double) value;
+			String result = value.toString();
+			result = result.replaceAll(",", "");
+			if(result.trim().equals("#N/A!")){
+				result = "-1.0";
+			}
+			this.sellingPrice = new Double(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_LEAD_TIME.equals(fieldName)){
-			this.leadTimeARO = (Integer) value;
+			this.leadTimeARO = new Integer(value.toString());
 		}
 		else if(FieldNameScheme.FIELDNAME_DYNAFLO_DISCOUNT_CODE.equals(fieldName)){
-			this.dynafloDiscountCode = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.dynafloDiscountCode = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_OLD_PART_NUMBER.equals(fieldName)){
-			this.oldPartNumber = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.oldPartNumber = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_LATEST_DATE_PURCHASED.equals(fieldName)){
-			this.latestDatePurchased = (Timestamp) value;
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		    Date parsedDate;
+		    try{
+		    	parsedDate = dateFormat.parse((String) value);
+		    }
+		    catch(Exception e){
+		    	throw e;
+		    }	    
+		    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+			this.latestDatePurchased = timestamp;
 		}
 		else if(FieldNameScheme.FIELDNAME_SUPPLIER.equals(fieldName)){
-			this.supplier = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.supplier = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_ITEM_REF.equals(fieldName)){
-			this.itemReference = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.itemReference = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_EQUIPMENT_PACKAGE_REF.equals(fieldName)){
-			this.equipmentPackageReference = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.equipmentPackageReference = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_REF.equals(fieldName)){
-			this.gracoReference = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.gracoReference = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_TYPE.equals(fieldName)){
-			this.gracoFamType = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.gracoFamType = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_DISCOUNT.equals(fieldName)){
-			this.gracoFamDiscount = (Double) value;
+			String result = value.toString();
+			result = result.replaceAll("%", "");
+			if(result.trim().equals("")){
+				result = "0.0";
+			}
+			if(result.trim().equals("#N/A!")){
+				result = "-1.0";
+			}
+			if(result.trim().equals("STD")){
+				result = "0.0";
+			}
+			this.gracoFamDiscount = new Double(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT_CODE.equals(fieldName)){
-			this.gracoStdDiscountCode = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.gracoStdDiscountCode = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT.equals(fieldName)){
-			this.gracoStdDiscount = (Double) value;
+			String result = value.toString();
+			result = result.replaceAll("%", "");
+			if(result.trim().equals("")){
+				result = "0.0";
+			}
+			if(result.trim().equals("#N/A!")){
+				result = "-1.0";
+			}
+			if(result.trim().equals("STD")){
+				result = "0.0";
+			}
+			this.gracoStdDiscount = new Double(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_SUPPLIER_CODE.equals(fieldName)){
-			this.supplierCode = (String) value;
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.supplierCode = result;
 		}
 	}
 	

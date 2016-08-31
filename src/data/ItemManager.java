@@ -55,33 +55,50 @@ public class ItemManager {
 				value.getGracoStdDiscount().toString() + ", '" +
 				value.getSupplierCode().trim() + 
 				"');";
-		Statement st= conn.createStatement();
+		Statement st = conn.createStatement();
 		System.out.println(sql);
 		st.executeUpdate(sql);
 
 	}
 	
-	public static void clearTable(Connection conn) {
-		
+	public static void clearTable(Connection conn) throws Exception {
+		String sql = "DELETE FROM " + ItemModel.TABLENAME + ";";
+		Statement st = conn.createStatement();
+		System.out.println(sql);
+		st.executeUpdate(sql);
 	}
 	
-	public static void getObjects(Connection conn) {
-		/*
-		String sql = "SELECT * FROM " + TableNames.userLoginTable + " WHERE " + UserLoginModel.COLNAME_NAME + " = '" +
-				username + "' AND " + UserLoginModel.COLNAME_PASSWORD + " = '" + password + "'";
-		Statement st= conn.createStatement();
+	public static ItemModel getObject(String partNumber, Integer qty, Connection conn) throws Exception {
+		
+		String sql = "SELECT * FROM " + ItemModel.TABLENAME + " WHERE " + ItemModel.COLNAME_PARTNUMBER + " LIKE '%" +
+				partNumber + "%' LIMIT 1;";
+		Statement st = conn.createStatement();
 		System.out.println(sql);
 		ResultSet rs = st.executeQuery(sql);
+		ItemModel itemObj = new ItemModel();
 		while(rs.next()) {
-			userLogin = new UserLoginModel();
-			userLogin.setId(new Integer(rs.getInt(UserLoginModel.COLNAME_ID)));
-			userLogin.setName(rs.getString(UserLoginModel.COLNAME_NAME));
-			userLogin.setPassword(rs.getString(UserLoginModel.COLNAME_PASSWORD));
-			userLogin.setFkAcc(new Integer(rs.getInt(UserLoginModel.COLNAME_ACCFK)));
-			userLogin.setDateCreated(rs.getTimestamp(UserLoginModel.COLNAME_DATECREATED));
-			userLogin.setDateUpdated(rs.getTimestamp(UserLoginModel.COLNAME_DATEUPDATED));
+			itemObj.setAddInfo1(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION1));
+			itemObj.setAddInfo2(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION2));
+			itemObj.setAddInfo3(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION3));
+			itemObj.setDescription(rs.getString(ItemModel.COLNAME_DESCRIPTION));
+			itemObj.setDuties(rs.getDouble(ItemModel.COLNAME_DUTIES));
+			itemObj.setDynafloDiscountCode(rs.getString(ItemModel.COLNAME_DYNAFLODISCOUNTCODE));
+			itemObj.setEquipmentPackageReference(rs.getString(ItemModel.COLNAME_EQUIPMENTPACKAGEREFERENCE));
+			itemObj.setGracoFamDiscount(rs.getDouble(ItemModel.COLNAME_GRACOFAMILYDISCOUNT));
+			itemObj.setGracoFamType(rs.getString(ItemModel.COLNAME_GRACOFAMILYTYPE));
+			itemObj.setGracoReference(rs.getString(ItemModel.COLNAME_GRACOREFERENCE));
+			itemObj.setGracoStdDiscount(rs.getDouble(ItemModel.COLNAME_GRACOSTDDISCOUNT));
+			itemObj.setGracoStdDiscountCode(rs.getString(ItemModel.COLNAME_GRACOSTDDISCOUNTCODE));
+			itemObj.setItemReference(rs.getString(ItemModel.COLNAME_ITEMREFERENCE));
+			itemObj.setLatestDatePurchased(rs.getTimestamp(ItemModel.COLNAME_LATESTDATEPURCHASED));
+			itemObj.setLeadTimeARO(new Integer(rs.getInt(ItemModel.COLNAME_LEADTIMEARO)));
+			itemObj.setOldPartNumber(rs.getString(ItemModel.COLNAME_OLDPARTNUMBER));
+			itemObj.setPartNumber(rs.getString(ItemModel.COLNAME_PARTNUMBER));
+			itemObj.setSellingPrice(rs.getDouble(ItemModel.COLNAME_SELLINGPRICE));
+			itemObj.setSupplier(rs.getString(ItemModel.COLNAME_SUPPLIER));
+			itemObj.setSupplierCode(rs.getString(ItemModel.COLNAME_SUPPLIERCODE));
 		}	
-		*/	
+		return itemObj;
 	}
 	
 }

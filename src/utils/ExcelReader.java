@@ -27,6 +27,8 @@ public class ExcelReader {
 		Workbook dynafloBook = Workbook.getWorkbook(new File("C:/Users/tankehwin/Desktop/DYNAFLO PRICE 2016 - 8.8.16.xls")); // TODO: Modify this to get from uploaded file
 		// Instantiate hard-coded master file for field name schemes
 		FieldNameScheme fnsScroll = new FieldNameScheme();
+		// Delete all items from database TODO: Transaction object really required for this whole section
+		ItemManager.clearTable(conn);
 		// Start loop
 		for(int i=0; i<dynafloBook.getNumberOfSheets(); i++){
 			// Access next worksheet
@@ -70,6 +72,11 @@ public class ExcelReader {
 			// Start loop
 			while(endOfData==false){
 				// Does the row have data? if so, continue. Otherwise, end loop
+				if(sheet.getRows() - 1 <= currentRow){
+					System.out.println("Reached end of document: " + currentRow);
+					endOfData = true;
+					break;
+				}
 				Cell cellData = sheet.getCell(1, currentRow);
 				if(cellData.getContents().trim().equals("")){
 					System.out.println("No more data rows detected: " + currentRow);
@@ -93,18 +100,16 @@ public class ExcelReader {
 						cellValue = cellData.getContents().trim();
 					}
 					// Depending on which column it belongs to, add it to appropriate property
-					itmObj.setFieldValue((String) arrFieldNames.get(k), cellValue);
-					// Add to product object collection
-					arrProdList.add(itmObj);
-					System.out.println(cellValue);
+					System.out.print(cellValue + ",");
+					itmObj.setFieldValue((String) arrFieldNames.get(k), cellValue);				
 				}
+				// Add to product object collection
+				arrProdList.add(itmObj);
 				System.out.println("==========");
 				// Go to next row
 				currentRow++;
 			// End loop
 			}
-			// Delete all items
-			ItemManager.clearTable(conn);
 			// Start loop
 			for(int m=0;m<arrProdList.size();m++){
 				// Write all product objects into database. Overwrite where necessary if there is a product code match
