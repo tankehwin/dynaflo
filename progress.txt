@@ -50,3 +50,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - items_query_result.jsp now returns search results for up to 5 items
 - installed css and jquery functions and formatting
 - added styling to tables and input fields
+- slight cleanup and war file creation

@@ -2,6 +2,7 @@ package model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
@@ -252,12 +253,24 @@ public class ItemModel {
 		this.addInfo3 = addInfo3;
 	}
 	public Double getDuties() {
+		int decimalPlaces = 2;
+		BigDecimal bd = new BigDecimal(duties.doubleValue());
+
+		// setScale is immutable
+		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+		duties = bd.doubleValue();
 		return duties;
 	}
 	public void setDuties(Double duties) {
 		this.duties = duties;
 	}
 	public Double getSellingPrice() {
+		int decimalPlaces = 2;
+		BigDecimal bd = new BigDecimal(sellingPrice.doubleValue());
+
+		// setScale is immutable
+		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+		sellingPrice = bd.doubleValue();
 		return sellingPrice;
 	}
 	public void setSellingPrice(Double sellingPrice) {
@@ -318,6 +331,12 @@ public class ItemModel {
 		this.gracoFamType = gracoFamType;
 	}
 	public Double getGracoFamDiscount() {
+		int decimalPlaces = 2;
+		BigDecimal bd = new BigDecimal(gracoFamDiscount.doubleValue());
+
+		// setScale is immutable
+		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+		gracoFamDiscount = bd.doubleValue();
 		return gracoFamDiscount;
 	}
 	public void setGracoFamDiscount(Double gracoFamDiscount) {
@@ -330,6 +349,12 @@ public class ItemModel {
 		this.gracoStdDiscountCode = gracoStdDiscountCode;
 	}
 	public Double getGracoStdDiscount() {
+		int decimalPlaces = 2;
+		BigDecimal bd = new BigDecimal(gracoStdDiscount.doubleValue());
+
+		// setScale is immutable
+		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+		gracoStdDiscount = bd.doubleValue();
 		return gracoStdDiscount;
 	}
 	public void setGracoStdDiscount(Double gracoStdDiscount) {
@@ -340,66 +365,6 @@ public class ItemModel {
 	}
 	public void setSupplierCode(String supplierCode) {
 		this.supplierCode = supplierCode;
-	}
-	public static String getColnamePartnumber() {
-		return COLNAME_PARTNUMBER;
-	}
-	public static String getColnameDescription() {
-		return COLNAME_DESCRIPTION;
-	}
-	public static String getColnameAdditionalinformation1() {
-		return COLNAME_ADDITIONALINFORMATION1;
-	}
-	public static String getColnameAdditionalinformation2() {
-		return COLNAME_ADDITIONALINFORMATION2;
-	}
-	public static String getColnameAdditionalinformation3() {
-		return COLNAME_ADDITIONALINFORMATION3;
-	}
-	public static String getColnameDuties() {
-		return COLNAME_DUTIES;
-	}
-	public static String getColnameSellingprice() {
-		return COLNAME_SELLINGPRICE;
-	}
-	public static String getColnameLeadtimearo() {
-		return COLNAME_LEADTIMEARO;
-	}
-	public static String getColnameDynaflodiscountcode() {
-		return COLNAME_DYNAFLODISCOUNTCODE;
-	}
-	public static String getColnameOldpartnumber() {
-		return COLNAME_OLDPARTNUMBER;
-	}
-	public static String getColnameLatestdatepurchased() {
-		return COLNAME_LATESTDATEPURCHASED;
-	}
-	public static String getColnameSupplier() {
-		return COLNAME_SUPPLIER;
-	}
-	public static String getColnameItemreference() {
-		return COLNAME_ITEMREFERENCE;
-	}
-	public static String getColnameEquipmentpackagereference() {
-		return COLNAME_EQUIPMENTPACKAGEREFERENCE;
-	}
-	public static String getColnameGracoreference() {
-		return COLNAME_GRACOREFERENCE;
-	}
-	public static String getColnameGracofamilytype() {
-		return COLNAME_GRACOFAMILYTYPE;
-	}
-	public static String getColnameGracofamilydiscount() {
-		return COLNAME_GRACOFAMILYDISCOUNT;
-	}
-	public static String getColnameGracostddiscountcode() {
-		return COLNAME_GRACOSTDDISCOUNTCODE;
-	}
-	public static String getColnameGracostddiscount() {
-		return COLNAME_GRACOSTDDISCOUNT;
-	}
-	public static String getColnameSuppliercode() {
-		return COLNAME_SUPPLIERCODE;
 	}
 
 }
