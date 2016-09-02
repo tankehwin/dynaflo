@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="dynaflow">
+    <wb-module deploy-name="dynaflo">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="dynaflow"/>
-        <property name="java-output-path" value="/dynaflow/build/classes"/>
+        <property name="java-output-path" value="/dynaflo/build/classes"/>
+        <property name="context-root" value="dynaflo"/>
     </wb-module>
 </project-modules>
