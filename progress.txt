@@ -51,3 +51,9 @@ looks like that was wrong. Need to find out what it really means before can proc
 - installed css and jquery functions and formatting
 - added styling to tables and input fields
 - slight cleanup and war file creation
+- disallowed Ctrl+C in items_query_result.jsp
+- fixed bug - duties displaying wrongly 
+- added 5 more search rows
+- graco fields, duties, dynaflo discount code, qty, centred in search results page
+- part number, qty, description, addinfo1-3, equipment-package ref, graco ref, <graco columns>, duties, selling price, total price, dynaflo discount code - IN THIS ORDER
+- added grand total row 

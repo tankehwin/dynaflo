@@ -10,10 +10,26 @@
 <script src="jquery/js/jquery-ui-1.10.4.custom.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Dynaflo</title>
+<script language=JavaScript>
+function disableselect(e) {
+    return false;
+}
+
+function reEnable() {
+    return true;
+}
+
+document.onselectstart = new Function("return false");
+
+if (window.sidebar) {
+    document.onmousedown = disableselect;
+    document.onclick = reEnable;
+}
+</script>
 </head>
 <body>
 <header>
-HEADER
+DYNAFLO PARTS SEARCH SYSTEM
 </header>
 <script language=JavaScript>
 //Disable right mouse click Script
@@ -62,6 +78,16 @@ document.oncontextmenu=new Function("return false")
 	String qty4 = request.getParameter("qty4");	
 	String partNum5 = request.getParameter("partnum5");	
 	String qty5 = request.getParameter("qty5");	
+	String partNum6 = request.getParameter("partnum6");	
+	String qty6 = request.getParameter("qty6");	
+	String partNum7 = request.getParameter("partnum7");	
+	String qty7 = request.getParameter("qty7");	
+	String partNum8 = request.getParameter("partnum8");	
+	String qty8 = request.getParameter("qty8");	
+	String partNum9 = request.getParameter("partnum9");	
+	String qty9 = request.getParameter("qty9");	
+	String partNum10 = request.getParameter("partnum10");	
+	String qty10 = request.getParameter("qty10");	
 
 	if(action != null && action.equals("backToIndex")) {
 		String redirectURL = "index.jsp";
@@ -73,11 +99,21 @@ document.oncontextmenu=new Function("return false")
 	ItemModel itmObj3 = new ItemModel();
 	ItemModel itmObj4 = new ItemModel();
 	ItemModel itmObj5 = new ItemModel();
+	ItemModel itmObj6 = new ItemModel();
+	ItemModel itmObj7 = new ItemModel();
+	ItemModel itmObj8 = new ItemModel();
+	ItemModel itmObj9 = new ItemModel();
+	ItemModel itmObj10 = new ItemModel();
 	int iQty1 = 1;
 	int iQty2 = 1;
 	int iQty3 = 1;
 	int iQty4 = 1;
 	int iQty5 = 1;
+	int iQty6 = 1;
+	int iQty7 = 1;
+	int iQty8 = 1;
+	int iQty9 = 1;
+	int iQty10 = 1;
 	if(!partNum1.trim().equals("")){		
 		if(!qty1.trim().equals("")){
 			iQty1 = new Integer(qty1).intValue();
@@ -108,7 +144,46 @@ document.oncontextmenu=new Function("return false")
 		}
 		itmObj5 = ItemManager.getObject(partNum5, iQty5, conn);
 	}
-	
+	if(!partNum6.trim().equals("")){		
+		if(!qty6.trim().equals("")){
+			iQty6 = new Integer(qty6).intValue();
+		}
+		itmObj6 = ItemManager.getObject(partNum6, iQty6, conn);
+	}
+	if(!partNum7.trim().equals("")){		
+		if(!qty7.trim().equals("")){
+			iQty7 = new Integer(qty7).intValue();
+		}
+		itmObj7 = ItemManager.getObject(partNum7, iQty7, conn);
+	}
+	if(!partNum8.trim().equals("")){		
+		if(!qty8.trim().equals("")){
+			iQty8 = new Integer(qty8).intValue();
+		}
+		itmObj8 = ItemManager.getObject(partNum8, iQty8, conn);
+	}
+	if(!partNum9.trim().equals("")){		
+		if(!qty9.trim().equals("")){
+			iQty9 = new Integer(qty9).intValue();
+		}
+		itmObj9 = ItemManager.getObject(partNum9, iQty9, conn);
+	}
+	if(!partNum10.trim().equals("")){		
+		if(!qty10.trim().equals("")){
+			iQty10 = new Integer(qty10).intValue();
+		}
+		itmObj10 = ItemManager.getObject(partNum10, iQty10, conn);
+	}
+	double grandTotal = itmObj1.getSellingPrice()*iQty1 +
+			itmObj2.getSellingPrice()*iQty2 +
+			itmObj3.getSellingPrice()*iQty3 +
+			itmObj4.getSellingPrice()*iQty4 +
+			itmObj5.getSellingPrice()*iQty5 +
+			itmObj6.getSellingPrice()*iQty6 +
+			itmObj7.getSellingPrice()*iQty7 +
+			itmObj8.getSellingPrice()*iQty8 +
+			itmObj9.getSellingPrice()*iQty9 +
+			itmObj10.getSellingPrice()*iQty10;
 	
 	
 %>
@@ -117,22 +192,42 @@ document.oncontextmenu=new Function("return false")
 <td>
 <table class="gridtable">
 	<tr>
-		<td colspan="6">Search Results
-		</td>
+		<th colspan="16">Search Results
+		</th>
 	</tr>
 	<tr>
-		<td>Part Number
-		</td>
-		<td>Qty
-		</td>
-		<td>Duties (%)
-		</td>
-		<td>Dynaflo Discount Code
-		</td>
-		<td>Selling Price
-		</td>
-		<td>Total Price
-		</td>
+		<th>Part Number
+		</th>
+		<th>Qty
+		</th>
+		<th>Description
+		</th>
+		<th>Additional <br/>Information 1
+		</th>
+		<th>Additional <br/>Information 2
+		</th>
+		<th>Additional <br/>Information 3
+		</th>
+		<th>Equipment/ <br/>Package Ref
+		</th>
+		<th>GRACO Ref
+		</th>
+		<th>GRACO <br/>Family Type
+		</th>
+		<th>GRACO <br/>Family Disc. (%)
+		</th>
+		<th>GRACO <br/>Std Disc. Code
+		</th>
+		<th>GRACO <br/>Std Disc. (%)
+		</th>
+		<th>Duties (%)
+		</th>
+		<th>Selling Price
+		</th>
+		<th>Total Price
+		</th>
+		<th>Dynaflo <br/>Disc. Code
+		</th>
 	</tr>
 <%
 	if(!itmObj1.getPartNumber().trim().equals("")){
@@ -140,15 +235,35 @@ document.oncontextmenu=new Function("return false")
 	<tr>
 		<td><%=itmObj1.getPartNumber() %>
 		</td>
-		<td align="right"><%=iQty1 %>
+		<td align="center"><%=iQty1 %>
 		</td>
-		<td align="right"><%=itmObj1.getDuties()*100 %>
+		<td><%=itmObj1.getDescription() %>
 		</td>
-		<td><%=itmObj1.getDynafloDiscountCode() %>
+		<td><%=itmObj1.getAddInfo1() %>
 		</td>
+		<td><%=itmObj1.getAddInfo2() %>
+		</td>
+		<td><%=itmObj1.getAddInfo3() %>
+		</td>
+		<td><%=itmObj1.getEquipmentPackageReference()%>
+		</td>
+		<td><%=itmObj1.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj1.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj1.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj1.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj1.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj1.getDuties() %>
+		</td>	
 		<td align="right"><%=itmObj1.getSellingPrice() %>
 		</td>
 		<td align="right"><%=itmObj1.getSellingPrice()*iQty1 %>
+		</td>
+		<td align="center"><%=itmObj1.getDynafloDiscountCode() %>
 		</td>
 	</tr>
 <%
@@ -156,7 +271,7 @@ document.oncontextmenu=new Function("return false")
 	else if(!partNum1.trim().equals("")){
 %>
 	<tr>
-		<td colspan="6"><%=partNum1 %> does not exist.
+		<td colspan="16"><%=partNum1 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -166,15 +281,35 @@ document.oncontextmenu=new Function("return false")
 	<tr>
 		<td><%=itmObj2.getPartNumber() %>
 		</td>
-		<td align="right"><%=iQty2 %>
+		<td align="center"><%=iQty2 %>
 		</td>
-		<td align="right"><%=itmObj2.getDuties()*100 %>
+		<td><%=itmObj2.getDescription() %>
 		</td>
-		<td><%=itmObj2.getDynafloDiscountCode() %>
+		<td><%=itmObj2.getAddInfo1() %>
 		</td>
+		<td><%=itmObj2.getAddInfo2() %>
+		</td>
+		<td><%=itmObj2.getAddInfo3() %>
+		</td>
+		<td><%=itmObj2.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj2.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj2.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj2.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj2.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj2.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj2.getDuties() %>
+		</td>	
 		<td align="right"><%=itmObj2.getSellingPrice() %>
 		</td>
 		<td align="right"><%=itmObj2.getSellingPrice()*iQty2 %>
+		</td>
+		<td align="center"><%=itmObj2.getDynafloDiscountCode() %>
 		</td>
 	</tr>
 <%
@@ -182,7 +317,7 @@ document.oncontextmenu=new Function("return false")
 	else if(!partNum2.trim().equals("")){
 %>
 	<tr>
-		<td colspan="6"><%=partNum2 %> does not exist.
+		<td colspan="16"><%=partNum2 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -192,15 +327,35 @@ document.oncontextmenu=new Function("return false")
 	<tr>
 		<td><%=itmObj3.getPartNumber() %>
 		</td>
-		<td align="right"><%=iQty3 %>
+		<td align="center"><%=iQty3 %>
 		</td>
-		<td align="right"><%=itmObj3.getDuties()*100 %>
+		<td><%=itmObj3.getDescription() %>
 		</td>
-		<td><%=itmObj3.getDynafloDiscountCode() %>
+		<td><%=itmObj3.getAddInfo1() %>
+		</td>
+		<td><%=itmObj3.getAddInfo2() %>
+		</td>
+		<td><%=itmObj3.getAddInfo3() %>
+		</td>
+		<td><%=itmObj3.getEquipmentPackageReference()%>
+		</td>
+		<td><%=itmObj3.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj3.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj3.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj3.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj3.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj3.getDuties() %>
 		</td>
 		<td align="right"><%=itmObj3.getSellingPrice() %>
 		</td>
 		<td align="right"><%=itmObj3.getSellingPrice()*iQty3 %>
+		</td>
+		<td align="center"><%=itmObj3.getDynafloDiscountCode() %>
 		</td>
 	</tr>
 <%
@@ -208,7 +363,7 @@ document.oncontextmenu=new Function("return false")
 	else if(!partNum3.trim().equals("")){
 %>
 	<tr>
-		<td colspan="6"><%=partNum3 %> does not exist.
+		<td colspan="16"><%=partNum3 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -218,15 +373,35 @@ document.oncontextmenu=new Function("return false")
 	<tr>
 		<td><%=itmObj4.getPartNumber() %>
 		</td>
-		<td align="right"><%=iQty4 %>
+		<td align="center"><%=iQty4 %>
 		</td>
-		<td align="right"><%=itmObj4.getDuties()*100 %>
+		<td><%=itmObj4.getDescription() %>
 		</td>
-		<td><%=itmObj4.getDynafloDiscountCode() %>
+		<td><%=itmObj4.getAddInfo1() %>
+		</td>
+		<td><%=itmObj4.getAddInfo2() %>
+		</td>
+		<td><%=itmObj4.getAddInfo3() %>
+		</td>
+		<td><%=itmObj4.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj4.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj4.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj4.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj4.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj4.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj4.getDuties() %>
 		</td>
 		<td align="right"><%=itmObj4.getSellingPrice() %>
 		</td>
 		<td align="right"><%=itmObj4.getSellingPrice()*iQty4 %>
+		</td>
+		<td align="center"><%=itmObj4.getDynafloDiscountCode() %>
 		</td>
 	</tr>
 <%
@@ -234,7 +409,7 @@ document.oncontextmenu=new Function("return false")
 	else if(!partNum4.trim().equals("")){
 %>
 	<tr>
-		<td colspan="6"><%=partNum4 %> does not exist.
+		<td colspan="16"><%=partNum4 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -244,15 +419,35 @@ document.oncontextmenu=new Function("return false")
 	<tr>
 		<td><%=itmObj5.getPartNumber() %>
 		</td>
-		<td align="right"><%=iQty5 %>
+		<td align="center"><%=iQty5 %>
 		</td>
-		<td align="right"><%=itmObj5.getDuties()*100 %>
+		<td><%=itmObj5.getDescription() %>
 		</td>
-		<td><%=itmObj5.getDynafloDiscountCode() %>
+		<td><%=itmObj5.getAddInfo1() %>
 		</td>
+		<td><%=itmObj5.getAddInfo2() %>
+		</td>
+		<td><%=itmObj5.getAddInfo3() %>
+		</td>
+		<td><%=itmObj5.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj5.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj5.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj5.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj5.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj5.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj5.getDuties() %>
+		</td>	
 		<td align="right"><%=itmObj5.getSellingPrice() %>
 		</td>
 		<td align="right"><%=itmObj5.getSellingPrice()*iQty5 %>
+		</td>
+		<td align="center"><%=itmObj5.getDynafloDiscountCode() %>
 		</td>
 	</tr>
 <%
@@ -260,16 +455,254 @@ document.oncontextmenu=new Function("return false")
 	else if(!partNum5.trim().equals("")){
 %>
 	<tr>
-		<td colspan="6"><%=partNum5 %> does not exist.
+		<td colspan="16"><%=partNum5 %> does not exist.
+		</td>
+	</tr>
+<%
+	}
+	if(!itmObj6.getPartNumber().trim().equals("")){
+%>
+	<tr>
+		<td><%=itmObj6.getPartNumber() %>
+		</td>
+		<td align="center"><%=iQty6 %>
+		</td>
+		<td><%=itmObj6.getDescription() %>
+		</td>
+		<td><%=itmObj6.getAddInfo1() %>
+		</td>
+		<td><%=itmObj6.getAddInfo2() %>
+		</td>
+		<td><%=itmObj6.getAddInfo3() %>
+		</td>
+		<td><%=itmObj6.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj6.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj6.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj6.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj6.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj6.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj6.getDuties() %>
+		</td>	
+		<td align="right"><%=itmObj6.getSellingPrice() %>
+		</td>
+		<td align="right"><%=itmObj6.getSellingPrice()*iQty6 %>
+		</td>
+		<td align="center"><%=itmObj6.getDynafloDiscountCode() %>
+		</td>
+	</tr>
+<%
+	}
+	else if(!partNum6.trim().equals("")){
+%>
+	<tr>
+		<td colspan="16"><%=partNum6 %> does not exist.
+		</td>
+	</tr>
+<%
+	}
+	if(!itmObj7.getPartNumber().trim().equals("")){
+%>
+	<tr>
+		<td><%=itmObj7.getPartNumber() %>
+		</td>
+		<td align="center"><%=iQty7 %>
+		</td>
+		<td><%=itmObj7.getDescription() %>
+		</td>
+		<td><%=itmObj7.getAddInfo1() %>
+		</td>
+		<td><%=itmObj7.getAddInfo2() %>
+		</td>
+		<td><%=itmObj7.getAddInfo3() %>
+		</td>
+		<td><%=itmObj7.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj7.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj7.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj7.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj7.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj7.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj7.getDuties() %>
+		</td>
+		<td align="right"><%=itmObj7.getSellingPrice() %>
+		</td>
+		<td align="right"><%=itmObj7.getSellingPrice()*iQty7 %>
+		</td>
+		<td align="center"><%=itmObj7.getDynafloDiscountCode() %>
+		</td>
+	</tr>
+<%
+	}
+	else if(!partNum7.trim().equals("")){
+%>
+	<tr>
+		<td colspan="16"><%=partNum7 %> does not exist.
+		</td>
+	</tr>
+<%
+	}
+	if(!itmObj8.getPartNumber().trim().equals("")){
+%>
+	<tr>
+		<td><%=itmObj8.getPartNumber() %>
+		</td>
+		<td align="center"><%=iQty8 %>
+		</td>
+		<td><%=itmObj8.getDescription() %>
+		</td>
+		<td><%=itmObj8.getAddInfo1() %>
+		</td>
+		<td><%=itmObj8.getAddInfo2() %>
+		</td>
+		<td><%=itmObj8.getAddInfo3() %>
+		</td>
+		<td><%=itmObj8.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj8.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj8.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj8.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj8.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj8.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj8.getDuties() %>
+		</td>		
+		<td align="right"><%=itmObj8.getSellingPrice() %>
+		</td>
+		<td align="right"><%=itmObj8.getSellingPrice()*iQty8 %>
+		</td>
+		<td align="center"><%=itmObj8.getDynafloDiscountCode() %>
+		</td>
+	</tr>
+<%
+	}
+	else if(!partNum8.trim().equals("")){
+%>
+	<tr>
+		<td colspan="16"><%=partNum8 %> does not exist.
+		</td>
+	</tr>
+<%
+	}
+	if(!itmObj9.getPartNumber().trim().equals("")){
+%>
+	<tr>
+		<td><%=itmObj9.getPartNumber() %>
+		</td>
+		<td align="center"><%=iQty9 %>
+		</td>
+		<td><%=itmObj9.getDescription() %>
+		</td>
+		<td><%=itmObj9.getAddInfo1() %>
+		</td>
+		<td><%=itmObj9.getAddInfo2() %>
+		</td>
+		<td><%=itmObj9.getAddInfo3() %>
+		</td>
+		<td><%=itmObj9.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj9.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj9.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj9.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj9.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj9.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj9.getDuties() %>
+		</td>
+		<td align="right"><%=itmObj9.getSellingPrice() %>
+		</td>
+		<td align="right"><%=itmObj9.getSellingPrice()*iQty9 %>
+		</td>
+		<td align="center"><%=itmObj9.getDynafloDiscountCode() %>
+		</td>
+	</tr>
+<%
+	}
+	else if(!partNum9.trim().equals("")){
+%>
+	<tr>
+		<td colspan="16"><%=partNum9 %> does not exist.
+		</td>
+	</tr>
+<%
+	}
+	if(!itmObj10.getPartNumber().trim().equals("")){
+%>
+	<tr>
+		<td><%=itmObj10.getPartNumber() %>
+		</td>
+		<td align="center"><%=iQty10 %>
+		</td>
+		<td><%=itmObj10.getDescription() %>
+		</td>
+		<td><%=itmObj10.getAddInfo1() %>
+		</td>
+		<td><%=itmObj10.getAddInfo2() %>
+		</td>
+		<td><%=itmObj10.getAddInfo3() %>
+		</td>
+		<td><%=itmObj10.getEquipmentPackageReference()%>
+		</td>
+		<td align="center"><%=itmObj10.getGracoReference() %>
+		</td>
+		<td align="center"><%=itmObj10.getGracoFamType() %>
+		</td>
+		<td align="center"><%=itmObj10.getGracoFamDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj10.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=itmObj10.getGracoStdDiscount()*100 %>
+		</td>
+		<td align="center"><%=itmObj10.getDuties() %>
+		</td>
+		<td align="right"><%=itmObj10.getSellingPrice() %>
+		</td>
+		<td align="right"><%=itmObj10.getSellingPrice()*iQty10 %>
+		</td>
+		<td align="center"><%=itmObj10.getDynafloDiscountCode() %>
+		</td>
+	</tr>
+<%
+	}
+	else if(!partNum10.trim().equals("")){
+%>
+	<tr>
+		<td colspan="16"><%=partNum10 %> does not exist.
 		</td>
 	</tr>
 <%
 	}
 %>
+	<tr>
+		<th colspan="14" align="right">GRAND TOTAL
+		</th>
+		<th align="right"><%=grandTotal %>
+		</th>
+		<th>&nbsp;
+		</th>
+	</tr>
 <form action="index.jsp" method="post" accept-charset=utf-8>
 <input type="hidden" name="action" value="backToIndex">
 	<tr>
-		<td colspan="6"><input type="submit" value="Search Again" />
+		<td colspan="16"><input type="submit" value="Search Again" />
 		</td>
 	</tr>
 </form>

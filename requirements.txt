@@ -1,13 +1,30 @@
-intranet website
-database - part number, price, duty percentage, discount, family code
-input part number, qty => total price (also show duty percentage, and discount)
-allow 10 rows in interface for query
-data ingestion through excel (multiple sheets, non-standard cell structure)
-make it in such a way that contents of web page cannot be copied (disable right-click?)
+intranet website (done)
+database - part number, price, duty percentage, discount, family code (done)
+input part number, qty => total price (also show duty percentage, and discount) (done)
+allow 10 rows in interface for query (done)
+data ingestion through excel (multiple sheets, non-standard cell structure) (done)
+make it in such a way that contents of web page cannot be copied (disable right-click) (done)
+add 5 more search rows (free) (done)
+add user login screen - differentiate between admin and operator (1 day)
+disallow Ctrl+C in items_query_result.jsp (free) (done)
+bug - duties displaying wrongly (free) (done)
+for long column names, wrap them downwards (free) (done)
+part number, qty, description, addinfo1-3, equipment-package ref, graco ref, <graco columns>, duties, selling price, total price, dynaflo discount code - IN THIS ORDER (free) (done)
+graco fields, duties, dynaflo discount code, qty should be centred in search results page (free) (done)
+pressing enter triggers calculation in search page (free)
+bug - selling price being truncated from 2 decimal points to 1 during import (free)
+bug - import not working in war file version (free)
+ensure 2 decimal points for selling price and total price (free)
+add grand total row (free) (done)
+add hard-coded irac notes, display only during irac items (only irac items have IAV prefix)  (free)
 
 outside scope:
 is there a way to restrict file copy operations within a server but can open the file to view
 
 possible update:
 internet capability (security - encryption, login, etc.)
+
+current price:
+current man/day count = 5 as of 3rd Sept 2016 (first review)
+day rate = RM350
 
