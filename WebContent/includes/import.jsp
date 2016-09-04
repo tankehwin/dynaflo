@@ -4,6 +4,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.math.*"%>
 <%
 	try {
 		// load global.properties

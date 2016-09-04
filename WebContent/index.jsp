@@ -69,7 +69,7 @@ DYNAFLO PARTS SEARCH SYSTEM
 <table class="formtable">
 <tr>
 <td>
-<form action="index.jsp" method="post" accept-charset=utf-8>
+<form action="index.jsp" method="post" accept-charset="utf-8">
 <input type="hidden" name="action" value="calculateItemPrice">
 <table class="gridtable">
 	<tr>
@@ -151,7 +151,7 @@ DYNAFLO PARTS SEARCH SYSTEM
 </table>
 </form>
 <br />
-<form action="index.jsp" method="post" accept-charset=utf-8>
+<form action="index.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="action" value="importData">
 <table class="gridtable">
 	<tr>

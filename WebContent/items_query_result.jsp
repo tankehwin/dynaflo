@@ -114,76 +114,110 @@ document.oncontextmenu=new Function("return false")
 	int iQty8 = 1;
 	int iQty9 = 1;
 	int iQty10 = 1;
+	boolean ifIracExists = false;
 	if(!partNum1.trim().equals("")){		
 		if(!qty1.trim().equals("")){
 			iQty1 = new Integer(qty1).intValue();
 		}
 		itmObj1 = ItemManager.getObject(partNum1, iQty1, conn);
+		if(itmObj1.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum2.trim().equals("")){		
 		if(!qty2.trim().equals("")){
 			iQty2 = new Integer(qty2).intValue();
 		}
 		itmObj2 = ItemManager.getObject(partNum2, iQty2, conn);
+		if(itmObj2.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum3.trim().equals("")){		
 		if(!qty3.trim().equals("")){
 			iQty3 = new Integer(qty3).intValue();
 		}
 		itmObj3 = ItemManager.getObject(partNum3, iQty3, conn);
+		if(itmObj3.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum4.trim().equals("")){		
 		if(!qty4.trim().equals("")){
 			iQty4 = new Integer(qty4).intValue();
 		}
 		itmObj4 = ItemManager.getObject(partNum4, iQty4, conn);
+		if(itmObj4.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum5.trim().equals("")){		
 		if(!qty5.trim().equals("")){
 			iQty5 = new Integer(qty5).intValue();
 		}
 		itmObj5 = ItemManager.getObject(partNum5, iQty5, conn);
+		if(itmObj5.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum6.trim().equals("")){		
 		if(!qty6.trim().equals("")){
 			iQty6 = new Integer(qty6).intValue();
 		}
 		itmObj6 = ItemManager.getObject(partNum6, iQty6, conn);
+		if(itmObj6.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum7.trim().equals("")){		
 		if(!qty7.trim().equals("")){
 			iQty7 = new Integer(qty7).intValue();
 		}
 		itmObj7 = ItemManager.getObject(partNum7, iQty7, conn);
+		if(itmObj7.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum8.trim().equals("")){		
 		if(!qty8.trim().equals("")){
 			iQty8 = new Integer(qty8).intValue();
 		}
 		itmObj8 = ItemManager.getObject(partNum8, iQty8, conn);
+		if(itmObj8.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum9.trim().equals("")){		
 		if(!qty9.trim().equals("")){
 			iQty9 = new Integer(qty9).intValue();
 		}
 		itmObj9 = ItemManager.getObject(partNum9, iQty9, conn);
+		if(itmObj9.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
 	if(!partNum10.trim().equals("")){		
 		if(!qty10.trim().equals("")){
 			iQty10 = new Integer(qty10).intValue();
 		}
 		itmObj10 = ItemManager.getObject(partNum10, iQty10, conn);
+		if(itmObj10.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 	}
-	double grandTotal = itmObj1.getSellingPrice()*iQty1 +
-			itmObj2.getSellingPrice()*iQty2 +
-			itmObj3.getSellingPrice()*iQty3 +
-			itmObj4.getSellingPrice()*iQty4 +
-			itmObj5.getSellingPrice()*iQty5 +
-			itmObj6.getSellingPrice()*iQty6 +
-			itmObj7.getSellingPrice()*iQty7 +
-			itmObj8.getSellingPrice()*iQty8 +
-			itmObj9.getSellingPrice()*iQty9 +
-			itmObj10.getSellingPrice()*iQty10;
+	BigDecimal grandTotal = itmObj1.getSellingPrice().multiply(new BigDecimal(iQty1));
+	grandTotal = grandTotal.add(itmObj2.getSellingPrice().multiply(new BigDecimal(iQty2)));
+	grandTotal = grandTotal.add(itmObj3.getSellingPrice().multiply(new BigDecimal(iQty3)));
+	grandTotal = grandTotal.add(itmObj4.getSellingPrice().multiply(new BigDecimal(iQty4)));
+	grandTotal = grandTotal.add(itmObj5.getSellingPrice().multiply(new BigDecimal(iQty5)));
+	grandTotal = grandTotal.add(itmObj6.getSellingPrice().multiply(new BigDecimal(iQty6)));
+	grandTotal = grandTotal.add(itmObj7.getSellingPrice().multiply(new BigDecimal(iQty7)));
+	grandTotal = grandTotal.add(itmObj8.getSellingPrice().multiply(new BigDecimal(iQty8)));
+	grandTotal = grandTotal.add(itmObj9.getSellingPrice().multiply(new BigDecimal(iQty9)));
+	grandTotal = grandTotal.add(itmObj10.getSellingPrice().multiply(new BigDecimal(iQty10)));
+
+	grandTotal = grandTotal.setScale(2, BigDecimal.ROUND_HALF_UP);
+
 	
 	
 %>
@@ -251,17 +285,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj1.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj1.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj1.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj1.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj1.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj1.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj1.getDuties() %>
 		</td>	
 		<td align="right"><%=itmObj1.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj1.getSellingPrice()*iQty1 %>
+		<td align="right"><%=itmObj1.getSellingPrice().multiply(new BigDecimal(iQty1)) %>
 		</td>
 		<td align="center"><%=itmObj1.getDynafloDiscountCode() %>
 		</td>
@@ -297,17 +331,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj2.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj2.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj2.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj2.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj2.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj2.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj2.getDuties() %>
 		</td>	
 		<td align="right"><%=itmObj2.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj2.getSellingPrice()*iQty2 %>
+		<td align="right"><%=itmObj2.getSellingPrice().multiply(new BigDecimal(iQty2)) %>
 		</td>
 		<td align="center"><%=itmObj2.getDynafloDiscountCode() %>
 		</td>
@@ -343,17 +377,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj3.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj3.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj3.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj3.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj3.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj3.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj3.getDuties() %>
 		</td>
 		<td align="right"><%=itmObj3.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj3.getSellingPrice()*iQty3 %>
+		<td align="right"><%=itmObj3.getSellingPrice().multiply(new BigDecimal(iQty3)) %>
 		</td>
 		<td align="center"><%=itmObj3.getDynafloDiscountCode() %>
 		</td>
@@ -389,17 +423,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj4.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj4.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj4.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj4.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj4.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj4.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj4.getDuties() %>
 		</td>
 		<td align="right"><%=itmObj4.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj4.getSellingPrice()*iQty4 %>
+		<td align="right"><%=itmObj4.getSellingPrice().multiply(new BigDecimal(iQty4)) %>
 		</td>
 		<td align="center"><%=itmObj4.getDynafloDiscountCode() %>
 		</td>
@@ -435,17 +469,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj5.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj5.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj5.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj5.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj5.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj5.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj5.getDuties() %>
 		</td>	
 		<td align="right"><%=itmObj5.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj5.getSellingPrice()*iQty5 %>
+		<td align="right"><%=itmObj5.getSellingPrice().multiply(new BigDecimal(iQty5)) %>
 		</td>
 		<td align="center"><%=itmObj5.getDynafloDiscountCode() %>
 		</td>
@@ -481,17 +515,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj6.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj6.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj6.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj6.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj6.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj6.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj6.getDuties() %>
 		</td>	
 		<td align="right"><%=itmObj6.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj6.getSellingPrice()*iQty6 %>
+		<td align="right"><%=itmObj6.getSellingPrice().multiply(new BigDecimal(iQty6)) %>
 		</td>
 		<td align="center"><%=itmObj6.getDynafloDiscountCode() %>
 		</td>
@@ -527,17 +561,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj7.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj7.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj7.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj7.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj7.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj7.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj7.getDuties() %>
 		</td>
 		<td align="right"><%=itmObj7.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj7.getSellingPrice()*iQty7 %>
+		<td align="right"><%=itmObj7.getSellingPrice().multiply(new BigDecimal(iQty7)) %>
 		</td>
 		<td align="center"><%=itmObj7.getDynafloDiscountCode() %>
 		</td>
@@ -573,17 +607,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj8.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj8.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj8.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj8.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj8.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj8.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj8.getDuties() %>
 		</td>		
 		<td align="right"><%=itmObj8.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj8.getSellingPrice()*iQty8 %>
+		<td align="right"><%=itmObj8.getSellingPrice().multiply(new BigDecimal(iQty8)) %>
 		</td>
 		<td align="center"><%=itmObj8.getDynafloDiscountCode() %>
 		</td>
@@ -619,17 +653,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj9.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj9.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj9.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj9.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj9.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj9.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj9.getDuties() %>
 		</td>
 		<td align="right"><%=itmObj9.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj9.getSellingPrice()*iQty9 %>
+		<td align="right"><%=itmObj9.getSellingPrice().multiply(new BigDecimal(iQty9)) %>
 		</td>
 		<td align="center"><%=itmObj9.getDynafloDiscountCode() %>
 		</td>
@@ -665,17 +699,17 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj10.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj10.getGracoFamDiscount()*100 %>
+		<td align="center"><%=itmObj10.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj10.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj10.getGracoStdDiscount()*100 %>
+		<td align="center"><%=itmObj10.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
 		</td>
 		<td align="center"><%=itmObj10.getDuties() %>
 		</td>
 		<td align="right"><%=itmObj10.getSellingPrice() %>
 		</td>
-		<td align="right"><%=itmObj10.getSellingPrice()*iQty10 %>
+		<td align="right"><%=itmObj10.getSellingPrice().multiply(new BigDecimal(iQty10)) %>
 		</td>
 		<td align="center"><%=itmObj10.getDynafloDiscountCode() %>
 		</td>
@@ -710,6 +744,26 @@ document.oncontextmenu=new Function("return false")
 <br />
 </td>
 </tr>
+<%
+	if(ifIracExists){
+%>
+<tr>
+<td>
+<div>
+NOTE : <br/>
+- Eex models are equipped with electrical installation for potentially explosive atmospheres Group II, category 2G - suitable for Zone 1 <br/>
+- Eex-d models are supplied with exploision proof electric system for fire and explosion dangerous areas Class 1 div 1 - suitable for Zone 1 <br/>
+- ADT models are equipped with electrical installation for potentially explosive atmospheres Group II, Category 3G - suitable for Zone 2 <br/>
+- All models come with SST (304) tanks <br/>
+- All models come with diathermic oil  except AV150 XE & AV200 XE <br/>
+- All models come with 1 x CLIPSAC bag clip and 3 x IRSAC thermoproof bags <br/>
+- Thermoproof disposal bags are manufactured to withstand temperatures up to 200°C <br/>
+</div>
+</td>
+</tr>
+<%
+	}
+%>
 </table>
 <footer>
 FOOTER

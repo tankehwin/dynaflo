@@ -57,3 +57,8 @@ looks like that was wrong. Need to find out what it really means before can proc
 - graco fields, duties, dynaflo discount code, qty, centred in search results page
 - part number, qty, description, addinfo1-3, equipment-package ref, graco ref, <graco columns>, duties, selling price, total price, dynaflo discount code - IN THIS ORDER
 - added grand total row 
+- added hard-coded irac notes, display only during irac items (only irac items have IAV prefix)
+- removed useless TableNames class
+- fixed bug - selling price being truncated from 2 decimal points to 1 during import
+- ensured 2 decimal points for selling price and total price
+- found out method to upload file is wrong, need to use another method: http://www.tutorialspoint.com/jsp/jsp_file_uploading.htm

@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import model.ItemModel;
-import utils.TableNames;
 import utils.TimestampGenerator;
 
 public class ItemManager {
@@ -81,20 +80,20 @@ public class ItemManager {
 			itemObj.setAddInfo2(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION2));
 			itemObj.setAddInfo3(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION3));
 			itemObj.setDescription(rs.getString(ItemModel.COLNAME_DESCRIPTION));
-			itemObj.setDuties(rs.getDouble(ItemModel.COLNAME_DUTIES));
+			itemObj.setDuties(rs.getBigDecimal(ItemModel.COLNAME_DUTIES));
 			itemObj.setDynafloDiscountCode(rs.getString(ItemModel.COLNAME_DYNAFLODISCOUNTCODE));
 			itemObj.setEquipmentPackageReference(rs.getString(ItemModel.COLNAME_EQUIPMENTPACKAGEREFERENCE));
-			itemObj.setGracoFamDiscount(rs.getDouble(ItemModel.COLNAME_GRACOFAMILYDISCOUNT));
+			itemObj.setGracoFamDiscount(rs.getBigDecimal(ItemModel.COLNAME_GRACOFAMILYDISCOUNT));
 			itemObj.setGracoFamType(rs.getString(ItemModel.COLNAME_GRACOFAMILYTYPE));
 			itemObj.setGracoReference(rs.getString(ItemModel.COLNAME_GRACOREFERENCE));
-			itemObj.setGracoStdDiscount(rs.getDouble(ItemModel.COLNAME_GRACOSTDDISCOUNT));
+			itemObj.setGracoStdDiscount(rs.getBigDecimal(ItemModel.COLNAME_GRACOSTDDISCOUNT));
 			itemObj.setGracoStdDiscountCode(rs.getString(ItemModel.COLNAME_GRACOSTDDISCOUNTCODE));
 			itemObj.setItemReference(rs.getString(ItemModel.COLNAME_ITEMREFERENCE));
 			itemObj.setLatestDatePurchased(rs.getTimestamp(ItemModel.COLNAME_LATESTDATEPURCHASED));
 			itemObj.setLeadTimeARO(new Integer(rs.getInt(ItemModel.COLNAME_LEADTIMEARO)));
 			itemObj.setOldPartNumber(rs.getString(ItemModel.COLNAME_OLDPARTNUMBER));
 			itemObj.setPartNumber(rs.getString(ItemModel.COLNAME_PARTNUMBER));
-			itemObj.setSellingPrice(rs.getDouble(ItemModel.COLNAME_SELLINGPRICE));
+			itemObj.setSellingPrice(rs.getBigDecimal(ItemModel.COLNAME_SELLINGPRICE));
 			itemObj.setSupplier(rs.getString(ItemModel.COLNAME_SUPPLIER));
 			itemObj.setSupplierCode(rs.getString(ItemModel.COLNAME_SUPPLIERCODE));
 		}	

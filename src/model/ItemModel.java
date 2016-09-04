@@ -38,8 +38,8 @@ public class ItemModel {
 	private String addInfo1;
 	private String addInfo2;
 	private String addInfo3;
-	private Double duties;
-	private Double sellingPrice;
+	private BigDecimal duties;
+	private BigDecimal sellingPrice;
 	private Integer leadTimeARO;
 	private String dynafloDiscountCode;
 	private String oldPartNumber;
@@ -49,9 +49,9 @@ public class ItemModel {
 	private String equipmentPackageReference;
 	private String gracoReference;
 	private String gracoFamType;
-	private Double gracoFamDiscount;
+	private BigDecimal gracoFamDiscount;
 	private String gracoStdDiscountCode;
-	private Double gracoStdDiscount;
+	private BigDecimal gracoStdDiscount;
 	private String supplierCode;
 	
 	public ItemModel() {
@@ -60,8 +60,8 @@ public class ItemModel {
 		this.addInfo1 = "";
 		this.addInfo2 = "";
 		this.addInfo3 = "";
-		this.duties = new Double(0);
-		this.sellingPrice = new Double(0);
+		this.duties = new BigDecimal(0);
+		this.sellingPrice = new BigDecimal(0);
 		this.leadTimeARO = new Integer(0);
 		this.dynafloDiscountCode = "";
 		this.oldPartNumber = "";
@@ -71,9 +71,9 @@ public class ItemModel {
 		this.equipmentPackageReference = "";
 		this.gracoReference = "";
 		this.gracoFamType = "";
-		this.gracoFamDiscount = new Double(0);
+		this.gracoFamDiscount = new BigDecimal(0);
 		this.gracoStdDiscountCode = "";
-		this.gracoStdDiscount = new Double(0);
+		this.gracoStdDiscount = new BigDecimal(0);
 		this.supplierCode = "";
 	}
 	
@@ -109,7 +109,7 @@ public class ItemModel {
 			if(result.trim().equals("")){
 				result = "0.0";
 			}
-			this.duties = new Double(result);
+			this.duties = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_SELLING_PRICE.equals(fieldName)){
 			String result = value.toString();
@@ -117,7 +117,7 @@ public class ItemModel {
 			if(result.trim().equals("#N/A!")){
 				result = "-1.0";
 			}
-			this.sellingPrice = new Double(result);
+			this.sellingPrice = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_LEAD_TIME.equals(fieldName)){
 			this.leadTimeARO = new Integer(value.toString());
@@ -194,7 +194,7 @@ public class ItemModel {
 			if(result.trim().equals("STD")){
 				result = "0.0";
 			}
-			this.gracoFamDiscount = new Double(result);
+			this.gracoFamDiscount = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT_CODE.equals(fieldName)){
 			String result = value.toString();
@@ -213,7 +213,7 @@ public class ItemModel {
 			if(result.trim().equals("STD")){
 				result = "0.0";
 			}
-			this.gracoStdDiscount = new Double(result);
+			this.gracoStdDiscount = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_SUPPLIER_CODE.equals(fieldName)){
 			String result = value.toString();
@@ -252,28 +252,28 @@ public class ItemModel {
 	public void setAddInfo3(String addInfo3) {
 		this.addInfo3 = addInfo3;
 	}
-	public Double getDuties() {
+	public BigDecimal getDuties() {
 		int decimalPlaces = 2;
 		BigDecimal bd = new BigDecimal(duties.doubleValue());
 
 		// setScale is immutable
 		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
-		duties = bd.doubleValue();
+		duties = bd;
 		return duties;
 	}
-	public void setDuties(Double duties) {
+	public void setDuties(BigDecimal duties) {
 		this.duties = duties;
 	}
-	public Double getSellingPrice() {
+	public BigDecimal getSellingPrice() {
 		int decimalPlaces = 2;
 		BigDecimal bd = new BigDecimal(sellingPrice.doubleValue());
 
 		// setScale is immutable
 		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
-		sellingPrice = bd.doubleValue();
+		sellingPrice = bd;
 		return sellingPrice;
 	}
-	public void setSellingPrice(Double sellingPrice) {
+	public void setSellingPrice(BigDecimal sellingPrice) {
 		this.sellingPrice = sellingPrice;
 	}
 	public Integer getLeadTimeARO() {
@@ -330,16 +330,16 @@ public class ItemModel {
 	public void setGracoFamType(String gracoFamType) {
 		this.gracoFamType = gracoFamType;
 	}
-	public Double getGracoFamDiscount() {
+	public BigDecimal getGracoFamDiscount() {
 		int decimalPlaces = 2;
 		BigDecimal bd = new BigDecimal(gracoFamDiscount.doubleValue());
 
 		// setScale is immutable
 		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
-		gracoFamDiscount = bd.doubleValue();
+		gracoFamDiscount = bd;
 		return gracoFamDiscount;
 	}
-	public void setGracoFamDiscount(Double gracoFamDiscount) {
+	public void setGracoFamDiscount(BigDecimal gracoFamDiscount) {
 		this.gracoFamDiscount = gracoFamDiscount;
 	}
 	public String getGracoStdDiscountCode() {
@@ -348,16 +348,16 @@ public class ItemModel {
 	public void setGracoStdDiscountCode(String gracoStdDiscountCode) {
 		this.gracoStdDiscountCode = gracoStdDiscountCode;
 	}
-	public Double getGracoStdDiscount() {
+	public BigDecimal getGracoStdDiscount() {
 		int decimalPlaces = 2;
 		BigDecimal bd = new BigDecimal(gracoStdDiscount.doubleValue());
 
 		// setScale is immutable
 		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
-		gracoStdDiscount = bd.doubleValue();
+		gracoStdDiscount = bd;
 		return gracoStdDiscount;
 	}
-	public void setGracoStdDiscount(Double gracoStdDiscount) {
+	public void setGracoStdDiscount(BigDecimal gracoStdDiscount) {
 		this.gracoStdDiscount = gracoStdDiscount;
 	}
 	public String getSupplierCode() {
