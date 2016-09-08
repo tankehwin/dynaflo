@@ -23,7 +23,13 @@ CREATE TABLE items_master (
 ENGINE = InnoDB;
 
 
-
+CREATE TABLE login_master (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name varchar(20),
+	password varchar(30),
+	date_created datetime,
+	date_updated datetime
+);
 
 
 

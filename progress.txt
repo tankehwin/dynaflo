@@ -62,3 +62,5 @@ looks like that was wrong. Need to find out what it really means before can proc
 - fixed bug - selling price being truncated from 2 decimal points to 1 during import
 - ensured 2 decimal points for selling price and total price
 - found out method to upload file is wrong, need to use another method: http://www.tutorialspoint.com/jsp/jsp_file_uploading.htm
+- pressing enter triggers calculation in search page
+- building login module

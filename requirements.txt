@@ -14,7 +14,7 @@ add hard-coded irac notes, display only during irac items (only irac items have 
 add grand total row (free) (done)
 ensure 2 decimal points for selling price and total price (free) (done)
 bug - selling price being truncated from 2 decimal points to 1 during import (free) (done)
-pressing enter triggers calculation in search page (free)
+pressing enter triggers calculation in search page (free) (done)
 bug - import not working in war file version (free)
 add user login screen - differentiate between admin and operator (1 day)
 
