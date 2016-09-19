@@ -27,6 +27,7 @@ CREATE TABLE login_master (
 	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name varchar(20),
 	password varchar(30),
+	acc_type varchar(10),
 	date_created datetime,
 	date_updated datetime
 );
