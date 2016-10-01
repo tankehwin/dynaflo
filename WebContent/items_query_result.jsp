@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@include file="includes/import.jsp" %>   
+<%@include file="includes/import.jsp" %> 
+<%@include file="includes/authentication.jsp" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,9 +66,8 @@ document.onmousedown=clickIE4;
 //document.oncontextmenu=new Function("alert(message);return false")
 document.oncontextmenu=new Function("return false")
 </script>
-<%
+<%	
 	Connection conn = (Connection) session.getAttribute("conn");	
-	String action = request.getParameter("action");
 	String partNum1 = request.getParameter("partnum1");	
 	String qty1 = request.getParameter("qty1");	
 	String partNum2 = request.getParameter("partnum2");	
@@ -89,10 +89,7 @@ document.oncontextmenu=new Function("return false")
 	String partNum10 = request.getParameter("partnum10");	
 	String qty10 = request.getParameter("qty10");	
 
-	if(action != null && action.equals("backToIndex")) {
-		String redirectURL = "index.jsp";
-		response.sendRedirect(redirectURL);
-	}
+	
 	
 	ItemModel itmObj1 = new ItemModel();
 	ItemModel itmObj2 = new ItemModel();
@@ -733,13 +730,10 @@ document.oncontextmenu=new Function("return false")
 		<th>&nbsp;
 		</th>
 	</tr>
-<form action="index.jsp" method="post" accept-charset=utf-8>
-<input type="hidden" name="action" value="backToIndex">
 	<tr>
-		<td colspan="16"><input type="submit" value="Search Again" />
+		<td colspan="16"><a href="items_query.jsp">Search Again</a>
 		</td>
 	</tr>
-</form>
 </table>
 <br />
 </td>

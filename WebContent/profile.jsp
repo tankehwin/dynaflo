@@ -1,14 +1,31 @@
-<%@include file="includes/import.jsp" %>   
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@include file="includes/import.jsp" %>
+<%@include file="includes/authentication.jsp" %>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link href="jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<script src="jquery/js/jquery-1.10.2.js"></script>
+<script src="jquery/js/jquery-ui-1.10.4.custom.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Dynaflo</title>
+</head>
+<body>
+<header>
+DYNAFLO PARTS SEARCH SYSTEM
+</header>   
 <%
 	Connection conn = (Connection) session.getAttribute("conn");
 	String action = request.getParameter("action");
 	String error = "";
-	if(action != null && action.equals("registerUser")) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+	String password = "";
+	if(action != null && action.equals("editUser")) {
+		password = request.getParameter("password");
 		try {
-			LoginManager.register(username, password, conn);
-			String success = "Registration successful for " + username + ".";
+			LoginManager.update(userLogin.getName(), password, conn);
+			String success = "Update successful for " + userLogin.getName() + ".";
 			System.out.println(success);
 %>
 <script>
@@ -18,7 +35,7 @@
 			buttons: {
 				OK: function() {
 					$( this ).dialog( "close" );
-					window.location.replace("../index.jsp");
+					window.location.replace("items_query.jsp");
 					
 				}
 			}
@@ -26,7 +43,7 @@
 	});
 </script>
 
-<div id="dialog-message" title="Registration Successful">
+<div id="dialog-message" title="Update Successful">
 	<p>
 		<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
 		<%=success %>
@@ -35,12 +52,7 @@
 <%
 		}
 		catch (Exception ex) {
-			if(ex.getMessage().equals("This user is already registered.")) {
-				error = ex.getMessage();
-			}
-			else {
-				error = ex.getMessage() + ". This user could not be registered.";
-			}
+			error = ex.getMessage();
 		}	
 	} // end if
 %>
@@ -49,15 +61,15 @@
 		$( "#dob" ).datepicker();
 	});
 </script>
-<form action="register.jsp" method="post" accept-charset=utf-8>
-<input type="hidden" name="action" value="registerUser">
+<form action="profile.jsp" method="post" accept-charset=utf-8>
+<input type="hidden" name="action" value="editUser">
 <table class="formtable">
 	<tr>
 		<td>Username
 		</td>
 		<td>:
 		</td>
-		<td><input type="text" name="username" />
+		<td><%=userLogin.getName() %>
 		</td>
 	</tr>
 	<tr>
@@ -86,3 +98,8 @@
 <%
 	}
 %>
+<footer>
+FOOTER
+</footer>
+</body>
+</html>

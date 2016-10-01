@@ -17,6 +17,9 @@ public class LoginModel {
 	
 	public static final String TABLENAME = "login_master";
 	
+	public static final String CONST_ACC_TYPE_ADMIN = "admin";
+	public static final String CONST_ACC_TYPE_NORMAL = "normal";
+	
 	private Integer id;
 	private String name;
 	private String password;

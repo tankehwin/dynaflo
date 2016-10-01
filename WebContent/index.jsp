@@ -17,6 +17,7 @@ DYNAFLO PARTS SEARCH SYSTEM
 </header>
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
+	session.setAttribute("userLogin", null);
 	String username = request.getParameter("username");	
 	String error = "";
 	if(username != null) {
@@ -75,7 +76,7 @@ DYNAFLO PARTS SEARCH SYSTEM
 <%
 	}
 %>
-<a href="members/register.jsp">click here to register</a>
+<a href="register.jsp">Register New User</a>
 <footer>
 FOOTER
 </footer>

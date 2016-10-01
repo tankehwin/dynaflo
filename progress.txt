@@ -65,3 +65,9 @@ looks like that was wrong. Need to find out what it really means before can proc
 - pressing enter triggers calculation in search page
 - building login module
 - added register.jsp and profile.jsp, fleshed out LoginManager and LoginModel a little
+- created login table in mysql and default accounts
+- created authentication.jsp to control access
+- edit profile function created
+- register user function created
+- logout function created
+- account difference noted when deciding whether to display import file function

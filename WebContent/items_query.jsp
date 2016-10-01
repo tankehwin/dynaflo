@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@include file="includes/import.jsp" %>   
+<%@include file="includes/authentication.jsp" %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,7 +70,7 @@ DYNAFLO PARTS SEARCH SYSTEM
 <table class="formtable">
 <tr>
 <td>
-<form action="index.jsp" method="post" accept-charset="utf-8">
+<form action="items_query.jsp" method="post" accept-charset="utf-8">
 <input type="hidden" name="action" value="calculateItemPrice">
 <table class="gridtable">
 	<tr>
@@ -148,10 +149,16 @@ DYNAFLO PARTS SEARCH SYSTEM
 		<td>&nbsp;
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2"><a href="profile.jsp">Edit User Profile</a>
+	</tr>
 </table>
 </form>
+<%
+	if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
 <br />
-<form action="index.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form action="items_query.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="action" value="importData">
 <table class="gridtable">
 	<tr>
@@ -171,17 +178,20 @@ DYNAFLO PARTS SEARCH SYSTEM
 		</td>
 	</tr>
 <%
-	if(!importResults.trim().equals("")){
+		if(!importResults.trim().equals("")){
 %>
 	<tr>
 		<td colspan="2"><%=importResults %>
 		</td>
 	</tr>
 <%
-	}
+		}
 %>
 </table>
 </form>
+<%
+	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
 </td>	
 </tr>	
 </table>
