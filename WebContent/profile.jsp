@@ -13,9 +13,7 @@
 <title>Dynaflo</title>
 </head>
 <body>
-<header>
-DYNAFLO PARTS SEARCH SYSTEM
-</header>   
+<%@include file="includes/header.jsp" %>   
 <%
 	Connection conn = (Connection) session.getAttribute("conn");
 	String action = request.getParameter("action");
@@ -98,8 +96,6 @@ DYNAFLO PARTS SEARCH SYSTEM
 <%
 	}
 %>
-<footer>
-FOOTER
-</footer>
+<%@include file="includes/footer.jsp" %>   
 </body>
 </html>

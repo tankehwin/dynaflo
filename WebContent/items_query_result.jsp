@@ -29,9 +29,7 @@ if (window.sidebar) {
 </script>
 </head>
 <body>
-<header>
-DYNAFLO PARTS SEARCH SYSTEM
-</header>
+<%@include file="includes/header.jsp" %>   
 <script language=JavaScript>
 //Disable right mouse click Script
 //By Maximus (maximus@nsimail.com) w/ mods by DynamicDrive
@@ -731,7 +729,7 @@ document.oncontextmenu=new Function("return false")
 		</th>
 	</tr>
 	<tr>
-		<td colspan="16"><a href="items_query.jsp">Search Again</a>
+		<td colspan="16"><button><a href="items_query.jsp">Search Again</a></button>
 		</td>
 	</tr>
 </table>
@@ -759,8 +757,6 @@ NOTE : <br/>
 	}
 %>
 </table>
-<footer>
-FOOTER
-</footer>
+<%@include file="includes/footer.jsp" %>   
 </body>
 </html>

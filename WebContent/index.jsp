@@ -12,9 +12,7 @@
 <title>Dynaflo</title>
 </head>
 <body>
-<header>
-DYNAFLO PARTS SEARCH SYSTEM
-</header>
+<%@include file="includes/header.jsp" %>   
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
 	session.setAttribute("userLogin", null);
@@ -25,7 +23,6 @@ DYNAFLO PARTS SEARCH SYSTEM
 		LoginModel userLogin = LoginManager.login(username, password, conn);
 		if(userLogin != null) {
 			session.setAttribute("userLogin", userLogin);
-			System.out.println("Login successful.");
 			String redirectURL = "items_query.jsp";
 		    response.sendRedirect(redirectURL);
 		}
@@ -68,17 +65,16 @@ DYNAFLO PARTS SEARCH SYSTEM
 
 
 </form>
-<br />
 <%
 	if(!error.equals("")) {
 %>
+<br />
 <%=error %>
 <%
 	}
 %>
+<br/>
 <a href="register.jsp">Register New User</a>
-<footer>
-FOOTER
-</footer>
+<%@include file="includes/footer.jsp" %>   
 </body>
 </html>

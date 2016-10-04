@@ -13,9 +13,7 @@
 <title>Dynaflo</title>
 </head>
 <body>
-<header>
-DYNAFLO PARTS SEARCH SYSTEM
-</header>
+<%@include file="includes/header.jsp" %>   
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
 	String action = request.getParameter("action");
@@ -55,8 +53,13 @@ DYNAFLO PARTS SEARCH SYSTEM
 		response.sendRedirect(redirectURL);
 	}
 	else if(action != null && action.equals("importData")) {
-		String filePath = request.getParameter("filepath");	
-		System.out.println("File path is: " + filePath);
+		Properties prop = new Properties();
+		ServletContext servletContext = session.getServletContext();
+		prop.load(new FileInputStream(servletContext.getRealPath("/global.properties")));	
+
+		String tomcatLocation = prop.getProperty("tomcatLocation");
+	   
+	   	String filePath = tomcatLocation + "webapps/data/import.xls";
 		if(!filePath.trim().equals("")){
 			ExcelReader excelBook = new ExcelReader();
 			int importCount = excelBook.ingestExcelFile(filePath, conn);
@@ -149,16 +152,14 @@ DYNAFLO PARTS SEARCH SYSTEM
 		<td>&nbsp;
 		</td>
 	</tr>
-	<tr>
-		<td colspan="2"><a href="profile.jsp">Edit User Profile</a>
-	</tr>
 </table>
 </form>
 <%
 	if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>
 <br />
-<form action="items_query.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+
+<form action="file_upload.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="action" value="importData">
 <table class="gridtable">
 	<tr>
@@ -195,8 +196,6 @@ DYNAFLO PARTS SEARCH SYSTEM
 </td>	
 </tr>	
 </table>
-<footer>
-FOOTER
-</footer>
+<%@include file="includes/footer.jsp" %>   
 </body>
 </html>

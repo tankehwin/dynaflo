@@ -71,3 +71,8 @@ looks like that was wrong. Need to find out what it really means before can proc
 - register user function created
 - logout function created
 - account difference noted when deciding whether to display import file function
+- cleaned up edit profile links
+- refactored header and footer into footer.jsp and header.jsp
+- added tomcatLocation variable into global.properties for file upload
+- added file upload fix
+- file upload tested, works
