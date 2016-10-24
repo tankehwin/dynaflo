@@ -87,7 +87,7 @@ document.oncontextmenu=new Function("return false")
 	String partNum10 = request.getParameter("partnum10");	
 	String qty10 = request.getParameter("qty10");	
 
-	
+	int colspan = 20;
 	
 	ItemModel itmObj1 = new ItemModel();
 	ItemModel itmObj2 = new ItemModel();
@@ -221,7 +221,7 @@ document.oncontextmenu=new Function("return false")
 <td>
 <table class="gridtable">
 	<tr>
-		<th colspan="16">Search Results
+		<th colspan="<%=colspan%>">Search Results
 		</th>
 	</tr>
 	<tr>
@@ -237,9 +237,7 @@ document.oncontextmenu=new Function("return false")
 		</th>
 		<th>Additional <br/>Information 3
 		</th>
-		<th>Equipment/ <br/>Package Ref
-		</th>
-		<th>GRACO Ref
+		<th>Equipment/Package/<br/>Item Ref.
 		</th>
 		<th>GRACO <br/>Family Type
 		</th>
@@ -256,6 +254,16 @@ document.oncontextmenu=new Function("return false")
 		<th>Total Price
 		</th>
 		<th>Dynaflo <br/>Disc. Code
+		</th>
+		<th>Lead Time ARO
+		</th>
+		<th>Old Part Number
+		</th>
+		<th>Latest Date Purchased
+		</th>
+		<th>Supplier
+		</th>
+		<th>Supplier Code
 		</th>
 	</tr>
 <%
@@ -274,9 +282,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj1.getAddInfo3() %>
 		</td>
-		<td><%=itmObj1.getEquipmentPackageReference()%>
-		</td>
-		<td><%=itmObj1.getGracoReference() %>
+		<td align="center"><%=itmObj1.getEquipmentPackageReference()+itmObj1.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj1.getGracoFamType() %>
 		</td>
@@ -294,13 +300,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj1.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj1.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj1.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj1.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj1.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj1.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum1.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum1 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum1 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -320,9 +336,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj2.getAddInfo3() %>
 		</td>
-		<td><%=itmObj2.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj2.getGracoReference() %>
+		<td align="center"><%=itmObj2.getEquipmentPackageReference()+itmObj2.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj2.getGracoFamType() %>
 		</td>
@@ -340,13 +354,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj2.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj2.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj2.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj2.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj2.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj2.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum2.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum2 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum2 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -366,9 +390,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj3.getAddInfo3() %>
 		</td>
-		<td><%=itmObj3.getEquipmentPackageReference()%>
-		</td>
-		<td><%=itmObj3.getGracoReference() %>
+		<td align="center"><%=itmObj3.getEquipmentPackageReference()+itmObj3.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj3.getGracoFamType() %>
 		</td>
@@ -386,13 +408,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj3.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj3.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj3.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj3.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj3.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj3.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum3.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum3 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum3 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -412,9 +444,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj4.getAddInfo3() %>
 		</td>
-		<td><%=itmObj4.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj4.getGracoReference() %>
+		<td align="center"><%=itmObj4.getEquipmentPackageReference()+itmObj4.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj4.getGracoFamType() %>
 		</td>
@@ -432,13 +462,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj4.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj4.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj4.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj4.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj4.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj4.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum4.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum4 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum4 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -458,9 +498,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj5.getAddInfo3() %>
 		</td>
-		<td><%=itmObj5.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj5.getGracoReference() %>
+		<td align="center"><%=itmObj5.getEquipmentPackageReference()+itmObj5.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj5.getGracoFamType() %>
 		</td>
@@ -478,13 +516,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj5.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj5.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj5.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj5.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj5.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj5.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum5.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum5 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum5 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -504,9 +552,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj6.getAddInfo3() %>
 		</td>
-		<td><%=itmObj6.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj6.getGracoReference() %>
+		<td align="center"><%=itmObj6.getEquipmentPackageReference()+itmObj6.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj6.getGracoFamType() %>
 		</td>
@@ -524,13 +570,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj6.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj6.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj6.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj6.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj6.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj6.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum6.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum6 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum6 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -550,9 +606,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj7.getAddInfo3() %>
 		</td>
-		<td><%=itmObj7.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj7.getGracoReference() %>
+		<td align="center"><%=itmObj7.getEquipmentPackageReference()+itmObj7.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj7.getGracoFamType() %>
 		</td>
@@ -570,13 +624,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj7.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj7.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj7.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj7.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj7.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj7.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum7.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum7 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum7 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -596,9 +660,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj8.getAddInfo3() %>
 		</td>
-		<td><%=itmObj8.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj8.getGracoReference() %>
+		<td align="center"><%=itmObj8.getEquipmentPackageReference()+itmObj8.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj8.getGracoFamType() %>
 		</td>
@@ -616,13 +678,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj8.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj8.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj8.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj8.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj8.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj8.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum8.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum8 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum8 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -642,9 +714,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj9.getAddInfo3() %>
 		</td>
-		<td><%=itmObj9.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj9.getGracoReference() %>
+		<td align="center"><%=itmObj9.getEquipmentPackageReference()+itmObj9.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj9.getGracoFamType() %>
 		</td>
@@ -662,13 +732,23 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj9.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj9.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj9.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj9.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj9.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj9.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum9.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum9 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum9 %> does not exist.
 		</td>
 	</tr>
 <%
@@ -688,9 +768,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td><%=itmObj10.getAddInfo3() %>
 		</td>
-		<td><%=itmObj10.getEquipmentPackageReference()%>
-		</td>
-		<td align="center"><%=itmObj10.getGracoReference() %>
+		<td align="center"><%=itmObj10.getEquipmentPackageReference()+itmObj10.getItemReference() %>
 		</td>
 		<td align="center"><%=itmObj10.getGracoFamType() %>
 		</td>
@@ -708,28 +786,48 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj10.getDynafloDiscountCode() %>
 		</td>
+		<td align="center"><%=itmObj10.getLeadTimeARO() %>
+		</td>
+		<td align="center"><%=itmObj10.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj10.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj10.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj10.getSupplierCode() %>
+		</td>
 	</tr>
 <%
 	}
 	else if(!partNum10.trim().equals("")){
 %>
 	<tr>
-		<td colspan="16"><%=partNum10 %> does not exist.
+		<td colspan="<%=colspan%>"><%=partNum10 %> does not exist.
 		</td>
 	</tr>
 <%
 	}
 %>
 	<tr>
-		<th colspan="14" align="right">GRAND TOTAL
+		<th colspan="13" align="right">GRAND TOTAL
 		</th>
 		<th align="right"><%=grandTotal %>
 		</th>
 		<th>&nbsp;
 		</th>
+		<th>&nbsp;
+		</th>
+		<th>&nbsp;
+		</th>
+		<th>&nbsp;
+		</th>
+		<th>&nbsp;
+		</th>
+		<th>&nbsp;
+		</th>
 	</tr>
 	<tr>
-		<td colspan="16"><button><a href="items_query.jsp">Search Again</a></button>
+		<td colspan="<%=colspan%>"><a href="items_query.jsp">Search Again</a>
 		</td>
 	</tr>
 </table>

@@ -32,7 +32,7 @@ public class FieldNameScheme {
 		else if(scheme.toUpperCase().trim().equals("LOCAL")) {
 			return getLocalFields();
 		}
-		else if(scheme.toUpperCase().trim().equals("DSTECH")) {
+		else if(scheme.toUpperCase().trim().equals("DS TECH")) {
 			return getDSTechFields();
 		}
 		else if(scheme.toUpperCase().trim().equals("EUROTECH")) {

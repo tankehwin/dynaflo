@@ -15,13 +15,19 @@ public class TimestampGenerator {
 	
 	public static String getFormattedDate() throws Exception {
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 		String result = sdf.format(date);
 		return result;
 	}
 	
+	public static String getTruncatedDate(Timestamp value) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+		String result = sdf.format(value);	
+		return result;
+	}
+	
 	public static Timestamp createTimestamp(String value) throws Exception {
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 		Date date = dateFormat.parse(value);
 		long time = date.getTime();
 		return new Timestamp(time);

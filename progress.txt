@@ -76,3 +76,6 @@ looks like that was wrong. Need to find out what it really means before can proc
 - added tomcatLocation variable into global.properties for file upload
 - added file upload fix
 - file upload tested, works
+- added and rearranged fields in items_query_result.jsp
+- changing date formats to dd/mm/yy
+- fixed bug where DS TECH sheet items were not being imported
