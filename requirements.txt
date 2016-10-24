@@ -17,6 +17,14 @@ bug - selling price being truncated from 2 decimal points to 1 during import (fr
 pressing enter triggers calculation in search page (free) (done)
 add user login screen - differentiate between admin and operator (done)
 bug - import not working in war file version (free) (done)
+non-related fields to be left blank instead of displaying “0” or “-“ or “01/01/1970” (free) (done)
+Overall font size can be 1 down to allow for more fields to be displayed on the first screen (done)
+All dates should be DD/MM/YY (free) (done)
+All percentages except for Duties to be round numbers. Duties to only have 1 decimal (free) (done)
+Column headings should be as in the Sample file (free)
+At the moment, the INOX brand P/N XRAAGM150 does not return a search result (free) (done)
+
+
 need bootstrap script to create temp and tomcat/webapps/data folder for file upload purposes (optional)
 
 

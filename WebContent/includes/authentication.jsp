@@ -3,6 +3,9 @@
 	if(userLogin == null) {
 		String redirectURL = "index.jsp";
 	    response.sendRedirect(redirectURL);
+	    return; 
+	 	// it is important to execute return after a sendRedirect to prevent the following error:
+	    // java.lang.IllegalStateException: Cannot call sendRedirect() after the response has been committed
 	}
 	else{
 %>

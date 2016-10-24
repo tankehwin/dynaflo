@@ -253,7 +253,7 @@ public class ItemModel {
 		this.addInfo3 = addInfo3;
 	}
 	public BigDecimal getDuties() {
-		int decimalPlaces = 2;
+		int decimalPlaces = 1;
 		BigDecimal bd = new BigDecimal(duties.doubleValue());
 
 		// setScale is immutable

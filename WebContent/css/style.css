@@ -2,7 +2,7 @@
 <style type="text/css">
 table.gridtable {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:small;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -10,14 +10,14 @@ table.gridtable {
 }
 table.gridtable th {
 	border-width: 1px;
-	padding: 8px;
+	padding: 5px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #dedede;
 }
 table.gridtable td {
 	border-width: 1px;
-	padding: 8px;
+	padding: 5px;
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
@@ -25,7 +25,7 @@ table.gridtable td {
 
 table.formtable {
 	font-family: verdana,arial,sans-serif;
-	font-size:11px;
+	font-size:small;
 	color:#333333;
 	border-width: 1px;
 	border-color: #666666;
@@ -33,12 +33,12 @@ table.formtable {
 }
 table.formtable th {
 	border-width: 1px;
-	padding: 8px;
+	padding: 5px;
 	background-color: #dedede;
 }
 table.formtable td {
 	border-width: 1px;
-	padding: 8px;
+	padding: 5px;
 	background-color: #ffffff;
 }
 
@@ -51,7 +51,7 @@ input.partNumber {
 }
 
 a {
-	font-size:11px;
+	font-size:small;
 }
 
 </style>

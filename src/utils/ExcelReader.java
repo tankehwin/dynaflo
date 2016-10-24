@@ -77,7 +77,7 @@ public class ExcelReader {
 				// Start loop
 				while(endOfData==false){
 					// Does the row have data? if so, continue. Otherwise, end loop
-					if(sheet.getRows() - 1 <= currentRow){
+					if(sheet.getRows() <= currentRow){
 						System.out.println("Reached end of document: " + currentRow);
 						endOfData = true;
 						break;
@@ -128,7 +128,7 @@ public class ExcelReader {
 			dynafloBook.close();	
 		}
 		catch(Exception ex){
-			System.out.println("Sheet: " + errSheet);
+			System.out.println("Sheet error: " + errSheet);
 			ex.printStackTrace();
 			importCount = 0;
 		}

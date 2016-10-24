@@ -51,6 +51,7 @@
 				+"&partnum9="+partNum9+"&qty9="+qty9
 				+"&partnum10="+partNum10+"&qty10="+qty10;
 		response.sendRedirect(redirectURL);
+		return;
 	}
 	else if(action != null && action.equals("importData")) {
 		Properties prop = new Properties();
@@ -70,7 +71,7 @@
 	}
 	
 %>
-<table class="formtable">
+<table>
 <tr>
 <td>
 <form action="items_query.jsp" method="post" accept-charset="utf-8">
@@ -155,7 +156,7 @@
 </table>
 </form>
 <%
-	if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>
 <br />
 

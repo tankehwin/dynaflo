@@ -25,6 +25,7 @@
 			session.setAttribute("userLogin", userLogin);
 			String redirectURL = "items_query.jsp";
 		    response.sendRedirect(redirectURL);
+		    return;
 		}
 		else {
 			error = "Username or password is invalid.";

@@ -216,7 +216,7 @@ document.oncontextmenu=new Function("return false")
 	
 	
 %>
-<table class="formtable">
+<table>
 <tr>
 <td>
 <table class="gridtable">
@@ -225,45 +225,49 @@ document.oncontextmenu=new Function("return false")
 		</th>
 	</tr>
 	<tr>
-		<th>Part Number
+		<th rowspan="2">PART NO.
 		</th>
-		<th>Qty
+		<th rowspan="2">QTY
 		</th>
-		<th>Description
+		<th rowspan="2">DESCRIPTION
 		</th>
-		<th>Additional <br/>Information 1
+		<th rowspan="2">ADDITIONAL <br/>INFORMATION 1
 		</th>
-		<th>Additional <br/>Information 2
+		<th rowspan="2">ADDITIONAL <br/>INFORMATION 2
 		</th>
-		<th>Additional <br/>Information 3
+		<th rowspan="2">ADDITIONAL <br/>INFORMATION 3
 		</th>
-		<th>Equipment/Package/<br/>Item Ref.
+		<th rowspan="2">ITEM REF.
 		</th>
-		<th>GRACO <br/>Family Type
+		<th colspan="4">GRACO 
 		</th>
-		<th>GRACO <br/>Family Disc. (%)
+		<th rowspan="2">DUTIES (%)
 		</th>
-		<th>GRACO <br/>Std Disc. Code
+		<th rowspan="2">SELLING PRICE
 		</th>
-		<th>GRACO <br/>Std Disc. (%)
+		<th rowspan="2">TOTAL PRICE
 		</th>
-		<th>Duties (%)
+		<th rowspan="2">DYN <br/>DISC. CODE
 		</th>
-		<th>Selling Price
+		<th rowspan="2">LEAD TIME <br/>(DAYS)
 		</th>
-		<th>Total Price
+		<th rowspan="2">OLD PART NUMBER
 		</th>
-		<th>Dynaflo <br/>Disc. Code
+		<th rowspan="2">LATEST DATE PURCHASED
 		</th>
-		<th>Lead Time ARO
+		<th rowspan="2">LATEST SUPPLIER
 		</th>
-		<th>Old Part Number
+		<th rowspan="2">SUPPLIER <br/>PART NO.
 		</th>
-		<th>Latest Date Purchased
+	</tr>
+	<tr>
+		<th>FAMILY TYPE
 		</th>
-		<th>Supplier
+		<th>FAMILY DISC. (%)
 		</th>
-		<th>Supplier Code
+		<th>STD DISC. CODE
+		</th>
+		<th>STD DISC. (%)
 		</th>
 	</tr>
 <%
@@ -286,11 +290,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj1.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj1.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj1.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj1.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj1.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj1.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj1.getDuties() %>
 		</td>	
@@ -300,7 +304,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj1.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj1.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj1.getLeadTimeARO().intValue()==0)?"":itmObj1.getLeadTimeARO()  %>
 		</td>
 		<td align="center"><%=itmObj1.getOldPartNumber() %>
 		</td>
@@ -340,11 +344,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj2.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj2.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj2.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj2.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj2.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj2.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj2.getDuties() %>
 		</td>	
@@ -354,7 +358,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj2.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj2.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj2.getLeadTimeARO().intValue()==0)?"":itmObj2.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj2.getOldPartNumber() %>
 		</td>
@@ -394,11 +398,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj3.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj3.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj3.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj3.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj3.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj3.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj3.getDuties() %>
 		</td>
@@ -408,7 +412,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj3.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj3.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj3.getLeadTimeARO().intValue()==0)?"":itmObj3.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj3.getOldPartNumber() %>
 		</td>
@@ -448,11 +452,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj4.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj4.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj4.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj4.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj4.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj4.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj4.getDuties() %>
 		</td>
@@ -462,7 +466,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj4.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj4.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj4.getLeadTimeARO().intValue()==0)?"":itmObj4.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj4.getOldPartNumber() %>
 		</td>
@@ -502,11 +506,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj5.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj5.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj5.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj5.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj5.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj5.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj5.getDuties() %>
 		</td>	
@@ -516,7 +520,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj5.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj5.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj5.getLeadTimeARO().intValue()==0)?"":itmObj5.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj5.getOldPartNumber() %>
 		</td>
@@ -556,11 +560,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj6.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj6.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj6.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj6.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj6.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj6.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj6.getDuties() %>
 		</td>	
@@ -570,7 +574,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj6.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj6.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj6.getLeadTimeARO().intValue()==0)?"":itmObj6.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj6.getOldPartNumber() %>
 		</td>
@@ -610,11 +614,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj7.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj7.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj7.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj7.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj7.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj7.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj7.getDuties() %>
 		</td>
@@ -624,7 +628,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj7.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj7.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj7.getLeadTimeARO().intValue()==0)?"":itmObj7.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj7.getOldPartNumber() %>
 		</td>
@@ -664,11 +668,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj8.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj8.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj8.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj8.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj8.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj8.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj8.getDuties() %>
 		</td>		
@@ -678,7 +682,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj8.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj8.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj8.getLeadTimeARO().intValue()==0)?"":itmObj8.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj8.getOldPartNumber() %>
 		</td>
@@ -718,11 +722,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj9.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj9.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj9.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj9.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj9.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj9.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj9.getDuties() %>
 		</td>
@@ -732,7 +736,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj9.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj9.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj9.getLeadTimeARO().intValue()==0)?"":itmObj9.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj9.getOldPartNumber() %>
 		</td>
@@ -772,11 +776,11 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj10.getGracoFamType() %>
 		</td>
-		<td align="center"><%=itmObj10.getGracoFamDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj10.getGracoFamDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj10.getGracoStdDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj10.getGracoStdDiscount().multiply(new BigDecimal(100)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj10.getGracoStdDiscount()) %>
 		</td>
 		<td align="center"><%=itmObj10.getDuties() %>
 		</td>
@@ -786,7 +790,7 @@ document.oncontextmenu=new Function("return false")
 		</td>
 		<td align="center"><%=itmObj10.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj10.getLeadTimeARO() %>
+		<td align="center"><%=(itmObj10.getLeadTimeARO().intValue()==0)?"":itmObj10.getLeadTimeARO() %>
 		</td>
 		<td align="center"><%=itmObj10.getOldPartNumber() %>
 		</td>

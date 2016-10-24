@@ -23,6 +23,10 @@ public class TimestampGenerator {
 	public static String getTruncatedDate(Timestamp value) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 		String result = sdf.format(value);	
+		if(result.equals("01/01/70")){
+			// this date simply means no date value was recorded; leave it blank
+			result = "";
+		}
 		return result;
 	}
 	

@@ -79,3 +79,9 @@ looks like that was wrong. Need to find out what it really means before can proc
 - added and rearranged fields in items_query_result.jsp
 - changing date formats to dd/mm/yy
 - fixed bug where DS TECH sheet items were not being imported
+- fixed bug where XRAAGM150 and various other items were not being imported due to an offset error in the import loop
+- non-related fields left blank instead of displaying “0” or “-“ or “01/01/1970”
+- all dates set to DD/MM/YY
+- all percentages except for Duties set to round numbers. Duties only have 1 decimal
+- overall font size in tables reduced
+- partial header setup according to new format
