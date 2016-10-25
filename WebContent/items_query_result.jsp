@@ -219,7 +219,7 @@ document.oncontextmenu=new Function("return false")
 <table>
 <tr>
 <td>
-<table class="gridtable">
+<table>
 	<tr>
 		<th colspan="<%=colspan%>">Search Results
 		</th>

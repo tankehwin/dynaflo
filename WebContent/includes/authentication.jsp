@@ -9,7 +9,7 @@
 	}
 	else{
 %>
-<table class="formtable">
+<table>
 	<tr>
 		<td align="right" width="100%">Welcome, <%=userLogin.getName() %>.
 		&nbsp;

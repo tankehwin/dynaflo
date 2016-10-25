@@ -76,7 +76,7 @@
 <td>
 <form action="items_query.jsp" method="post" accept-charset="utf-8">
 <input type="hidden" name="action" value="calculateItemPrice">
-<table class="gridtable">
+<table>
 	<tr>
 		<th colspan="2">Search Parts
 		</th>
@@ -162,7 +162,7 @@
 
 <form action="file_upload.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="action" value="importData">
-<table class="gridtable">
+<table>
 	<tr>
 		<td colspan="2">Import New Data File
 		</td>

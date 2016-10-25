@@ -61,7 +61,7 @@
 </script>
 <form action="profile.jsp" method="post" accept-charset=utf-8>
 <input type="hidden" name="action" value="editUser">
-<table class="formtable">
+<table>
 	<tr>
 		<td>Username
 		</td>

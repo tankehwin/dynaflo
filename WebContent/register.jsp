@@ -65,7 +65,7 @@
 </script>
 <form action="register.jsp" method="post" accept-charset=utf-8>
 <input type="hidden" name="action" value="registerUser">
-<table class="formtable">
+<table>
 	<tr>
 		<td>Username
 		</td>

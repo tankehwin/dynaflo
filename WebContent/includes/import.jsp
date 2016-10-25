@@ -18,20 +18,13 @@
 		String dbPassword = prop.getProperty("dbPwd");
 		
 		Connection conn;
-		if(session.getAttribute("conn") == null) {
+		if(session.getAttribute("conn") == null){
 
 			DBConn connObj = new DBConn();
 			conn = DBConn.getConn(dbConnString, dbUser, dbPassword);
 			session.setAttribute("conn", conn);
 		}
 		
-		
-// 		// sample looping of properties file entries
-// 		System.out.println("PROP SIZE: " + prop.size());
-// 		for (String key : prop.stringPropertyNames()) {
-// 			String value = prop.getProperty(key);
-// 			System.out.println(key + " => " + value);
-// 		}
 	} catch (Exception e) {
 		e.printStackTrace();
 	} 

@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import model.ItemModel;
-import utils.TimestampGenerator;
 
 public class ItemManager {
 
