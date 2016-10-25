@@ -9,7 +9,7 @@
 	}
 	else{
 %>
-<table>
+<table class="cleartable">
 	<tr>
 		<td align="right" width="100%">Welcome, <%=userLogin.getName() %>.
 		&nbsp;

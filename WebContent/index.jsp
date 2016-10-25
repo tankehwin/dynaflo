@@ -5,14 +5,16 @@
 <html>
 <head>
 <link href="jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<%@include file="css/style.css" %> 
 <script src="jquery/js/jquery-1.10.2.js"></script>
-<script src="jquery/js/jquery-ui-1.10.4.custom.js"></script>
+<script src="jquery/js/jquery-ui-1.10.4.custom.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Dynaflo</title>
+<header>
+DYNAFLO PARTS SEARCH SYSTEM
+</header>
 </head>
 <body>
-<%@include file="includes/header.jsp" %>   
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
 	session.setAttribute("userLogin", null);
@@ -35,7 +37,7 @@
 	else 
 %>
 <form action="index.jsp" method="post" accept-charset=utf-8>
-<table class="formtable">
+<table class="cleartable">
 	<tr>
 		<td>Username
 		</td>
@@ -60,11 +62,12 @@
 		<td>&nbsp;
 		</td>
 	</tr>
+	<tr>
+		<td colspan="3">
+			<a href="register.jsp">Register New User</a>
+		</td>
+	</tr>
 </table>
-
-
-
-
 </form>
 <%
 	if(!error.equals("")) {
@@ -74,8 +77,6 @@
 <%
 	}
 %>
-<br/>
-<a href="register.jsp">Register New User</a>
-<%@include file="includes/footer.jsp" %>   
 </body>
+<%@include file="includes/footer.jsp" %>
 </html>

@@ -1,6 +1,49 @@
 <!-- CSS goes in the document HEAD or added to your external stylesheet -->
-<style type="text/css">
 
+<style type="text/css">
+table.gridtable {
+	font-family: calibri,arial,sans-serif;
+	font-size:12px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+
+table.gridtable th {
+	border-width: 1px;
+	padding: 5px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 5px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+table.cleartable {
+	font-family: calibri,arial,sans-serif;
+	font-size:12px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+
+table.cleartable th {
+	border-width: 1px;
+	padding: 5px;
+	background-color: #dedede;
+}
+table.cleartable td {
+	border-width: 1px;
+	padding: 5px;
+	background-color: #ffffff;
+}
 
 input.qty {
 	width: 100px;
@@ -10,5 +53,5 @@ input.partNumber {
 	width: 300px;
 }
 
-</style>
 
+</style>

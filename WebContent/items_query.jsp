@@ -1,19 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@include file="includes/import.jsp" %>   
-<%@include file="includes/authentication.jsp" %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<link href="jquery/css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<script src="jquery/js/jquery-1.10.2.js"></script>
-<script src="jquery/js/jquery-ui-1.10.4.custom.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Dynaflo</title>
-</head>
-<body>
-<%@include file="includes/header.jsp" %>   
+<%@include file="includes/header.jsp" %> 
+<body>  
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
 	String action = request.getParameter("action");
@@ -71,12 +59,9 @@
 	}
 	
 %>
-<table>
-<tr>
-<td>
 <form action="items_query.jsp" method="post" accept-charset="utf-8">
 <input type="hidden" name="action" value="calculateItemPrice">
-<table>
+<table class="gridtable">
 	<tr>
 		<th colspan="2">Search Parts
 		</th>
@@ -162,7 +147,7 @@
 
 <form action="file_upload.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="action" value="importData">
-<table>
+<table class="gridtable">
 	<tr>
 		<td colspan="2">Import New Data File
 		</td>
@@ -194,9 +179,6 @@
 <%
 	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>
-</td>	
-</tr>	
-</table>
-<%@include file="includes/footer.jsp" %>   
 </body>
+<%@include file="includes/footer.jsp" %>   
 </html>

@@ -25,6 +25,30 @@ Column headings should be as in the Sample file (free)
 At the moment, the INOX brand P/N XRAAGM150 does not return a search result (free) (done)
 
 
+
+
+
+
+
+phase 2
+need to redo column management due to new format - just copy-paste repeating set of columns (free)
+add brand column in items_master, add brand search criteria. permanent variables table is linked to brand - new brand table, configurable by admin
+remove original structure - put results and search function on one page, removed 10 fixed rows, allow search to return multiple results. column rearrangement according to sample file
+selling price column different colour (cream)
+make sure part number column is long enough to display most of part number in single line. fix the width of each column. smaller font, calibri
+As in my sample file, could you move the percentages from the column heading to the fields?
+Graco Family Disc and Std. Disc are displaying 0 for non-Graco items. This should be left blank
+allow individual rows to be highlighted in search results - should not clash with right click disable code 
+remove register link from login page, allow only admins to register new users 
+
+phase 3
+going online
+
+
+
+
+
+
 need bootstrap script to create temp and tomcat/webapps/data folder for file upload purposes (optional)
 
 

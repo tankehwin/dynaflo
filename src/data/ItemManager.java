@@ -68,7 +68,7 @@ public class ItemManager {
 	
 	public static ItemModel getObject(String partNumber, Integer qty, Connection conn) throws Exception {
 		
-		String sql = "SELECT * FROM " + ItemModel.TABLENAME + " WHERE " + ItemModel.COLNAME_PARTNUMBER + " LIKE '%" +
+		String sql = "SELECT * FROM " + ItemModel.TABLENAME + " WHERE " + ItemModel.COLNAME_PARTNUMBER + " LIKE '" +
 				partNumber + "%' LIMIT 1;";
 		Statement st = conn.createStatement();
 		// System.out.println(sql);

@@ -85,3 +85,6 @@ looks like that was wrong. Need to find out what it really means before can proc
 - all percentages except for Duties set to round numbers. Duties only have 1 decimal
 - overall font size in tables reduced
 - partial header setup according to new format
+- partial part number search now assumes partial portion only to the right of string
+- rebuilt css structure because table css were not being applied correctly (could not be applied at all)
+- cleaned up header html
