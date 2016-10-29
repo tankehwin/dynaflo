@@ -7,16 +7,21 @@
 	String action = request.getParameter("action");
 	String error = "";
 	String importResults = "";
-	int colspan = 20;
+	int colspan = 17;
+	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
-		String partNum1 = request.getParameter("partnum");	
+		String partNum = request.getParameter("partnum");	
 
 		
 		
 		ItemModel itmObj1 = new ItemModel();
 		boolean ifIracExists = false;
-		if(!partNum1.trim().equals("")){		
-			itmObj1 = ItemManager.getObject(partNum1, conn);
+		String brand = "";
+		if(!partNum.trim().equals("")){		
+			result = ItemManager.getObject(partNum, brand, conn);
+			
+			
+			
 			if(itmObj1.getPartNumber().startsWith("IAV")){
 				ifIracExists = true;
 			}
@@ -74,8 +79,6 @@
 	<tr>
 		<th rowspan="2">PART NO.
 		</th>
-		<th rowspan="2">QTY
-		</th>
 		<th rowspan="2">DESCRIPTION
 		</th>
 		<th rowspan="2">ADDITIONAL <br/>INFORMATION 1
@@ -85,16 +88,14 @@
 		<th rowspan="2">ADDITIONAL <br/>INFORMATION 3
 		</th>
 		<th rowspan="2">ITEM REF.
+		</th>		
+		<th rowspan="2">SELLING PRICE
 		</th>
-		<th colspan="4">GRACO 
+		<th rowspan="2">DYN <br/>DISC. CODE
 		</th>
 		<th rowspan="2">DUTIES (%)
 		</th>
-		<th rowspan="2">SELLING PRICE
-		</th>
-		<th rowspan="2">TOTAL PRICE
-		</th>
-		<th rowspan="2">DYN <br/>DISC. CODE
+		<th colspan="3">GRACO 
 		</th>
 		<th rowspan="2">LEAD TIME <br/>(DAYS)
 		</th>
@@ -110,59 +111,52 @@
 	<tr>
 		<th>FAMILY TYPE
 		</th>
-		<th>FAMILY DISC. (%)
+		<th>FAMILY DISC.
 		</th>
-		<th>STD DISC. CODE
-		</th>
-		<th>STD DISC. (%)
+		<th>STD DISC.
 		</th>
 	</tr>
 <%
-	if(!itmObj1.getPartNumber().trim().equals("")){
+	for(int i=0; i<result.size(); i++){
+		ItemModel itmObj = result.get(i);
 %>
 	<tr>
-		<td><%=itmObj1.getPartNumber() %>
+		<td><%=itmObj.getPartNumber() %>
 		</td>
-		<td align="center"><%=iQty1 %>
+		<td><%=itmObj.getDescription() %>
 		</td>
-		<td><%=itmObj1.getDescription() %>
+		<td><%=itmObj.getAddInfo1() %>
 		</td>
-		<td><%=itmObj1.getAddInfo1() %>
+		<td><%=itmObj.getAddInfo2() %>
 		</td>
-		<td><%=itmObj1.getAddInfo2() %>
+		<td><%=itmObj.getAddInfo3() %>
 		</td>
-		<td><%=itmObj1.getAddInfo3() %>
+		<td align="center"><%=itmObj.getItemReference() %>
 		</td>
-		<td align="center"><%=itmObj1.getEquipmentPackageReference()+itmObj1.getItemReference() %>
+		<td align="right"><%=itmObj.getSellingPrice() %>
 		</td>
-		<td align="center"><%=itmObj1.getGracoFamType() %>
+		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj1.getGracoFamDiscount()) %>
-		</td>
-		<td align="center"><%=itmObj1.getGracoStdDiscountCode() %>
-		</td>
-		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj1.getGracoStdDiscount()) %>
-		</td>
-		<td align="center"><%=itmObj1.getDuties() %>
+		<td align="center"><%=itmObj.getDuties() %>
 		</td>	
-		<td align="right"><%=itmObj1.getSellingPrice() %>
+		<td align="center"><%=itmObj.getGracoFamType() %>
 		</td>
-		<td align="right"><%=itmObj1.getSellingPrice().multiply(new BigDecimal(iQty1)) %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj.getGracoFamDiscount()) %>
 		</td>
-		<td align="center"><%=itmObj1.getDynafloDiscountCode() %>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj.getGracoStdDiscount()) %>
+		</td>	
+		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":itmObj.getLeadTimeARO()  %>
 		</td>
-		<td align="center"><%=(itmObj1.getLeadTimeARO().intValue()==0)?"":itmObj1.getLeadTimeARO()  %>
+		<td align="center"><%=itmObj.getOldPartNumber() %>
 		</td>
-		<td align="center"><%=itmObj1.getOldPartNumber() %>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>
-		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj1.getLatestDatePurchased()) %>
+		<td align="center"><%=itmObj.getSupplier() %>
 		</td>
-		<td align="center"><%=itmObj1.getSupplier() %>
-		</td>
-		<td align="center"><%=itmObj1.getSupplierCode() %>
+		<td align="center"><%=itmObj.getSupplierCode() %>
 		</td>
 	</tr>
-<%
+<%		
 	}
 %>
 </table>

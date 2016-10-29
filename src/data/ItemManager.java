@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import model.ItemModel;
 
@@ -72,15 +73,17 @@ public class ItemManager {
 		return new ItemModel();
 	}
 	
-	public static ItemModel getObject(String partNumber, Connection conn) throws Exception {
+	public static ArrayList<ItemModel> getObject(String partNumber, String brand, Connection conn) throws Exception {
 		
 		String sql = "SELECT * FROM " + ItemModel.TABLENAME + " WHERE " + ItemModel.COLNAME_PARTNUMBER + " LIKE '" +
-				partNumber + "%';";
+				partNumber + "%' AND " + ItemModel.COLNAME_BRAND + " = '" + brand + "' ORDER BY " + ItemModel.COLNAME_PARTNUMBER + ";";
 		Statement st = conn.createStatement();
-		// System.out.println(sql);
+//		System.out.println(sql);
 		ResultSet rs = st.executeQuery(sql);
-		ItemModel itemObj = new ItemModel();
+		ArrayList<ItemModel> result = new ArrayList<ItemModel>();
+		ItemModel itemObj = null;
 		while(rs.next()) {
+			itemObj = new ItemModel();
 			itemObj.setAddInfo1(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION1));
 			itemObj.setAddInfo2(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION2));
 			itemObj.setAddInfo3(rs.getString(ItemModel.COLNAME_ADDITIONALINFORMATION3));
@@ -102,8 +105,9 @@ public class ItemManager {
 			itemObj.setSupplier(rs.getString(ItemModel.COLNAME_SUPPLIER));
 			itemObj.setSupplierCode(rs.getString(ItemModel.COLNAME_SUPPLIERCODE));
 			itemObj.setBrand(rs.getString(ItemModel.COLNAME_BRAND));
+			result.add(itemObj);
 		}	
-		return itemObj;
+		return result;
 	}
 	
 }
