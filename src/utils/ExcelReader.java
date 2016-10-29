@@ -25,7 +25,7 @@ public class ExcelReader {
 		String errSheet = "";
 		int importCount = 0;
 		try{
-			String samplePath = "C:/Users/tankehwin/Desktop/DYNAFLO PRICE 2016 - 8.8.16.xls";
+			String samplePath = "C:/Users/tankehwin/Desktop/DYNAFLO PRICE 2016 - 14.10.16 - Rev 2.xls";
 			// Open workbook
 			Workbook dynafloBook = Workbook.getWorkbook(new File(filePath)); 
 			// Instantiate hard-coded master file for field name schemes
@@ -66,8 +66,8 @@ public class ExcelReader {
 					headerRow = cellColumn.getRow();
 				// End loop
 				}		
-				// Find the row from which all data starts
-				int currentRow = headerRow + 1;
+				// Find the row from which all data starts: adding 2 because of rowspan issue in header
+				int currentRow = headerRow + 2;
 				
 				boolean endOfData = false;
 				System.out.println("Number of columns detected: " + arrFieldColumns.size());
@@ -98,16 +98,20 @@ public class ExcelReader {
 							cellData = sheet.getCell(colNumber, currentRow);
 							cellValue = cellData.getContents().trim();
 							cellData = sheet.getCell(colNumber + 1, currentRow);
-							cellValue += cellData.getContents().trim();
+							cellValue += cellData.getContents().trim();							
 						}
 						else{
 							cellData = sheet.getCell(colNumber, currentRow);
 							cellValue = cellData.getContents().trim();
 						}
+//						System.out.println("column: " + arrFieldNames.get(k));
+//						System.out.println("cellValue: " + cellValue);
 						// Depending on which column it belongs to, add it to appropriate property
 						System.out.print(cellValue + ",");
 						itmObj.setFieldValue((String) arrFieldNames.get(k), cellValue);				
-					}
+					}					
+					// special consideration for brand property, which is derived from sheet name
+					itmObj.setFieldValue(ItemModel.COLNAME_BRAND, dynafloSheetName);
 					// Add to product object collection
 					arrProdList.add(itmObj);
 					System.out.println("=0=");

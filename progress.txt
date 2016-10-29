@@ -88,3 +88,9 @@ looks like that was wrong. Need to find out what it really means before can proc
 - partial part number search now assumes partial portion only to the right of string
 - rebuilt css structure because table css were not being applied correctly (could not be applied at all)
 - cleaned up header html
+- added brand field to items_master table
+- added brand property to item classes
+- column management redone to fit new datafile format (DYNAFLO PRICE 2016 - 14.10.16 - Rev 2.xls)
+- created BrandManager and BrandModel classes
+- started some work combining items_query.jsp and items_query_result.jsp into a single page
+

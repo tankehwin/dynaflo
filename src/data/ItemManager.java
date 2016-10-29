@@ -29,6 +29,7 @@ public class ItemManager {
 				ItemModel.COLNAME_GRACOFAMILYDISCOUNT + ", " +
 				ItemModel.COLNAME_GRACOSTDDISCOUNTCODE + ", " +
 				ItemModel.COLNAME_GRACOSTDDISCOUNT + ", " +
+				ItemModel.COLNAME_BRAND + ", " +
 				ItemModel.COLNAME_SUPPLIERCODE + 
 				")" +
 				" VALUES ('" +
@@ -51,10 +52,11 @@ public class ItemManager {
 				value.getGracoFamDiscount().toString() + ", '" +
 				value.getGracoStdDiscountCode().trim() + "', " +
 				value.getGracoStdDiscount().toString() + ", '" +
+				value.getBrand().toString() + "', '" +
 				value.getSupplierCode().trim() + 
 				"');";
 		Statement st = conn.createStatement();
-		// System.out.println(sql);
+//		System.out.println(sql);
 		st.executeUpdate(sql);
 
 	}
@@ -67,9 +69,13 @@ public class ItemManager {
 	}
 	
 	public static ItemModel getObject(String partNumber, Integer qty, Connection conn) throws Exception {
+		return new ItemModel();
+	}
+	
+	public static ItemModel getObject(String partNumber, Connection conn) throws Exception {
 		
 		String sql = "SELECT * FROM " + ItemModel.TABLENAME + " WHERE " + ItemModel.COLNAME_PARTNUMBER + " LIKE '" +
-				partNumber + "%' LIMIT 1;";
+				partNumber + "%';";
 		Statement st = conn.createStatement();
 		// System.out.println(sql);
 		ResultSet rs = st.executeQuery(sql);
@@ -95,6 +101,7 @@ public class ItemManager {
 			itemObj.setSellingPrice(rs.getBigDecimal(ItemModel.COLNAME_SELLINGPRICE));
 			itemObj.setSupplier(rs.getString(ItemModel.COLNAME_SUPPLIER));
 			itemObj.setSupplierCode(rs.getString(ItemModel.COLNAME_SUPPLIERCODE));
+			itemObj.setBrand(rs.getString(ItemModel.COLNAME_BRAND));
 		}	
 		return itemObj;
 	}

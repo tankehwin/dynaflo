@@ -7,39 +7,20 @@
 	String action = request.getParameter("action");
 	String error = "";
 	String importResults = "";
-	if(action != null && action.equals("calculateItemPrice")) {
-		String partNum1 = request.getParameter("partnum1");	
-		String qty1 = request.getParameter("qty1");	
-		String partNum2 = request.getParameter("partnum2");	
-		String qty2 = request.getParameter("qty2");	
-		String partNum3 = request.getParameter("partnum3");	
-		String qty3 = request.getParameter("qty3");	
-		String partNum4 = request.getParameter("partnum4");	
-		String qty4 = request.getParameter("qty4");	
-		String partNum5 = request.getParameter("partnum5");	
-		String qty5 = request.getParameter("qty5");	
-		String partNum6 = request.getParameter("partnum6");	
-		String qty6 = request.getParameter("qty6");	
-		String partNum7 = request.getParameter("partnum7");	
-		String qty7 = request.getParameter("qty7");	
-		String partNum8 = request.getParameter("partnum8");	
-		String qty8 = request.getParameter("qty8");	
-		String partNum9 = request.getParameter("partnum9");	
-		String qty9 = request.getParameter("qty9");	
-		String partNum10 = request.getParameter("partnum10");	
-		String qty10 = request.getParameter("qty10");	
-		String redirectURL = "items_query_result.jsp?partnum1="+partNum1+"&qty1="+qty1
-				+"&partnum2="+partNum2+"&qty2="+qty2
-				+"&partnum3="+partNum3+"&qty3="+qty3
-				+"&partnum4="+partNum4+"&qty4="+qty4
-				+"&partnum5="+partNum5+"&qty5="+qty5
-				+"&partnum6="+partNum6+"&qty6="+qty6
-				+"&partnum7="+partNum7+"&qty7="+qty7
-				+"&partnum8="+partNum8+"&qty8="+qty8
-				+"&partnum9="+partNum9+"&qty9="+qty9
-				+"&partnum10="+partNum10+"&qty10="+qty10;
-		response.sendRedirect(redirectURL);
-		return;
+	int colspan = 20;
+	if(action != null && action.equals("searchPart")) {
+		String partNum1 = request.getParameter("partnum");	
+
+		
+		
+		ItemModel itmObj1 = new ItemModel();
+		boolean ifIracExists = false;
+		if(!partNum1.trim().equals("")){		
+			itmObj1 = ItemManager.getObject(partNum1, conn);
+			if(itmObj1.getPartNumber().startsWith("IAV")){
+				ifIracExists = true;
+			}
+		}
 	}
 	else if(action != null && action.equals("importData")) {
 		Properties prop = new Properties();
@@ -60,86 +41,132 @@
 	
 %>
 <form action="items_query.jsp" method="post" accept-charset="utf-8">
-<input type="hidden" name="action" value="calculateItemPrice">
+<input type="hidden" name="action" value="searchPart">
 <table class="gridtable">
 	<tr>
-		<th colspan="2">Search Parts
+		<th>Search Parts
 		</th>
 	</tr>
 	<tr>
 		<th>Part Number
 		</th>
-		<th>Qty
-		</th>
+
 	</tr>
 	<tr>
-		<td><input type="text" class="partNumber" name="partnum1" />
-		</td>
-		<td><input type="text" class="qty" name="qty1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
+		<td><input type="text" class="partNumber" name="partnum" />
 		</td>
 	</tr>
 	<tr>
-		<td><input type="text" class="partNumber" name="partnum2" />
-		</td>
-		<td><input type="text" class="qty" name="qty2" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum3" />
-		</td>
-		<td><input type="text" class="qty" name="qty3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum4" />
-		</td>
-		<td><input type="text" class="qty" name="qty4" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum5" />
-		</td>
-		<td><input type="text" class="qty" name="qty5" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum6" />
-		</td>
-		<td><input type="text" class="qty" name="qty6" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum7" />
-		</td>
-		<td><input type="text" class="qty" name="qty7" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum8" />
-		</td>
-		<td><input type="text" class="qty" name="qty8" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum9" />
-		</td>
-		<td><input type="text" class="qty" name="qty9" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum10" />
-		</td>
-		<td><input type="text" class="qty" name="qty10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="submit" value="Calculate" />
+		<td><input type="submit" value="Search" />
 		</td>
 		<td>&nbsp;
 		</td>
 	</tr>
 </table>
 </form>
+
+
+<table class="gridtable">
+	<tr>
+		<th colspan="<%=colspan%>">Search Results
+		</th>
+	</tr>
+	<tr>
+		<th rowspan="2">PART NO.
+		</th>
+		<th rowspan="2">QTY
+		</th>
+		<th rowspan="2">DESCRIPTION
+		</th>
+		<th rowspan="2">ADDITIONAL <br/>INFORMATION 1
+		</th>
+		<th rowspan="2">ADDITIONAL <br/>INFORMATION 2
+		</th>
+		<th rowspan="2">ADDITIONAL <br/>INFORMATION 3
+		</th>
+		<th rowspan="2">ITEM REF.
+		</th>
+		<th colspan="4">GRACO 
+		</th>
+		<th rowspan="2">DUTIES (%)
+		</th>
+		<th rowspan="2">SELLING PRICE
+		</th>
+		<th rowspan="2">TOTAL PRICE
+		</th>
+		<th rowspan="2">DYN <br/>DISC. CODE
+		</th>
+		<th rowspan="2">LEAD TIME <br/>(DAYS)
+		</th>
+		<th rowspan="2">OLD PART NUMBER
+		</th>
+		<th rowspan="2">LATEST DATE PURCHASED
+		</th>
+		<th rowspan="2">LATEST SUPPLIER
+		</th>
+		<th rowspan="2">SUPPLIER <br/>PART NO.
+		</th>
+	</tr>
+	<tr>
+		<th>FAMILY TYPE
+		</th>
+		<th>FAMILY DISC. (%)
+		</th>
+		<th>STD DISC. CODE
+		</th>
+		<th>STD DISC. (%)
+		</th>
+	</tr>
+<%
+	if(!itmObj1.getPartNumber().trim().equals("")){
+%>
+	<tr>
+		<td><%=itmObj1.getPartNumber() %>
+		</td>
+		<td align="center"><%=iQty1 %>
+		</td>
+		<td><%=itmObj1.getDescription() %>
+		</td>
+		<td><%=itmObj1.getAddInfo1() %>
+		</td>
+		<td><%=itmObj1.getAddInfo2() %>
+		</td>
+		<td><%=itmObj1.getAddInfo3() %>
+		</td>
+		<td align="center"><%=itmObj1.getEquipmentPackageReference()+itmObj1.getItemReference() %>
+		</td>
+		<td align="center"><%=itmObj1.getGracoFamType() %>
+		</td>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj1.getGracoFamDiscount()) %>
+		</td>
+		<td align="center"><%=itmObj1.getGracoStdDiscountCode() %>
+		</td>
+		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj1.getGracoStdDiscount()) %>
+		</td>
+		<td align="center"><%=itmObj1.getDuties() %>
+		</td>	
+		<td align="right"><%=itmObj1.getSellingPrice() %>
+		</td>
+		<td align="right"><%=itmObj1.getSellingPrice().multiply(new BigDecimal(iQty1)) %>
+		</td>
+		<td align="center"><%=itmObj1.getDynafloDiscountCode() %>
+		</td>
+		<td align="center"><%=(itmObj1.getLeadTimeARO().intValue()==0)?"":itmObj1.getLeadTimeARO()  %>
+		</td>
+		<td align="center"><%=itmObj1.getOldPartNumber() %>
+		</td>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj1.getLatestDatePurchased()) %>
+		</td>
+		<td align="center"><%=itmObj1.getSupplier() %>
+		</td>
+		<td align="center"><%=itmObj1.getSupplierCode() %>
+		</td>
+	</tr>
+<%
+	}
+%>
+</table>
+
 <%
 	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>

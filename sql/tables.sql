@@ -9,7 +9,7 @@ CREATE TABLE items_master (
   `lead_time_aro` BIGINT NOT NULL,
   `dynaflo_discount_code` VARCHAR(50) NULL,
   `old_part_number` VARCHAR(100) NULL,
-  `latest_date_purchased` date NULL,
+  `latest_date_purchased` datetime NULL,
   `supplier` VARCHAR(100) NULL,
   `item_reference` VARCHAR(100) NULL,
   `equipment_package_reference` VARCHAR(100) NULL,
@@ -18,6 +18,7 @@ CREATE TABLE items_master (
   `graco_fam_discount` FLOAT NULL,
   `graco_std_discount` FLOAT NULL,
   `graco_std_discount_code` VARCHAR(50) NULL,
+  `brand` VARCHAR(30) NULL,
   `supplier_code` VARCHAR(100) NULL,
   PRIMARY KEY (`part_number`))
 ENGINE = InnoDB;
@@ -28,6 +29,16 @@ CREATE TABLE login_master (
 	name varchar(20),
 	password varchar(30),
 	acc_type varchar(10),
+	date_created datetime,
+	date_updated datetime
+);
+
+CREATE TABLE brands_master (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name varchar(30),
+	freight_charges varchar(5),
+	expiry_date varchar(20),
+	exchange_rate varchar(50),
 	date_created datetime,
 	date_updated datetime
 );

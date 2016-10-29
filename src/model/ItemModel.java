@@ -30,6 +30,7 @@ public class ItemModel {
 	public static final String COLNAME_GRACOSTDDISCOUNTCODE = "graco_std_discount_code";
 	public static final String COLNAME_GRACOSTDDISCOUNT = "graco_std_discount";
 	public static final String COLNAME_SUPPLIERCODE = "supplier_code";
+	public static final String COLNAME_BRAND = "brand";
 	
 	public static final String TABLENAME = "items_master";
 	
@@ -53,6 +54,7 @@ public class ItemModel {
 	private String gracoStdDiscountCode;
 	private BigDecimal gracoStdDiscount;
 	private String supplierCode;
+	private String brand;
 	
 	public ItemModel() {
 		this.partNumber = "";
@@ -117,9 +119,18 @@ public class ItemModel {
 			if(result.trim().equals("#N/A!")){
 				result = "-1.0";
 			}
+			if(result.trim().equals("#N/A")){
+				result = "-1.0";
+			}
+			if(result.trim().equals("ERROR 42")){
+				result = "-1.0";
+			}
 			this.sellingPrice = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_LEAD_TIME.equals(fieldName)){
+			if(value.toString().trim().equals("")){
+				value = "0";
+			}
 			this.leadTimeARO = new Integer(value.toString());
 		}
 		else if(FieldNameScheme.FIELDNAME_DYNAFLO_DISCOUNT_CODE.equals(fieldName)){
@@ -133,29 +144,31 @@ public class ItemModel {
 			this.oldPartNumber = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_LATEST_DATE_PURCHASED.equals(fieldName)){			
-			// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
-			// This code counteracts this issue, but we cannot be sure that this will always be the case
-			// Currently just a workaround
-			Calendar calendar = Calendar.getInstance();
-			int slashIndex = value.toString().indexOf("/");
-			int dayOfYear = new Integer(value.toString().substring(0, slashIndex)).intValue();
-			slashIndex = value.toString().lastIndexOf("/");
-			int year = new Integer(value.toString().substring(slashIndex+1)).intValue();
-			calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-			calendar.set(Calendar.YEAR, year);
-			Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
-			/*// This is a more conventional method of saving date data, assuming the data extracted from Excel is conventional
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		    Date parsedDate;
-		    try{
-		    	parsedDate = dateFormat.parse((String) value);	    	
-		    }
-		    catch(Exception e){
-		    	throw e;
-		    }	    
-		    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
-		    */			
-			this.latestDatePurchased = timestamp;
+			if(!value.toString().trim().equals("")){
+				// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
+				// This code counteracts this issue, but we cannot be sure that this will always be the case
+				// Currently just a workaround
+				Calendar calendar = Calendar.getInstance();
+				int slashIndex = value.toString().indexOf("/");
+				int dayOfYear = new Integer(value.toString().substring(0, slashIndex)).intValue();
+				slashIndex = value.toString().lastIndexOf("/");
+				int year = new Integer(value.toString().substring(slashIndex+1)).intValue();
+				calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+				calendar.set(Calendar.YEAR, year);
+				Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+				/*// This is a more conventional method of saving date data, assuming the data extracted from Excel is conventional
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			    Date parsedDate;
+			    try{
+			    	parsedDate = dateFormat.parse((String) value);	    	
+			    }
+			    catch(Exception e){
+			    	throw e;
+			    }	    
+			    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+			    */			
+				this.latestDatePurchased = timestamp;
+			}			
 		}
 		else if(FieldNameScheme.FIELDNAME_SUPPLIER.equals(fieldName)){
 			String result = value.toString();
@@ -167,20 +180,15 @@ public class ItemModel {
 			result = result.replaceAll("'", "''");
 			this.itemReference = result;
 		}
-		else if(FieldNameScheme.FIELDNAME_EQUIPMENT_PACKAGE_REF.equals(fieldName)){
-			String result = value.toString();
-			result = result.replaceAll("'", "''");
-			this.equipmentPackageReference = result;
-		}
-		else if(FieldNameScheme.FIELDNAME_GRACO_REF.equals(fieldName)){
-			String result = value.toString();
-			result = result.replaceAll("'", "''");
-			this.gracoReference = result;
-		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_TYPE.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll("'", "''");
 			this.gracoFamType = result;
+		}
+		else if(COLNAME_BRAND.equals(fieldName)){
+			String result = value.toString();
+			result = result.replaceAll("'", "''");
+			this.brand = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_DISCOUNT.equals(fieldName)){
 			String result = value.toString();
@@ -195,11 +203,6 @@ public class ItemModel {
 				result = "0.0";
 			}
 			this.gracoFamDiscount = new BigDecimal(result);
-		}
-		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT_CODE.equals(fieldName)){
-			String result = value.toString();
-			result = result.replaceAll("'", "''");
-			this.gracoStdDiscountCode = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT.equals(fieldName)){
 			String result = value.toString();
@@ -366,5 +369,10 @@ public class ItemModel {
 	public void setSupplierCode(String supplierCode) {
 		this.supplierCode = supplierCode;
 	}
-
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 }
