@@ -46,6 +46,8 @@ CREATE TABLE brands_master (
 insert into login_master(name,password,acc_type,date_created,date_updated)values('admin','admin','admin',now(),now());
 insert into login_master(name,password,acc_type,date_created,date_updated)values('normal','normal','normal',now(),now());
 
+-- once initial import is done, run the line below to populate brands_master
+insert into brands_master(name) select distinct brand from items_master;
 
 
 		

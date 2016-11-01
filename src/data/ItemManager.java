@@ -69,8 +69,9 @@ public class ItemManager {
 		st.executeUpdate(sql);
 	}
 	
+	// DEPRECATED, REMOVE THIS ONCE items_query_result.jsp has been deleted
 	public static ItemModel getObject(String partNumber, Integer qty, Connection conn) throws Exception {
-		return new ItemModel();
+		return new ItemModel(); 
 	}
 	
 	public static ArrayList<ItemModel> getObject(String partNumber, String brand, Connection conn) throws Exception {

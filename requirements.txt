@@ -24,25 +24,23 @@ All percentages except for Duties to be round numbers. Duties to only have 1 dec
 At the moment, the INOX brand P/N XRAAGM150 does not return a search result (free) (done)
 need to redo column management due to new format - just copy-paste repeating set of columns (free) (done)
 database transactions should be implemented (free)
-
-
-
-
-
+add brand column in items_master, add brand search criteria (done)
+remove original structure - put results and search function on one page, removed 10 fixed rows, allow search to return multiple results. column rearrangement according to sample file (done)
+make sure part number column is long enough to display most of part number in single line. smaller font, calibri (done)
+percentage symbol moved to data fields
+Graco Family Disc and Std. Disc were displaying 0 for non-Graco items. This is now left blank
+selling price column has different colour (done)
+lead time (days) column displays empty string if value is 0 (done)
 
 phase 2
-add brand column in items_master, add brand search criteria. permanent variables table is linked to brand - new brand table, configurable by admin
-remove original structure - put results and search function on one page, removed 10 fixed rows, allow search to return multiple results. column rearrangement according to sample file
-selling price column different colour (cream)
-make sure part number column is long enough to display most of part number in single line. fix the width of each column. smaller font, calibri
-As in my sample file, could you move the percentages from the column heading to the fields?
-Graco Family Disc and Std. Disc are displaying 0 for non-Graco items. This should be left blank
-lead time (days) column needs to display empty string if value is 0
+permanent variables table is linked to brand - new brand table, configurable by admin
+fix the width of each column
 allow individual rows to be highlighted in search results - should not clash with right click disable code 
 remove register link from login page, allow only admins to register new users 
 
 
 phase 3
+split server implementation - 2 servers each with its own tomcat and database. any upload to one instance automatically updates both databases
 going online
 
 

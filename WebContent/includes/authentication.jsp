@@ -15,6 +15,16 @@
 		&nbsp;
 		<a href="profile.jsp">Edit User Profile</a>
 		&nbsp;
+<%
+		if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
+		<a href="register.jsp">Register New User</a>
+		&nbsp;
+		<a href="brands.jsp">Edit Brands</a>
+		&nbsp;
+<%
+		}
+%>
 		<a href="index.jsp">Logout</a>
 		</td>
 	</tr>

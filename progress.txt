@@ -93,4 +93,14 @@ looks like that was wrong. Need to find out what it really means before can proc
 - column management redone to fit new datafile format (DYNAFLO PRICE 2016 - 14.10.16 - Rev 2.xls)
 - created BrandManager and BrandModel classes
 - started some work combining items_query.jsp and items_query_result.jsp into a single page
+- items_query.jsp now partially implements ArrayList result of items 
+- added brand column in items_master, added brand search criteria
+- added brands_master table
+- removed original structure - put results and search function on one page, removed 10 fixed rows, allow search to return multiple results. column rearrangement according to sample file 
+- make sure part number column is long enough to display most of part number in single line. smaller font, calibri 
+- percentage symbol moved to data fields
+- Graco Family Disc and Std. Disc were displaying 0 for non-Graco items. This is now left blank
+- selling price column has different colour 
+- lead time (days) column displays empty string if value is 0 
+- shifted register link to authentication.jsp and edit brands link to authentication.jsp
 

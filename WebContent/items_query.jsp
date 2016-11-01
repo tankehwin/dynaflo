@@ -8,23 +8,16 @@
 	String error = "";
 	String importResults = "";
 	int colspan = 17;
+	boolean ifIracExists = false;
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
 		String partNum = request.getParameter("partnum");	
 
 		
-		
-		ItemModel itmObj1 = new ItemModel();
-		boolean ifIracExists = false;
-		String brand = "";
+		String brand = request.getParameter("brand");	
 		if(!partNum.trim().equals("")){		
-			result = ItemManager.getObject(partNum, brand, conn);
-			
-			
-			
-			if(itmObj1.getPartNumber().startsWith("IAV")){
-				ifIracExists = true;
-			}
+			result = ItemManager.getObject(partNum.toUpperCase(), brand, conn);
+		
 		}
 	}
 	else if(action != null && action.equals("importData")) {
@@ -53,6 +46,26 @@
 		</th>
 	</tr>
 	<tr>
+		<th>Brand
+		</th>
+
+	</tr>
+	<tr>
+		<td>
+			<select class="partNumber" name="brand">
+<%
+	ArrayList<BrandModel> brands = BrandManager.getAllObjects(conn);
+	// trying out new style of for loop
+	for(BrandModel brandObj : brands){
+%>
+				<option value="<%=brandObj.getName() %>"><%=brandObj.getName() %></option>
+<%
+	}
+%>
+			</select>
+		</td>
+	</tr>
+	<tr>
 		<th>Part Number
 		</th>
 
@@ -64,12 +77,10 @@
 	<tr>
 		<td><input type="submit" value="Search" />
 		</td>
-		<td>&nbsp;
-		</td>
 	</tr>
 </table>
 </form>
-
+<br />
 
 <table class="gridtable">
 	<tr>
@@ -81,27 +92,27 @@
 		</th>
 		<th rowspan="2">DESCRIPTION
 		</th>
-		<th rowspan="2">ADDITIONAL <br/>INFORMATION 1
+		<th rowspan="2">ADD. INFORMATION 1
 		</th>
-		<th rowspan="2">ADDITIONAL <br/>INFORMATION 2
+		<th rowspan="2">ADD. INFORMATION 2
 		</th>
-		<th rowspan="2">ADDITIONAL <br/>INFORMATION 3
+		<th rowspan="2">ADD. INFORMATION 3
 		</th>
 		<th rowspan="2">ITEM REF.
 		</th>		
-		<th rowspan="2">SELLING PRICE
+		<th rowspan="2">SELLING PRICE<br/>(RM)
 		</th>
-		<th rowspan="2">DYN <br/>DISC. CODE
+		<th rowspan="2">DYN <br/>DISC. <br/>CODE
 		</th>
 		<th rowspan="2">DUTIES (%)
 		</th>
 		<th colspan="3">GRACO 
 		</th>
-		<th rowspan="2">LEAD TIME <br/>(DAYS)
+		<th rowspan="2">LEAD <br/>TIME <br/>(DAYS)
 		</th>
-		<th rowspan="2">OLD PART NUMBER
+		<th rowspan="2">OLD PART <br/>NUMBER
 		</th>
-		<th rowspan="2">LATEST DATE PURCHASED
+		<th rowspan="2">LATEST DATE <br/>PURCHASED
 		</th>
 		<th rowspan="2">LATEST SUPPLIER
 		</th>
@@ -109,9 +120,9 @@
 		</th>
 	</tr>
 	<tr>
-		<th>FAMILY TYPE
+		<th>FAMILY <br/>TYPE
 		</th>
-		<th>FAMILY DISC.
+		<th>FAMILY <br/>DISC.
 		</th>
 		<th>STD DISC.
 		</th>
@@ -119,6 +130,9 @@
 <%
 	for(int i=0; i<result.size(); i++){
 		ItemModel itmObj = result.get(i);
+		if(itmObj.getPartNumber().startsWith("IAV")){
+			ifIracExists = true;
+		}
 %>
 	<tr>
 		<td><%=itmObj.getPartNumber() %>
@@ -133,17 +147,17 @@
 		</td>
 		<td align="center"><%=itmObj.getItemReference() %>
 		</td>
-		<td align="right"><%=itmObj.getSellingPrice() %>
+		<td align="right" style="background-color: #ffff99;"><%=itmObj.getSellingPrice() %>
 		</td>
 		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj.getDuties() %>
+		<td align="center"><%=itmObj.getDuties().toString()+"%" %>
 		</td>	
 		<td align="center"><%=itmObj.getGracoFamType() %>
 		</td>
-		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj.getGracoFamDiscount()) %>
+		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"":itmObj.getGracoFamDiscount()+"%" %>
 		</td>
-		<td align="center"><%=NumberFormatter.getRoundedDiscount(itmObj.getGracoStdDiscount()) %>
+		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":itmObj.getGracoStdDiscount()+"%" %>
 		</td>	
 		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":itmObj.getLeadTimeARO()  %>
 		</td>
@@ -162,10 +176,33 @@
 </table>
 
 <%
+	if(ifIracExists){
+%>
+<br/>
+<table class="gridtable">
+<tr>
+<td>
+<div>
+NOTE : <br/>
+- Eex models are equipped with electrical installation for potentially explosive atmospheres Group II, category 2G - suitable for Zone 1 <br/>
+- Eex-d models are supplied with exploision proof electric system for fire and explosion dangerous areas Class 1 div 1 - suitable for Zone 1 <br/>
+- ADT models are equipped with electrical installation for potentially explosive atmospheres Group II, Category 3G - suitable for Zone 2 <br/>
+- All models come with SST (304) tanks <br/>
+- All models come with diathermic oil  except AV150 XE & AV200 XE <br/>
+- All models come with 1 x CLIPSAC bag clip and 3 x IRSAC thermoproof bags <br/>
+- Thermoproof disposal bags are manufactured to withstand temperatures up to 200°C <br/>
+</div>
+</td>
+</tr>
+</table>
+<%
+	}
+%>
+
+<%
 	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>
 <br />
-
 <form action="file_upload.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 <input type="hidden" name="action" value="importData">
 <table class="gridtable">

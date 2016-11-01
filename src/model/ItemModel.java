@@ -334,12 +334,12 @@ public class ItemModel {
 		this.gracoFamType = gracoFamType;
 	}
 	public BigDecimal getGracoFamDiscount() {
-		int decimalPlaces = 2;
-		BigDecimal bd = new BigDecimal(gracoFamDiscount.doubleValue());
-
-		// setScale is immutable
-		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
-		gracoFamDiscount = bd;
+//		int decimalPlaces = 2;
+//		BigDecimal bd = new BigDecimal(gracoFamDiscount.doubleValue());
+//
+//		// setScale is immutable
+//		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+//		gracoFamDiscount = bd;
 		return gracoFamDiscount;
 	}
 	public void setGracoFamDiscount(BigDecimal gracoFamDiscount) {
@@ -352,12 +352,12 @@ public class ItemModel {
 		this.gracoStdDiscountCode = gracoStdDiscountCode;
 	}
 	public BigDecimal getGracoStdDiscount() {
-		int decimalPlaces = 2;
-		BigDecimal bd = new BigDecimal(gracoStdDiscount.doubleValue());
-
-		// setScale is immutable
-		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
-		gracoStdDiscount = bd;
+//		int decimalPlaces = 2;
+//		BigDecimal bd = new BigDecimal(gracoStdDiscount.doubleValue());
+//
+//		// setScale is immutable
+//		bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+//		gracoStdDiscount = bd;
 		return gracoStdDiscount;
 	}
 	public void setGracoStdDiscount(BigDecimal gracoStdDiscount) {

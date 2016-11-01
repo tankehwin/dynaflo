@@ -62,11 +62,6 @@ DYNAFLO PARTS SEARCH SYSTEM
 		<td>&nbsp;
 		</td>
 	</tr>
-	<tr>
-		<td colspan="3">
-			<a href="register.jsp">Register New User</a>
-		</td>
-	</tr>
 </table>
 </form>
 <%
