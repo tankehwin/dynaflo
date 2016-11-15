@@ -53,5 +53,9 @@ input.partNumber {
 	width: 300px;
 }
 
+div.criteria {
+	height: 25px;
+    overflow: hidden;
+}
 
 </style>

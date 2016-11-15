@@ -2,19 +2,73 @@
 <html>
 <%@include file="includes/header.jsp" %> 
 <body>  
+<script language=JavaScript>
+function disableselect(e) {
+    return false;
+}
+
+function reEnable() {
+    return true;
+}
+
+document.onselectstart = new Function("return false");
+
+if (window.sidebar) {
+    document.onmousedown = disableselect;
+    document.onclick = reEnable;
+}
+</script>
+<script language=JavaScript>
+//Disable right mouse click Script
+//By Maximus (maximus@nsimail.com) w/ mods by DynamicDrive
+//For full source code, visit http://www.dynamicdrive.com
+var message="Function Disabled!";
+
+///////////////////////////////////
+function clickIE4(){
+if (event.button==2){
+//alert(message);
+return false;
+}
+}
+
+function clickNS4(e){
+if (document.layers||document.getElementById&&!document.all){
+if (e.which==2||e.which==3){
+//alert(message);
+return false;
+}
+}
+}
+
+if (document.layers){
+document.captureEvents(Event.MOUSEDOWN);
+document.onmousedown=clickNS4;
+}
+else if (document.all&&!document.getElementById){
+document.onmousedown=clickIE4;
+}
+
+//document.oncontextmenu=new Function("alert(message);return false")
+document.oncontextmenu=new Function("return false")
+</script>
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
 	String action = request.getParameter("action");
 	String error = "";
 	String importResults = "";
+	String partNum = "";
+	String brand = "";
+	BrandModel pricingVariableObj = null;
 	int colspan = 17;
 	boolean ifIracExists = false;
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
-		String partNum = request.getParameter("partnum");	
+		partNum = request.getParameter("partnum");	
 
 		
-		String brand = request.getParameter("brand");	
+		brand = request.getParameter("brand");	
+		pricingVariableObj = BrandManager.getObject(brand, conn);
 		if(!partNum.trim().equals("")){		
 			result = ItemManager.getObject(partNum.toUpperCase(), brand, conn);
 		
@@ -40,42 +94,62 @@
 %>
 <form action="items_query.jsp" method="post" accept-charset="utf-8">
 <input type="hidden" name="action" value="searchPart">
-<table class="gridtable">
+<table class="gridtable" style="display:inline-block;">
 	<tr>
-		<th>Search Parts
+		<th colspan="2"><div class="criteria">Search Parts</div>
 		</th>
 	</tr>
 	<tr>
-		<th>Brand
+		<th><div class="criteria">Brand</div>
 		</th>
-
-	</tr>
-	<tr>
-		<td>
+		<td><div class="criteria">
 			<select class="partNumber" name="brand">
 <%
 	ArrayList<BrandModel> brands = BrandManager.getAllObjects(conn);
 	// trying out new style of for loop
 	for(BrandModel brandObj : brands){
 %>
-				<option value="<%=brandObj.getName() %>"><%=brandObj.getName() %></option>
+				<option value="<%=brandObj.getName() %>" <%=(brand.trim().equals(brandObj.getName()))?"selected":"" %>><%=brandObj.getName() %></option>
 <%
 	}
 %>
-			</select>
+			</select></div>
 		</td>
 	</tr>
 	<tr>
-		<th>Part Number
+		<th><div class="criteria">Part Number</div>
 		</th>
-
-	</tr>
-	<tr>
-		<td><input type="text" class="partNumber" name="partnum" />
+		<td><div class="criteria"><input type="text" class="partNumber" name="partnum" value="<%=partNum %>" /></div>
 		</td>
 	</tr>
 	<tr>
-		<td><input type="submit" value="Search" />
+		<td colspan="2"><div class="criteria"><input type="submit" value="Search" /></div>
+		</td>
+	</tr>
+</table>
+<table class="gridtable" style="display:inline-block;">
+	<tr>
+		<th colspan="4"><div class="criteria">Pricing Variables</div>
+		</th>
+	</tr>
+	<tr>
+		<th><div class="criteria">Exchange Rate:</div>
+		</th>
+		<td><div class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExchangeRate():"" %></div>
+		</td>
+		<th rowspan="2"><div class="criteria">Freight (%):</div>
+		</th>
+		<td rowspan="2"><div class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
+		</td>
+	</tr>
+	<tr>
+		<th><div class="criteria">Expiry Date:</div>
+		</th>
+		<td><div class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4"><div class="criteria">&nbsp;</div>
 		</td>
 	</tr>
 </table>
