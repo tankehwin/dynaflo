@@ -92,4 +92,14 @@ public static ArrayList<BrandModel> getAllObjects(Connection conn) throws Except
 		return brandObj;
 	}
 	
+	public static void updateObject(String name, String exchangeRate, String expiryDate, String freightCharges, Connection conn) throws Exception {
+		String sql = "UPDATE " + BrandModel.TABLENAME + " SET " +
+				BrandModel.COLNAME_EXCHANGE_RATE + " = '" + exchangeRate + "', " +
+				BrandModel.COLNAME_EXPIRY_DATE + " = '" + expiryDate + "', " +
+				BrandModel.COLNAME_FREIGHT_CHARGES + " = '" + freightCharges + "' " +
+				"WHERE " + BrandModel.COLNAME_NAME + " = '" + name + "';";
+		Statement st = conn.createStatement();
+//		System.out.println(sql);
+		st.executeUpdate(sql);
+	}
 }
