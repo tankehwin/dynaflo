@@ -107,3 +107,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - retain search values in item_query.jsp after searching
 - brand info table on items_query.jsp completed
 - permanent variables table is linked to brand - new brand table, configurable by admin
+- update brands table each time data import is done

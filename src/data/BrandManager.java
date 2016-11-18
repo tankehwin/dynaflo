@@ -92,6 +92,28 @@ public static ArrayList<BrandModel> getAllObjects(Connection conn) throws Except
 		return brandObj;
 	}
 	
+	public static void updateBrandsList(ArrayList<String> brands, Connection conn) throws Exception {
+		ArrayList<BrandModel> compare = getAllObjects(conn);
+		ArrayList<String> leftover = new ArrayList<String>();
+		for(String brand : brands){
+			boolean found = false;
+			for(BrandModel brandObj : compare){
+				if(brand.equals(brandObj.getName())){
+					found = true;
+					break;
+				}
+			}
+			if(!found){
+				leftover.add(brand);
+			}
+		}
+		for(String name : leftover){
+			BrandModel insertObj = new BrandModel();
+			insertObj.setName(name);
+			insertObject(insertObj, conn);
+		}
+	}
+	
 	public static void updateObject(String name, String exchangeRate, String expiryDate, String freightCharges, Connection conn) throws Exception {
 		String sql = "UPDATE " + BrandModel.TABLENAME + " SET " +
 				BrandModel.COLNAME_EXCHANGE_RATE + " = '" + exchangeRate + "', " +

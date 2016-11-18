@@ -69,9 +69,16 @@ public class ItemManager {
 		st.executeUpdate(sql);
 	}
 	
-	// DEPRECATED, REMOVE THIS ONCE items_query_result.jsp has been deleted
-	public static ItemModel getObject(String partNumber, Integer qty, Connection conn) throws Exception {
-		return new ItemModel(); 
+	public static ArrayList<String> getBrands(Connection conn) throws Exception {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		String sql = "SELECT DISTINCT "+ItemModel.COLNAME_BRAND+" FROM " + ItemModel.TABLENAME + ";";
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		while(rs.next()) {
+			result.add(rs.getString(ItemModel.COLNAME_BRAND));
+		}
+		return result;
 	}
 	
 	public static ArrayList<ItemModel> getObject(String partNumber, String brand, Connection conn) throws Exception {

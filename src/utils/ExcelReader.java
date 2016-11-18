@@ -130,6 +130,9 @@ public class ExcelReader {
 			// End loop
 			}
 			dynafloBook.close();	
+			
+			// Update brands list in brands table
+			BrandManager.updateBrandsList(ItemManager.getBrands(conn), conn);
 		}
 		catch(Exception ex){
 			System.out.println("Sheet error: " + errSheet);
