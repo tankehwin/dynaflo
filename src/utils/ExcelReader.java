@@ -133,6 +133,8 @@ public class ExcelReader {
 			
 			// Update brands list in brands table
 			BrandManager.updateBrandsList(ItemManager.getBrands(conn), conn);
+			
+			// TODO: add code to read the datafile again and extract the brand information then populate the database
 		}
 		catch(Exception ex){
 			System.out.println("Sheet error: " + errSheet);

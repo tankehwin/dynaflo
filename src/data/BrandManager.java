@@ -24,10 +24,7 @@ public class BrandManager {
 				BrandModel.COLNAME_DATE_UPDATED + 
 				")" +
 				" VALUES ('" +
-				value.getName().trim() + "', '" +
-				value.getFreightCharges().trim() + "', '" +
-				value.getExpiryDate().trim() + "', '" +
-				value.getExchangeRate().trim() + "', '" +
+				value.getName().trim() + "', '', '', '', '" +
 				TimestampGenerator.getTimestamp() + "', '" +
 				TimestampGenerator.getTimestamp() +
 				"');";

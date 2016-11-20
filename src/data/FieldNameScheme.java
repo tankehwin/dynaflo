@@ -89,6 +89,9 @@ public class FieldNameScheme {
 		else if(scheme.toUpperCase().trim().equals("TAISHO")) {
 			return getTaishoFields();
 		}
+		else if(scheme.toUpperCase().trim().equals("TOGAWA")) {
+			return getTogawaFields();
+		}
 		else {
 			return null;
 		}
@@ -557,6 +560,28 @@ public class FieldNameScheme {
 	}
 	
 	public ArrayList getTaishoFields() {
+		ArrayList result = new ArrayList();
+		result.add(FIELDNAME_PART_NUMBER);
+		result.add(FIELDNAME_DESCRIPTION);
+		result.add(FIELDNAME_ADDITIONAL_INFORMATION_1);
+		result.add(FIELDNAME_ADDITIONAL_INFORMATION_2);
+		result.add(FIELDNAME_ADDITIONAL_INFORMATION_3);
+		result.add(FIELDNAME_ITEM_REF);
+		result.add(FIELDNAME_SELLING_PRICE);
+		result.add(FIELDNAME_DYNAFLO_DISCOUNT_CODE);	
+		result.add(FIELDNAME_DUTIES);	
+		result.add(FIELDNAME_GRACO_FAMILY_TYPE);	
+		result.add(FIELDNAME_GRACO_FAMILY_DISCOUNT);	
+		result.add(FIELDNAME_GRACO_STD_DISCOUNT);	
+		result.add(FIELDNAME_LEAD_TIME);	
+		result.add(FIELDNAME_OLD_PART_NUMBER);	
+		result.add(FIELDNAME_LATEST_DATE_PURCHASED);	
+		result.add(FIELDNAME_SUPPLIER);
+		result.add(FIELDNAME_SUPPLIER_CODE);	
+		return result;
+	}
+	
+	public ArrayList getTogawaFields() {
 		ArrayList result = new ArrayList();
 		result.add(FIELDNAME_PART_NUMBER);
 		result.add(FIELDNAME_DESCRIPTION);
