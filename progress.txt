@@ -109,3 +109,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - permanent variables table is linked to brand - new brand table, configurable by admin
 - update brands table each time data import is done
 - allow individual rows to be highlighted in search results - should not clash with right click disable code
+- fixed width of part number column to 250px

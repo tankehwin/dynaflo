@@ -143,7 +143,7 @@ $(document).ready(function(){
 		</th>
 	</tr>
 	<tr>
-		<th rowspan="2">PART NO.
+		<th rowspan="2" style="width:250px;">PART NO.
 		</th>
 		<th rowspan="2">DESCRIPTION
 		</th>

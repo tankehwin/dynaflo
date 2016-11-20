@@ -39,8 +39,8 @@ build brand info table on items_query.jsp (done)
 permanent variables table is linked to brand - new brand table, configurable by admin (0.5days) (done)
 update brands table each time data import is done (done)
 remove register link from login page, allow only admins to register new users (0.5days) (done)
-fix the width of each column (0.5days)
-allow individual rows to be highlighted in search results - should not clash with right click disable code 
+fix the width of each column (0.5days) 
+allow individual rows to be highlighted in search results - should not clash with right click disable code (0.5days) (done)
 
 
 
