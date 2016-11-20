@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <%@include file="includes/header.jsp" %> 
-<body>  
+<body oncontextmenu="return false;"><!-- stop right-click action -->
 <script language=JavaScript>
+// stop user from selecting text (for copying)
 function disableselect(e) {
     return false;
 }
@@ -17,41 +18,21 @@ if (window.sidebar) {
     document.onmousedown = disableselect;
     document.onclick = reEnable;
 }
-</script>
+</script>  
 <script language=JavaScript>
-//Disable right mouse click Script
-//By Maximus (maximus@nsimail.com) w/ mods by DynamicDrive
-//For full source code, visit http://www.dynamicdrive.com
-var message="Function Disabled!";
+// highlight results table row when clicked with jquery
 
-///////////////////////////////////
-function clickIE4(){
-if (event.button==2){
-//alert(message);
-return false;
-}
-}
-
-function clickNS4(e){
-if (document.layers||document.getElementById&&!document.all){
-if (e.which==2||e.which==3){
-//alert(message);
-return false;
-}
-}
-}
-
-if (document.layers){
-document.captureEvents(Event.MOUSEDOWN);
-document.onmousedown=clickNS4;
-}
-else if (document.all&&!document.getElementById){
-document.onmousedown=clickIE4;
-}
-
-//document.oncontextmenu=new Function("alert(message);return false")
-document.oncontextmenu=new Function("return false")
+$(document).ready(function(){
+    $("#results tr").click(function(){
+    	var selected = $(this).hasClass("highlight");
+        $("#results tr").removeClass("highlight");
+        if(!selected){
+        	$(this).addClass("highlight");
+        }
+    }); 
+});
 </script>
+
 <%
 	Connection conn = (Connection) session.getAttribute("conn");	
 	String action = request.getParameter("action");
@@ -156,7 +137,7 @@ document.oncontextmenu=new Function("return false")
 </form>
 <br />
 
-<table class="gridtable">
+<table id="results" class="gridtable">
 	<tr>
 		<th colspan="<%=colspan%>">Search Results
 		</th>
