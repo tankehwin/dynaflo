@@ -111,6 +111,15 @@ public class ItemModel {
 			if(result.trim().equals("")){
 				result = "0.0";
 			}
+			if(result.trim().equals("#N/A!")){
+				result = "-1.0";
+			}
+			if(result.trim().equals("#N/A")){
+				result = "-1.0";
+			}
+			if(result.trim().equals("ERROR 42")){
+				result = "-1.0";
+			}
 			this.duties = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_SELLING_PRICE.equals(fieldName)){
@@ -128,10 +137,21 @@ public class ItemModel {
 			this.sellingPrice = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_LEAD_TIME.equals(fieldName)){
-			if(value.toString().trim().equals("")){
-				value = "0";
+			String result = value.toString();
+			result = result.replaceAll(",", "");
+			if(result.trim().equals("#N/A!")){
+				result = "-1";
 			}
-			this.leadTimeARO = new Integer(value.toString());
+			if(result.trim().equals("#N/A")){
+				result = "-1";
+			}
+			if(result.trim().equals("ERROR 42")){
+				result = "-1";
+			}
+			if(result.toString().trim().equals("")){
+				result = "0";
+			}
+			this.leadTimeARO = new Integer(result.toString());
 		}
 		else if(FieldNameScheme.FIELDNAME_DYNAFLO_DISCOUNT_CODE.equals(fieldName)){
 			String result = value.toString();
