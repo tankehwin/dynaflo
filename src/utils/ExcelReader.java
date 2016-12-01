@@ -129,12 +129,36 @@ public class ExcelReader {
 				}
 			// End loop
 			}
-			dynafloBook.close();	
+			
 			
 			// Update brands list in brands table
 			BrandManager.updateBrandsList(ItemManager.getBrands(conn), conn);
 			
-			// TODO: add code to read the datafile again and extract the brand information then populate the database
+			// Add code to read the datafile again and extract the brand information then populate the database
+			System.out.println("Updating brand information...");
+			// Start loop
+			for(int i=0; i<dynafloBook.getNumberOfSheets(); i++){
+				// Access next worksheet
+				Sheet sheet = dynafloBook.getSheet(i);
+				// Find out which worksheet it is based on worksheet name (Kawasaki, EUROTECH, Hosco, PHALBOK etc.)
+				String dynafloSheetName = sheet.getName();
+				// Record sheet name for info later if there are errors
+				errSheet = dynafloSheetName;
+				System.out.println("Sheet name: " + dynafloSheetName);
+				Cell cellEXRRate = sheet.findCell("EXCHANGE RATE:");
+				Cell cellEXRDate = sheet.findCell("EXR DATE:");
+				Cell cellFreight = sheet.findCell("FREIGHT (%):");
+				Cell cellEXRRateData = sheet.getCell(cellEXRRate.getColumn() + 2, cellEXRRate.getRow());
+				Cell cellEXRDateData = sheet.getCell(cellEXRDate.getColumn() + 2, cellEXRDate.getRow());
+				Cell cellFreightData = sheet.getCell(cellFreight.getColumn() + 1, cellFreight.getRow());
+				BrandManager.updateObject(dynafloSheetName, 
+						cellEXRRateData.getContents().trim(),
+						cellEXRDateData.getContents().trim(),
+						cellFreightData.getContents().trim(),
+						conn);
+			// End loop
+			}
+			dynafloBook.close();	
 		}
 		catch(Exception ex){
 			System.out.println("Sheet error: " + errSheet);

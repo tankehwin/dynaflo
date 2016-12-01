@@ -110,7 +110,7 @@ public static ArrayList<BrandModel> getAllObjects(Connection conn) throws Except
 			insertObject(insertObj, conn);
 		}
 	}
-	
+		
 	public static void updateObject(String name, String exchangeRate, String expiryDate, String freightCharges, Connection conn) throws Exception {
 		String sql = "UPDATE " + BrandModel.TABLENAME + " SET " +
 				BrandModel.COLNAME_EXCHANGE_RATE + " = '" + exchangeRate + "', " +

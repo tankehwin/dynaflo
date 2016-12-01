@@ -112,3 +112,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - fixed width of part number column to 250px
 - added Togawa brand
 - added more error handling for duties and lead time ARO columns
+- brand info now automatically extracted from import file
