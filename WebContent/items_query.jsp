@@ -65,10 +65,15 @@ $(document).ready(function(){
 	   	String filePath = tomcatLocation + "webapps/data/import.xls";
 		if(!filePath.trim().equals("")){
 			ExcelReader excelBook = new ExcelReader();
-			int importCount = excelBook.ingestExcelFile(filePath, conn);
-			if(importCount>0){
-				importResults = new Integer(importCount).toString() + " items were imported.";
+			try{
+				int importCount = excelBook.ingestExcelFile(filePath, conn);
+				if(importCount>0){
+					importResults = new Integer(importCount).toString() + " items were imported.";
+				}
 			}
+			catch(Exception ex){
+				importResults = ex.getMessage();
+			}			
 		}	
 	}
 	
@@ -214,7 +219,7 @@ $(document).ready(function(){
 		</td>
 		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":itmObj.getGracoStdDiscount()+"%" %>
 		</td>	
-		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":itmObj.getLeadTimeARO()  %>
+		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"N/A":itmObj.getLeadTimeARO())  %>
 		</td>
 		<td align="center"><%=itmObj.getOldPartNumber() %>
 		</td>

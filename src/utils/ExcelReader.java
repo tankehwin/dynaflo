@@ -164,6 +164,7 @@ public class ExcelReader {
 			System.out.println("Sheet error: " + errSheet);
 			ex.printStackTrace();
 			importCount = 0;
+			throw new Exception("Sheet error: " + errSheet + ". Message: " + ex.getMessage());			
 		}
 		return importCount;
 	}
