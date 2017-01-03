@@ -2,6 +2,9 @@ package model;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -33,6 +36,9 @@ public class ItemModel {
 	public static final String COLNAME_BRAND = "brand";
 	
 	public static final String TABLENAME = "items_master";
+	
+	public static final int MODE_INT = 1;
+	public static final int MODE_FRACTION = 2;
 	
 	private String partNumber;
 	private String description;
@@ -79,6 +85,28 @@ public class ItemModel {
 		this.supplierCode = "";
 	}
 	
+	private String removeInvalidValueInNumberField(String result, int mode) throws Exception {
+		result = result.replaceAll("%", "");
+		if(result.trim().equals("")){
+			if(mode==MODE_INT){
+				result = "0";
+			}
+			else{
+				result = "0.0";
+			}		
+		}
+		else if(!StringUtils.isNumeric(result.trim())){
+			if(mode==MODE_INT){
+				result = "0";
+			}
+			else{
+				result = "0.0";
+			}
+		}
+		
+		return result;
+	}
+	
 	public void setFieldValue(String fieldName, Object value) throws Exception {
 		if(FieldNameScheme.FIELDNAME_PART_NUMBER.equals(fieldName)){
 			String result = value.toString();
@@ -93,64 +121,36 @@ public class ItemModel {
 		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_1.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll("'", "''");
+			result = result.replace("\\", "");
 			this.addInfo1 = result;		
 		}
 		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_2.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll("'", "''");
+			result = result.replace("\\", "");
 			this.addInfo2 = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_ADDITIONAL_INFORMATION_3.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll("'", "''");
+			result = result.replace("\\", "");
 			this.addInfo3 = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_DUTIES.equals(fieldName)){
-			String result = value.toString();
-			result = result.replaceAll("%", "");
-			if(result.trim().equals("")){
-				result = "0.0";
-			}
-			if(result.trim().equals("#N/A!")){
-				result = "-1.0";
-			}
-			if(result.trim().equals("#N/A")){
-				result = "-1.0";
-			}
-			if(result.trim().equals("ERROR 42")){
-				result = "-1.0";
-			}
+			String result = value.toString();			
+			result = removeInvalidValueInNumberField(result, MODE_FRACTION);
 			this.duties = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_SELLING_PRICE.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll(",", "");
-			if(result.trim().equals("#N/A!")){
-				result = "-1.0";
-			}
-			if(result.trim().equals("#N/A")){
-				result = "-1.0";
-			}
-			if(result.trim().equals("ERROR 42")){
-				result = "-1.0";
-			}
+			result = removeInvalidValueInNumberField(result, MODE_FRACTION);
 			this.sellingPrice = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_LEAD_TIME.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll(",", "");
-			if(result.trim().equals("#N/A!")){
-				result = "-1";
-			}
-			if(result.trim().equals("#N/A")){
-				result = "-1";
-			}
-			if(result.trim().equals("ERROR 42")){
-				result = "-1";
-			}
-			if(result.toString().trim().equals("")){
-				result = "0";
-			}
+			result = removeInvalidValueInNumberField(result, MODE_INT);
 			this.leadTimeARO = new Integer(result.toString());
 		}
 		else if(FieldNameScheme.FIELDNAME_DYNAFLO_DISCOUNT_CODE.equals(fieldName)){
@@ -202,7 +202,11 @@ public class ItemModel {
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_TYPE.equals(fieldName)){
 			String result = value.toString();
-			result = result.replaceAll("'", "''");
+			result = result.replaceAll("'", "''");		
+			if(result.trim().equals("STD")){
+				result = "0.0";
+			}
+			result = removeInvalidValueInNumberField(result, MODE_FRACTION);
 			this.gracoFamType = result;
 		}
 		else if(COLNAME_BRAND.equals(fieldName)){
@@ -212,30 +216,18 @@ public class ItemModel {
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_DISCOUNT.equals(fieldName)){
 			String result = value.toString();
-			result = result.replaceAll("%", "");
-			if(result.trim().equals("")){
-				result = "0.0";
-			}
-			if(result.trim().equals("#N/A!")){
-				result = "-1.0";
-			}
 			if(result.trim().equals("STD")){
 				result = "0.0";
 			}
+			result = removeInvalidValueInNumberField(result, MODE_FRACTION);
 			this.gracoFamDiscount = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_STD_DISCOUNT.equals(fieldName)){
-			String result = value.toString();
-			result = result.replaceAll("%", "");
-			if(result.trim().equals("")){
-				result = "0.0";
-			}
-			if(result.trim().equals("#N/A!")){
-				result = "-1.0";
-			}
+			String result = value.toString();			
 			if(result.trim().equals("STD")){
 				result = "0.0";
 			}
+			result = removeInvalidValueInNumberField(result, MODE_FRACTION);
 			this.gracoStdDiscount = new BigDecimal(result);
 		}
 		else if(FieldNameScheme.FIELDNAME_SUPPLIER_CODE.equals(fieldName)){

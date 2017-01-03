@@ -1,5 +1,5 @@
 CREATE TABLE items_master (
-  `part_number` VARCHAR(100) NOT NULL,
+  `part_number` VARCHAR(200) NOT NULL,
   `description` VARCHAR(200) NULL,
   `add_info_1` VARCHAR(500) NULL,
   `add_info_2` VARCHAR(500) NULL,

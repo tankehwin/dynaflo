@@ -57,7 +57,7 @@ public class ItemManager {
 				value.getSupplierCode().trim() + 
 				"');";
 		Statement st = conn.createStatement();
-//		System.out.println(sql);
+		System.out.println(sql);
 		st.executeUpdate(sql);
 
 	}

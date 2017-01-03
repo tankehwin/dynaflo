@@ -124,7 +124,7 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<th><div class="criteria">Expiry Date:</div>
+		<th><div class="criteria">EXR Date:</div>
 		</th>
 		<td><div class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
 		</td>

@@ -113,3 +113,7 @@ looks like that was wrong. Need to find out what it really means before can proc
 - added Togawa brand
 - added more error handling for duties and lead time ARO columns
 - brand info now automatically extracted from import file
+- changed Expiry Date label to EXR Date
+- further handling of ERROR 42 on the Graco fields
+- unified function to handle non-number values in number fields
+- made part_number database field longer (200 chars)
