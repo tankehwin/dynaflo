@@ -42,6 +42,9 @@ public class ExcelReader {
 				// Record sheet name for info later if there are errors
 				errSheet = dynafloSheetName;
 				System.out.println("Sheet name: " + dynafloSheetName);
+				//if(!dynafloSheetName.equals("Local")){
+				//	continue;
+				//}
 				// Retrieve the appropriate field name scheme (hard-coded or properties file)
 				ArrayList arrFieldNames = fnsScroll.getColumns(dynafloSheetName);
 				if(arrFieldNames == null) {

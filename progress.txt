@@ -118,3 +118,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - unified function to handle non-number values in number fields
 - made part_number database field longer (200 chars)
 - added N/A presentation to lead time
+- readjusted UI extensively, increased font size

@@ -2,23 +2,7 @@
 <html>
 <%@include file="includes/header.jsp" %> 
 <body oncontextmenu="return false;"><!-- stop right-click action -->
-<script language=JavaScript>
-// stop user from selecting text (for copying)
-function disableselect(e) {
-    return false;
-}
 
-function reEnable() {
-    return true;
-}
-
-document.onselectstart = new Function("return false");
-
-if (window.sidebar) {
-    document.onmousedown = disableselect;
-    document.onclick = reEnable;
-}
-</script>  
 <script language=JavaScript>
 // highlight results table row when clicked with jquery
 
@@ -41,7 +25,7 @@ $(document).ready(function(){
 	String partNum = "";
 	String brand = "";
 	BrandModel pricingVariableObj = null;
-	int colspan = 17;
+	int colspan = 16;
 	boolean ifIracExists = false;
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
@@ -80,16 +64,18 @@ $(document).ready(function(){
 %>
 <form action="items_query.jsp" method="post" accept-charset="utf-8">
 <input type="hidden" name="action" value="searchPart">
-<table class="gridtable" style="display:inline-block;">
+<table class="gridtable" style="display:inline-block;table-layout:fixed;width:500px;">
+	<col style="overflow:hidden;width:100px;" id="colSearchTitle"/>
+	<col style="overflow:hidden;width:250px;" id="colSearchValue"/>
 	<tr>
-		<th colspan="2"><div class="criteria">Search Parts</div>
+		<th colspan="2"><div class="criteria">SEARCH PARTS</div>
 		</th>
 	</tr>
 	<tr>
-		<th><div class="criteria">Brand</div>
+		<th><div class="criteria">BRAND:</div>
 		</th>
 		<td><div class="criteria">
-			<select class="partNumber" name="brand">
+			<select style="width:165px;" name="brand">
 <%
 	ArrayList<BrandModel> brands = BrandManager.getAllObjects(conn);
 	// trying out new style of for loop
@@ -103,80 +89,90 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<th><div class="criteria">Part Number</div>
+		<th><div class="criteria">PART NO.:</div>
 		</th>
-		<td><div class="criteria"><input type="text" class="partNumber" name="partnum" value="<%=partNum %>" /></div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2"><div class="criteria"><input type="submit" value="Search" /></div>
+		<td><div class="criteria"><input type="text" class="partNumber" name="partnum" value="<%=partNum %>" /><input type="submit" value="Search" /></div>
 		</td>
 	</tr>
 </table>
-<table class="gridtable" style="display:inline-block;">
+<table class="gridtable" style="display:inline-block;table-layout:fixed;width:500px;">
+	<col style="overflow:hidden;width:120px;" id="colDoubleTitle"/>
+	<col style="overflow:hidden;width:130px;" id="colDoubleValue"/>
+	<col style="overflow:hidden;width:100px;" id="colFreightTitle"/>
+	<col style="overflow:hidden;width:50px;" id="colFreightValue"/>
 	<tr>
-		<th colspan="4"><div class="criteria">Pricing Variables</div>
+		<th colspan="4"><div class="criteria">PRICING VARIABLES</div>
 		</th>
 	</tr>
 	<tr>
-		<th><div class="criteria">Exchange Rate:</div>
+		<th><div class="criteria">EXCHANGE RATE:</div>
 		</th>
-		<td><div class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExchangeRate():"" %></div>
+		<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExchangeRate():"" %></div>
 		</td>
-		<th rowspan="2"><div class="criteria">Freight (%):</div>
+		<th rowspan="2"><div class="criteria">FREIGHT:</div>
 		</th>
-		<td rowspan="2"><div class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
-		</td>
-	</tr>
-	<tr>
-		<th><div class="criteria">EXR Date:</div>
-		</th>
-		<td><div class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
+		<td rowspan="2"><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="4"><div class="criteria">&nbsp;</div>
+		<th><div class="criteria">EXR DATE:</div>
+		</th>
+		<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
 		</td>
 	</tr>
 </table>
 </form>
 <br />
 
-<table id="results" class="gridtable">
+<table id="results" class="gridtable" style="table-layout:fixed;width:2265px;">
+	<col style="overflow:hidden;width:170px;" id="colPartNo"/>
+	<col style="overflow:hidden;width:375px;" id="colDesc"/>
+	<col style="overflow:hidden;width:200px;" id="colAddInfo1"/>
+	<col style="overflow:hidden;width:200px;" id="colAddInfo2"/>
+	<col style="overflow:hidden;width:200px;" id="colAddInfo3"/>
+	<col style="overflow:hidden;width:100px;" id="colSellPrice"/>
+	<col style="overflow:hidden;width:50px;" id="colDynDisCode"/>
+	<col style="overflow:hidden;width:55px;" id="colDuties"/>
+	<col style="overflow:hidden;width:55px;" id="colGraFamType"/>
+	<col style="overflow:hidden;width:55px;" id="colGraFamDis"/>
+	<col style="overflow:hidden;width:55px;" id="colGraStdDis"/>
+	<col style="overflow:hidden;width:50px;" id="colLeadARO"/>
+	<col style="overflow:hidden;width:170px;" id="colOldPartNo"/>
+	<col style="overflow:hidden;width:100px;" id="colLastDatePurc"/>
+	<col style="overflow:hidden;width:200px;" id="colLastSupp"/>
+	<col style="overflow:hidden;width:200px;" id="colSuppPartNo"/>
 	<tr>
-		<th colspan="<%=colspan%>">Search Results
+		<th colspan="<%=colspan%>">SEARCH RESULTS
 		</th>
 	</tr>
 	<tr>
-		<th rowspan="2" style="width:250px;">PART NO.
+		<th rowspan="2" >PART NO.
 		</th>
-		<th rowspan="2">DESCRIPTION
+		<th rowspan="2" >DESCRIPTION
 		</th>
-		<th rowspan="2">ADD. INFORMATION 1
+		<th rowspan="2" >ADD. INFORMATION 1
 		</th>
-		<th rowspan="2">ADD. INFORMATION 2
+		<th rowspan="2" >ADD. INFORMATION 2
 		</th>
-		<th rowspan="2">ADD. INFORMATION 3
-		</th>
-		<th rowspan="2">ITEM REF.
+		<th rowspan="2" >ADD. INFORMATION 3
 		</th>		
-		<th rowspan="2">SELLING PRICE<br/>(RM)
+		<th rowspan="2" >SELLING PRICE<br/>(RM)
 		</th>
-		<th rowspan="2">DYN <br/>DISC. <br/>CODE
+		<th rowspan="2" >DYN <br/>DISC. <br/>CODE
 		</th>
-		<th rowspan="2">DUTIES (%)
+		<th rowspan="2" >DUTIES 
 		</th>
-		<th colspan="3">GRACO 
+		<th colspan="3" >GRACO 
 		</th>
-		<th rowspan="2">LEAD <br/>TIME <br/>(DAYS)
+		<th rowspan="2" >LEAD <br/>TIME <br/>(DAYS)
 		</th>
-		<th rowspan="2">OLD PART <br/>NUMBER
+		<th rowspan="2" >OLD PART <br/>NO.
 		</th>
-		<th rowspan="2">LATEST DATE <br/>PURCHASED
+		<th rowspan="2" >LATEST DATE <br/>QUOTED/<br/>PURCHASED
 		</th>
-		<th rowspan="2">LATEST SUPPLIER
+		<th rowspan="2" >LATEST SUPPLIER
 		</th>
-		<th rowspan="2">SUPPLIER <br/>PART NO.
+		<th rowspan="2" >SUPPLIER <br/>PART NO.
 		</th>
 	</tr>
 	<tr>
@@ -195,39 +191,37 @@ $(document).ready(function(){
 		}
 %>
 	<tr>
-		<td><%=itmObj.getPartNumber() %>
+		<td style="overflow:hidden;width:200px;"><%=itmObj.getPartNumber() %>
 		</td>
-		<td><%=itmObj.getDescription() %>
+		<td style="overflow:hidden;width:200px;"><%=itmObj.getDescription() %>
 		</td>
-		<td><%=itmObj.getAddInfo1() %>
+		<td style="overflow:hidden;width:200px;"><%=itmObj.getAddInfo1() %>
 		</td>
-		<td><%=itmObj.getAddInfo2() %>
+		<td style="overflow:hidden;width:200px;"><%=itmObj.getAddInfo2() %>
 		</td>
-		<td><%=itmObj.getAddInfo3() %>
+		<td style="overflow:hidden;width:200px;"><%=itmObj.getAddInfo3() %>
 		</td>
-		<td align="center"><%=itmObj.getItemReference() %>
+		<td align="right" style="background-color: #ffff99;overflow:hidden;width:200px;"><%=itmObj.getSellingPrice() %>
 		</td>
-		<td align="right" style="background-color: #ffff99;"><%=itmObj.getSellingPrice() %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
-		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
-		</td>
-		<td align="center"><%=itmObj.getDuties().toString()+"%" %>
+		<td align="center" style="overflow:hidden;width:100px;"><%=itmObj.getDuties().toString()+"%" %>
 		</td>	
-		<td align="center"><%=itmObj.getGracoFamType() %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getGracoFamType() %>
 		</td>
-		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"":itmObj.getGracoFamDiscount()+"%" %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"":itmObj.getGracoFamDiscount()+"%" %>
 		</td>
-		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":itmObj.getGracoStdDiscount()+"%" %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":itmObj.getGracoStdDiscount()+"%" %>
 		</td>	
-		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"N/A":itmObj.getLeadTimeARO())  %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"N/A":itmObj.getLeadTimeARO())  %>
 		</td>
-		<td align="center"><%=itmObj.getOldPartNumber() %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getOldPartNumber() %>
 		</td>
-		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>
-		<td align="center"><%=itmObj.getSupplier() %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getSupplier() %>
 		</td>
-		<td align="center"><%=itmObj.getSupplierCode() %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getSupplierCode() %>
 		</td>
 	</tr>
 <%		

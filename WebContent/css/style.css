@@ -3,11 +3,20 @@
 <style type="text/css">
 table.gridtable {
 	font-family: calibri,arial,sans-serif;
-	font-size:12px;
-	color:#333333;
+	font-size:15px;
+	color:#000000;
 	border-width: 1px;
 	border-color: #666666;
 	border-collapse: collapse;
+	
+	/* stops selection of text */
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                          not supported by any browser */
 }
 table.gridtable th {
 	border-width: 1px;
@@ -26,8 +35,8 @@ table.gridtable td {
 
 table.cleartable {
 	font-family: calibri,arial,sans-serif;
-	font-size:12px;
-	color:#333333;
+	font-size:15px;
+	color:#000000;
 	border-width: 1px;
 	border-color: #666666;
 	border-collapse: collapse;
@@ -44,12 +53,8 @@ table.cleartable td {
 	background-color: #ffffff;
 }
 
-input.qty {
-	width: 100px;
-}
-
 input.partNumber {
-	width: 300px;
+	width: 160px;
 }
 
 div.criteria {

@@ -203,10 +203,6 @@ public class ItemModel {
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_TYPE.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll("'", "''");		
-			if(result.trim().equals("STD")){
-				result = "0.0";
-			}
-			result = removeInvalidValueInNumberField(result, MODE_FRACTION);
 			this.gracoFamType = result;
 		}
 		else if(COLNAME_BRAND.equals(fieldName)){
