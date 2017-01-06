@@ -25,6 +25,7 @@ public class ExcelReader {
 		String errSheet = "";
 		int importCount = 0;
 		try{
+			conn.setAutoCommit(false);
 			String samplePath = "C:/Users/tankehwin/Desktop/DYNAFLO PRICE 2016 - 14.10.16 - Rev 2.xls";
 			// Open workbook
 			Workbook dynafloBook = Workbook.getWorkbook(new File(filePath)); 
@@ -162,11 +163,13 @@ public class ExcelReader {
 			// End loop
 			}
 			dynafloBook.close();	
+			conn.commit();
 		}
 		catch(Exception ex){
 			System.out.println("Sheet error: " + errSheet);
 			ex.printStackTrace();
 			importCount = 0;
+			conn.rollback();
 			throw new Exception("Sheet error: " + errSheet + ". Message: " + ex.getMessage());			
 		}
 		return importCount;

@@ -53,10 +53,50 @@ $(document).ready(function(){
 				int importCount = excelBook.ingestExcelFile(filePath, conn);
 				if(importCount>0){
 					importResults = new Integer(importCount).toString() + " items were imported.";
+%>
+<div id="dialog-message" title="Import Successful">
+	<p>
+		<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+		<%=importResults %>
+	</p>
+</div>
+<script>
+	$(function() {
+		$( "#dialog-message" ).dialog({
+			modal: true,
+			buttons: {
+				OK: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	});
+</script>
+<%
 				}
 			}
 			catch(Exception ex){
 				importResults = ex.getMessage();
+%>
+<div id="dialog-message" title="Import Failed">
+	<p>
+		<span class="ui-icon ui-icon-notice" style="float:left; margin:0 7px 50px 0;"></span>
+		<%=importResults %>
+	</p>
+</div>
+<script>
+	$(function() {
+		$( "#dialog-message" ).dialog({
+			modal: true,
+			buttons: {
+				OK: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	});
+</script>
+<%				
 			}			
 		}	
 	}
@@ -68,7 +108,7 @@ $(document).ready(function(){
 	<col style="overflow:hidden;width:100px;" id="colSearchTitle"/>
 	<col style="overflow:hidden;width:250px;" id="colSearchValue"/>
 	<tr>
-		<th colspan="2"><div class="criteria">SEARCH PARTS</div>
+		<th colspan="2"><div style="overflow:hidden;">SEARCH PARTS</div>
 		</th>
 	</tr>
 	<tr>
@@ -101,7 +141,7 @@ $(document).ready(function(){
 	<col style="overflow:hidden;width:100px;" id="colFreightTitle"/>
 	<col style="overflow:hidden;width:50px;" id="colFreightValue"/>
 	<tr>
-		<th colspan="4"><div class="criteria">PRICING VARIABLES</div>
+		<th colspan="4"><div style="overflow:hidden;">PRICING VARIABLES</div>
 		</th>
 	</tr>
 	<tr>
@@ -205,15 +245,15 @@ $(document).ready(function(){
 		</td>
 		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
-		<td align="center" style="overflow:hidden;width:100px;"><%=itmObj.getDuties().toString()+"%" %>
+		<td align="center" style="overflow:hidden;width:100px;"><%=(itmObj.getDuties().longValue()==0)?"-":((itmObj.getDuties().intValue()==-1)?"-":itmObj.getDuties())+"%" %>
 		</td>	
 		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getGracoFamType() %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"":itmObj.getGracoFamDiscount()+"%" %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":itmObj.getGracoStdDiscount()+"%" %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
 		</td>	
-		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"N/A":itmObj.getLeadTimeARO())  %>
+		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getLeadTimeARO().intValue()==0)?"-":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO())  %>
 		</td>
 		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getOldPartNumber() %>
 		</td>

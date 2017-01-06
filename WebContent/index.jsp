@@ -25,6 +25,9 @@ DYNAFLO PARTS SEARCH SYSTEM
 		LoginModel userLogin = LoginManager.login(username, password, conn);
 		if(userLogin != null) {
 			session.setAttribute("userLogin", userLogin);
+			// set auto-logout - function accepts parameter in seconds
+			int minutes = 5;
+			session.setMaxInactiveInterval(minutes*60); 
 			String redirectURL = "items_query.jsp";
 		    response.sendRedirect(redirectURL);
 		    return;

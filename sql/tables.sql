@@ -1,6 +1,7 @@
 CREATE TABLE items_master (
+  `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `part_number` VARCHAR(200) NOT NULL,
-  `description` VARCHAR(200) NULL,
+  `description` VARCHAR(500) NULL,
   `add_info_1` VARCHAR(500) NULL,
   `add_info_2` VARCHAR(500) NULL,
   `add_info_3` VARCHAR(500) NULL,
@@ -19,8 +20,7 @@ CREATE TABLE items_master (
   `graco_std_discount` FLOAT NULL,
   `graco_std_discount_code` VARCHAR(50) NULL,
   `brand` VARCHAR(30) NULL,
-  `supplier_code` VARCHAR(100) NULL,
-  PRIMARY KEY (`part_number`))
+  `supplier_code` VARCHAR(100) NULL)
 ENGINE = InnoDB;
 
 
@@ -46,8 +46,7 @@ CREATE TABLE brands_master (
 insert into login_master(name,password,acc_type,date_created,date_updated)values('admin','admin','admin',now(),now());
 insert into login_master(name,password,acc_type,date_created,date_updated)values('normal','normal','normal',now(),now());
 
--- once initial import is done, run the line below to populate brands_master
-insert into brands_master(name) select distinct brand from items_master;
+
 
 
 		

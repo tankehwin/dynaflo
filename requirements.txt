@@ -22,11 +22,11 @@ bug - import not working in war file version (free) (done)
 phase 2
 non-related fields to be left blank instead of displaying “0” or “-“ or “01/01/1970” (free) (done)
 Overall font size can be 1 down to allow for more fields to be displayed on the first screen (done)
-All dates should be DD/MM/YY (free) (done)
-All percentages except for Duties to be round numbers. Duties to only have 1 decimal (free) (done)
-At the moment, the INOX brand P/N XRAAGM150 does not return a search result (free) (done)
+all dates should be DD/MM/YY (free) (done)
+all percentages except for Duties to be round numbers. Duties to only have 1 decimal (free) (done)
+at the moment, the INOX brand P/N XRAAGM150 does not return a search result (free) (done)
 need to redo column management due to new format - just copy-paste repeating set of columns (free) (done)
-database transactions should be implemented (free)
+database transactions should be implemented (free) (done)
 add brand column in items_master, add brand search criteria (done) (0.5days)
 remove original structure - put results and search function on one page, removed 10 fixed rows, allow search to return multiple results. column rearrangement according to sample file (done) (1days)
 make sure part number column is long enough to display most of part number in single line. smaller font, calibri (done) (free)
@@ -39,10 +39,12 @@ build brand info table on items_query.jsp (done)
 permanent variables table is linked to brand - new brand table, configurable by admin (0.5days) (done)
 update brands table each time data import is done (done)
 remove register link from login page, allow only admins to register new users (0.5days) (done)
-fix the width of each column (0.5days) 
+fix the width of each column (0.5days)  (done)
 allow individual rows to be highlighted in search results - should not clash with right click disable code (0.5days) (done)
-
-
+auto-logout after 5 minutes idle (0.5days) (done)
+allow duplicate part numbers (1days) (done)
+various UI changes (1days) (done)
+remove item ref from consideration (free)
 
 
 phase 3
@@ -66,5 +68,6 @@ internet capability (security - encryption, login, etc.)
 
 current price:
 current man/day count = 5 as of 3rd Sept 2016 (first review)
+current man/day count = 6 as of 5th Jan 2017 (second review)
 day rate = RM350
 
