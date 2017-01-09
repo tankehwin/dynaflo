@@ -124,3 +124,5 @@ looks like that was wrong. Need to find out what it really means before can proc
 - allowed duplicate part numbers
 - provide feedback when errors occur during import in the form of dialog messages
 - auto-logout function added, defaulted to 5 minutes
+- auto-logout changed to 8 hours
+- fixed bug where selling price set to 0 during import

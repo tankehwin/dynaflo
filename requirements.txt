@@ -43,7 +43,7 @@ fix the width of each column (0.5days)  (done)
 allow individual rows to be highlighted in search results - should not clash with right click disable code (0.5days) (done)
 auto-logout after 5 minutes idle (0.5days) (done)
 allow duplicate part numbers (1days) (done)
-various UI changes (1days) (done)
+many UI changes while at Dynaflo on 5/1/2017 (1days) (done)
 remove item ref from consideration (free)
 
 

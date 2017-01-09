@@ -3,7 +3,7 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -95,7 +95,7 @@ public class ItemModel {
 				result = "0.0";
 			}		
 		}
-		else if(!StringUtils.isNumeric(result.trim())){
+		else if(!NumberUtils.isCreatable(result.trim())){
 			if(mode==MODE_INT){
 				result = "0";
 			}
@@ -103,7 +103,7 @@ public class ItemModel {
 				result = "0.0";
 			}
 		}
-		
+
 		return result;
 	}
 	
