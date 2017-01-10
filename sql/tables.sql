@@ -43,6 +43,12 @@ CREATE TABLE brands_master (
 	date_updated datetime
 );
 
+CREATE TABLE general_config_master (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name varchar(50),
+	contents varchar(500)
+);
+
 insert into login_master(name,password,acc_type,date_created,date_updated)values('admin','admin','admin',now(),now());
 insert into login_master(name,password,acc_type,date_created,date_updated)values('normal','normal','normal',now(),now());
 

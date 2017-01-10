@@ -129,3 +129,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - set thousandth comma separator for selling price
 - all number fields show blank if 0 equivalent except duties show 0, and selling price shows -
 - trying to fix odd bug where ERROR 42 shows in graco family type column on site but shows #N/A! in local
+- adding base work for last uploaded filename
