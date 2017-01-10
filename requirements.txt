@@ -45,7 +45,10 @@ auto-logout after 5 minutes idle (0.5days) (done)
 allow duplicate part numbers (1days) (done)
 many UI changes while at Dynaflo on 5/1/2017 (1days) (done)
 remove item ref from consideration (free)
-
+set thousandth comma separator for selling price (free) (done)
+all number fields show blank if 0 equivalent except duties show 0, and selling price shows - (free) (done)
+store and display filename of last import file (0.5days)
+pricing variables table needs to align with additional info 1 column (free)
 
 phase 3
 split server implementation - 2 servers each with its own tomcat and database. any upload to one instance automatically updates both databases

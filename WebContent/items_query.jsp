@@ -26,7 +26,13 @@ $(document).ready(function(){
 	String brand = "";
 	BrandModel pricingVariableObj = null;
 	int colspan = 16;
-	boolean ifIracExists = false;
+	boolean ifIracExists = false;	
+	
+	DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+	DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+	symbols.setGroupingSeparator(' ');
+	formatter.setDecimalFormatSymbols(symbols);
+
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
 		partNum = request.getParameter("partnum");	
@@ -164,9 +170,9 @@ $(document).ready(function(){
 </form>
 <br />
 
-<table id="results" class="gridtable" style="table-layout:fixed;width:2265px;">
+<table id="results" class="gridtable" style="table-layout:fixed;width:2190px;">
 	<col style="overflow:hidden;width:170px;" id="colPartNo"/>
-	<col style="overflow:hidden;width:375px;" id="colDesc"/>
+	<col style="overflow:hidden;width:200px;" id="colDesc"/>
 	<col style="overflow:hidden;width:200px;" id="colAddInfo1"/>
 	<col style="overflow:hidden;width:200px;" id="colAddInfo2"/>
 	<col style="overflow:hidden;width:200px;" id="colAddInfo3"/>
@@ -231,37 +237,37 @@ $(document).ready(function(){
 		}
 %>
 	<tr>
-		<td style="overflow:hidden;width:200px;"><%=itmObj.getPartNumber() %>
+		<td><%=itmObj.getPartNumber() %>
 		</td>
-		<td style="overflow:hidden;width:200px;"><%=itmObj.getDescription() %>
+		<td><%=itmObj.getDescription() %>
 		</td>
-		<td style="overflow:hidden;width:200px;"><%=itmObj.getAddInfo1() %>
+		<td><%=itmObj.getAddInfo1() %>
 		</td>
-		<td style="overflow:hidden;width:200px;"><%=itmObj.getAddInfo2() %>
+		<td><%=itmObj.getAddInfo2() %>
 		</td>
-		<td style="overflow:hidden;width:200px;"><%=itmObj.getAddInfo3() %>
+		<td><%=itmObj.getAddInfo3() %>
 		</td>
-		<td align="right" style="background-color: #ffff99;overflow:hidden;width:200px;"><%=itmObj.getSellingPrice() %>
+		<td align="right" style="background-color: #ffff99;"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice().longValue()) %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getDynafloDiscountCode() %>
+		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
-		<td align="center" style="overflow:hidden;width:100px;"><%=(itmObj.getDuties().longValue()==0)?"-":((itmObj.getDuties().intValue()==-1)?"-":itmObj.getDuties())+"%" %>
+		<td align="center"><%=(itmObj.getDuties().longValue()==0)?"0.0%":((itmObj.getDuties().intValue()==-1)?"-":itmObj.getDuties())+"%" %>
 		</td>	
-		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getGracoFamType() %>
+		<td align="center"><%=itmObj.getGracoFamType() %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
+		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
+		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
 		</td>	
-		<td align="center" style="overflow:hidden;width:200px;"><%=(itmObj.getLeadTimeARO().intValue()==0)?"-":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO())  %>
+		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO())  %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getOldPartNumber() %>
+		<td align="center"><%=itmObj.getOldPartNumber() %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
+		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getSupplier() %>
+		<td align="center"><%=itmObj.getSupplier() %>
 		</td>
-		<td align="center" style="overflow:hidden;width:200px;"><%=itmObj.getSupplierCode() %>
+		<td align="center"><%=itmObj.getSupplierCode() %>
 		</td>
 	</tr>
 <%		

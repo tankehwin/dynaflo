@@ -5,6 +5,7 @@
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.math.*"%>
+<%@ page import="java.text.*"%>
 <%
 	try {
 		// load global.properties

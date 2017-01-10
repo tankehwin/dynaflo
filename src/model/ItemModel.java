@@ -203,6 +203,11 @@ public class ItemModel {
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_TYPE.equals(fieldName)){
 			String result = value.toString();
 			result = result.replaceAll("'", "''");		
+			result = result.replaceAll("#N/A", "N/A");		
+			result = result.replaceAll("#N/A!", "N/A");		
+			result = result.replaceAll("N/A()", "N/A");		
+			result = result.replaceAll("ERROR 42", "N/A");	
+			result = result.replaceAll("N/A!", "N/A");	
 			this.gracoFamType = result;
 		}
 		else if(COLNAME_BRAND.equals(fieldName)){
