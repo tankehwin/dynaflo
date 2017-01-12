@@ -10,7 +10,7 @@
    File file ;
    int maxFileSize = 5000 * 1024;
    int maxMemSize = 5000 * 1024;
-   
+   String fileName = "";
 	// load global.properties
 	Properties prop = new Properties();
 	ServletContext servletContext = session.getServletContext();
@@ -38,12 +38,13 @@
             FileItem fi = (FileItem)i.next();
             if ( !fi.isFormField () )  {
                 String fieldName = fi.getFieldName();
-                String fileName = fi.getName();
+                fileName = fi.getName();
                 boolean isInMemory = fi.isInMemory();
                 long sizeInBytes = fi.getSize();
                 file = new File( filePath + "import.xls");
                 fi.write(file);
                 out.println("Uploaded Filename: " + filePath + fileName + "<br>");
+                System.out.println("Uploaded Filename: " + filePath + fileName);
             }
          }
          out.println("</body>");
@@ -58,5 +59,5 @@
       out.println("</body>");
       out.println("</html>");
    }
-   response.sendRedirect("items_query.jsp?action=importData");
+   response.sendRedirect("items_query.jsp?action=importData&fileName="+fileName);
 %>

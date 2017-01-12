@@ -14,6 +14,8 @@ public class GeneralConfigModel {
 	
 	public static final String TABLENAME = "general_config_master";
 	
+	public static final String CONFIG_LAST_IMPORTED_FILENAME = "cfg_last_imported_filename";
+	
 	private Integer id;
 	private String name;
 	private String contents;

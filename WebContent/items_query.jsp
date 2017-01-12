@@ -10,8 +10,12 @@ $(document).ready(function(){
     $("#results tr").click(function(){
     	var selected = $(this).hasClass("highlight");
         $("#results tr").removeClass("highlight");
+        $("#results tr").children("#sellPriceVal").addClass("sellDefault");
+        
         if(!selected){
         	$(this).addClass("highlight");
+        	$(this).children("#sellPriceVal").removeClass("sellDefault");
+
         }
     }); 
 });
@@ -49,12 +53,12 @@ $(document).ready(function(){
 		prop.load(new FileInputStream(servletContext.getRealPath("/global.properties")));	
 
 		String tomcatLocation = prop.getProperty("tomcatLocation");
-	   
+	    String fileName = request.getParameter("fileName");
 	   	String filePath = tomcatLocation + "webapps/data/import.xls";
 		if(!filePath.trim().equals("")){
 			ExcelReader excelBook = new ExcelReader();
 			try{
-				int importCount = excelBook.ingestExcelFile(filePath, conn);
+				int importCount = excelBook.ingestExcelFile(filePath, fileName, conn);
 				if(importCount>0){
 					importResults = new Integer(importCount).toString() + " items were imported.";
 %>
@@ -108,60 +112,68 @@ $(document).ready(function(){
 %>
 <form action="items_query.jsp" method="post" accept-charset="utf-8">
 <input type="hidden" name="action" value="searchPart">
-<table class="gridtable" style="display:inline-block;table-layout:fixed;width:500px;">
-	<col style="overflow:hidden;width:100px;" id="colSearchTitle"/>
-	<col style="overflow:hidden;width:250px;" id="colSearchValue"/>
+<table class="cleartable" >
 	<tr>
-		<th colspan="2"><div style="overflow:hidden;">SEARCH PARTS</div>
-		</th>
-	</tr>
-	<tr>
-		<th><div class="criteria">BRAND:</div>
-		</th>
-		<td><div class="criteria">
-			<select style="width:165px;" name="brand">
-<%
-	ArrayList<BrandModel> brands = BrandManager.getAllObjects(conn);
-	// trying out new style of for loop
-	for(BrandModel brandObj : brands){
-%>
-				<option value="<%=brandObj.getName() %>" <%=(brand.trim().equals(brandObj.getName()))?"selected":"" %>><%=brandObj.getName() %></option>
-<%
-	}
-%>
-			</select></div>
+		<td>
+			<table class="gridtable" style="display:inline-block;table-layout:fixed;width:380px;">
+				<col style="overflow:hidden;width:100px;" id="colSearchTitle"/>
+				<col style="overflow:hidden;width:250px;" id="colSearchValue"/>
+				<tr>
+					<th colspan="2"><div style="overflow:hidden;">SEARCH PARTS</div>
+					</th>
+				</tr>
+				<tr>
+					<th><div class="criteria">BRAND:</div>
+					</th>
+					<td><div class="criteria">
+						<select style="width:165px;" name="brand">
+			<%
+				ArrayList<BrandModel> brands = BrandManager.getAllObjects(conn);
+				// trying out new style of for loop
+				for(BrandModel brandObj : brands){
+			%>
+							<option value="<%=brandObj.getName() %>" <%=(brand.trim().equals(brandObj.getName()))?"selected":"" %>><%=brandObj.getName() %></option>
+			<%
+				}
+			%>
+						</select></div>
+					</td>
+				</tr>
+				<tr>
+					<th><div class="criteria">PART NO.:</div>
+					</th>
+					<td><div class="criteria"><input type="text" class="partNumber" name="partnum" value="<%=partNum %>" /><input type="submit" value="Search" /></div>
+					</td>
+				</tr>
+			</table>
 		</td>
-	</tr>
-	<tr>
-		<th><div class="criteria">PART NO.:</div>
-		</th>
-		<td><div class="criteria"><input type="text" class="partNumber" name="partnum" value="<%=partNum %>" /><input type="submit" value="Search" /></div>
-		</td>
-	</tr>
-</table>
-<table class="gridtable" style="display:inline-block;table-layout:fixed;width:500px;">
-	<col style="overflow:hidden;width:120px;" id="colDoubleTitle"/>
-	<col style="overflow:hidden;width:130px;" id="colDoubleValue"/>
-	<col style="overflow:hidden;width:100px;" id="colFreightTitle"/>
-	<col style="overflow:hidden;width:50px;" id="colFreightValue"/>
-	<tr>
-		<th colspan="4"><div style="overflow:hidden;">PRICING VARIABLES</div>
-		</th>
-	</tr>
-	<tr>
-		<th><div class="criteria">EXCHANGE RATE:</div>
-		</th>
-		<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExchangeRate():"" %></div>
-		</td>
-		<th rowspan="2"><div class="criteria">FREIGHT:</div>
-		</th>
-		<td rowspan="2"><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
-		</td>
-	</tr>
-	<tr>
-		<th><div class="criteria">EXR DATE:</div>
-		</th>
-		<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
+		<td>
+			<table class="gridtable" style="display:inline-block;table-layout:fixed;width:500px;">
+				<col style="overflow:hidden;width:120px;" id="colDoubleTitle"/>
+				<col style="overflow:hidden;width:130px;" id="colDoubleValue"/>
+				<col style="overflow:hidden;width:100px;" id="colFreightTitle"/>
+				<col style="overflow:hidden;width:50px;" id="colFreightValue"/>
+				<tr>
+					<th colspan="4"><div style="overflow:hidden;">PRICING VARIABLES</div>
+					</th>
+				</tr>
+				<tr>
+					<th><div class="criteria">EXCHANGE RATE:</div>
+					</th>
+					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExchangeRate():"" %></div>
+					</td>
+					<th rowspan="2"><div class="criteria">FREIGHT:</div>
+					</th>
+					<td rowspan="2"><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
+					</td>
+				</tr>
+				<tr>
+					<th><div class="criteria">EXR DATE:</div>
+					</th>
+					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
+					</td>
+				</tr>
+			</table>
 		</td>
 	</tr>
 </table>
@@ -245,7 +257,7 @@ $(document).ready(function(){
 		</td>
 		<td><%=itmObj.getAddInfo3() %>
 		</td>
-		<td align="right" style="background-color: #ffff99;"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice().longValue()) %>
+		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice().longValue()) %>
 		</td>
 		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
@@ -318,6 +330,10 @@ NOTE : <br/>
 		<td><input type="submit" value="Import" />
 		</td>
 		<td>&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">The last imported file was <%=GeneralConfigManager.getConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, conn).getContents() %>
 		</td>
 	</tr>
 <%

@@ -130,3 +130,8 @@ looks like that was wrong. Need to find out what it really means before can proc
 - all number fields show blank if 0 equivalent except duties show 0, and selling price shows -
 - trying to fix odd bug where ERROR 42 shows in graco family type column on site but shows #N/A! in local
 - adding base work for last uploaded filename
+- store and display filename of last import file
+- pricing variables table needs to align with additional info 1 column
+- exr date is showing nth day for some reason
+- red highlight on selling price field
+- exr date, exchange rate, brand, part no., freight column headers must be completely centre justified 

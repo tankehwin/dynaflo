@@ -58,11 +58,16 @@ input.partNumber {
 }
 
 div.criteria {
-	height: 25px;
     overflow: hidden;
 }
 
 
-.highlight { background-color: pink; }
+.highlight { 
+	background-color: pink; 
+}
+
+.sellDefault { 
+	background-color: #ffff99;
+}
 
 </style>

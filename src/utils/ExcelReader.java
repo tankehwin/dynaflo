@@ -3,7 +3,10 @@ package utils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -16,19 +19,22 @@ import jxl.write.Number;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import model.GeneralConfigModel;
 import model.ItemModel;
 import data.*;
 
 public class ExcelReader {
 
-	public int ingestExcelFile(String filePath, Connection conn) throws Exception {
+	public int ingestExcelFile(String filePath, String fileName, Connection conn) throws Exception {
 		String errSheet = "";
 		int importCount = 0;
 		try{
 			conn.setAutoCommit(false);
 			String samplePath = "C:/Users/tankehwin/Desktop/DYNAFLO PRICE 2016 - 14.10.16 - Rev 2.xls";
 			// Open workbook
-			Workbook dynafloBook = Workbook.getWorkbook(new File(filePath)); 
+			File workbookFile = new File(filePath);
+			
+			Workbook dynafloBook = Workbook.getWorkbook(workbookFile); 
 			// Instantiate hard-coded master file for field name schemes
 			FieldNameScheme fnsScroll = new FieldNameScheme();
 			// Delete all items from database TODO: Transaction object really required for this whole section
@@ -111,14 +117,14 @@ public class ExcelReader {
 //						System.out.println("column: " + arrFieldNames.get(k));
 //						System.out.println("cellValue: " + cellValue);
 						// Depending on which column it belongs to, add it to appropriate property
-						System.out.print(cellValue + ",");
+						//System.out.print(cellValue + ",");
 						itmObj.setFieldValue((String) arrFieldNames.get(k), cellValue);				
 					}					
 					// special consideration for brand property, which is derived from sheet name
 					itmObj.setFieldValue(ItemModel.COLNAME_BRAND, dynafloSheetName);
 					// Add to product object collection
 					arrProdList.add(itmObj);
-					System.out.println("=0=");
+					//System.out.println("=0=");
 					// Go to next row
 					currentRow++;
 				// End loop
@@ -155,13 +161,40 @@ public class ExcelReader {
 				Cell cellEXRRateData = sheet.getCell(cellEXRRate.getColumn() + 2, cellEXRRate.getRow());
 				Cell cellEXRDateData = sheet.getCell(cellEXRDate.getColumn() + 2, cellEXRDate.getRow());
 				Cell cellFreightData = sheet.getCell(cellFreight.getColumn() + 1, cellFreight.getRow());
+				// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
+				// This code counteracts this issue, but we cannot be sure that this will always be the case
+				// Currently just a workaround
+				Calendar calendar = Calendar.getInstance();
+				String dateString = cellEXRDateData.getContents().trim();
+				if(!dateString.equals("-")){
+					int slashIndex = dateString.toString().indexOf("/");
+					int dayOfYear = new Integer(dateString.toString().substring(0, slashIndex)).intValue();
+					slashIndex = dateString.toString().lastIndexOf("/");
+					int year = new Integer(dateString.toString().substring(slashIndex+1)).intValue();
+					calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+					calendar.set(Calendar.YEAR, year);
+					Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+					dateString = dateFormat.format(timestamp);
+				}
+				
 				BrandManager.updateObject(dynafloSheetName, 
 						cellEXRRateData.getContents().trim(),
-						cellEXRDateData.getContents().trim(),
+						dateString,
 						cellFreightData.getContents().trim(),
 						conn);
 			// End loop
 			}
+			
+			GeneralConfigModel lastFilename = GeneralConfigManager.getConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, conn);
+			if(lastFilename!=null && lastFilename.getName().equals(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME)){
+				GeneralConfigManager.updateConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, fileName, conn);
+			}
+			else {
+				GeneralConfigManager.addConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, fileName, conn);
+			}
+			
+			
 			dynafloBook.close();	
 			conn.commit();
 		}
