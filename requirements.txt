@@ -49,6 +49,10 @@ set thousandth comma separator for selling price (free) (done)
 all number fields show blank if 0 equivalent except duties show 0, and selling price shows - (free) (done)
 store and display filename of last import file (0.5days)
 pricing variables table needs to align with additional info 1 column (free)
+exr date is showing nth day for some reason
+red highlight on selling price field
+how to stop browser from showing local file contents
+exr date, exchange rte, brand, part no., freight column headers must be completely centre justified
 
 phase 3
 split server implementation - 2 servers each with its own tomcat and database. any upload to one instance automatically updates both databases

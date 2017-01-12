@@ -28,10 +28,8 @@ $(document).ready(function(){
 	int colspan = 16;
 	boolean ifIracExists = false;	
 	
-	DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
-	DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
-	symbols.setGroupingSeparator(' ');
-	formatter.setDecimalFormatSymbols(symbols);
+
+	DecimalFormat formatter = new DecimalFormat("###,###,###,###.00");
 
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
@@ -255,7 +253,7 @@ $(document).ready(function(){
 		</td>	
 		<td align="center"><%=itmObj.getGracoFamType() %>
 		</td>
-		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
+		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
 		</td>
 		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
 		</td>	
