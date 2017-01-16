@@ -39,6 +39,8 @@ CREATE TABLE brands_master (
 	freight_charges varchar(5),
 	expiry_date varchar(20),
 	exchange_rate varchar(50),
+	news varchar(1000),
+	price_date varchar(20),
 	date_created datetime,
 	date_updated datetime
 );

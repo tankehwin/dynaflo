@@ -13,6 +13,8 @@ public class BrandModel {
 	public static final String COLNAME_FREIGHT_CHARGES = "freight_charges";
 	public static final String COLNAME_EXPIRY_DATE = "expiry_date";
 	public static final String COLNAME_EXCHANGE_RATE = "exchange_rate";
+	public static final String COLNAME_NEWS = "news";
+	public static final String COLNAME_PRICE_DATE = "price_date";
 	public static final String COLNAME_DATE_CREATED = "date_created";
 	public static final String COLNAME_DATE_UPDATED = "date_updated";
 	
@@ -24,6 +26,8 @@ public class BrandModel {
 	private String freightCharges;
 	private String expiryDate;
 	private String exchangeRate;
+	private String priceDate;
+	private String news;
 	private Timestamp dateCreated;
 	private Timestamp dateUpdated;
 	
@@ -68,5 +72,17 @@ public class BrandModel {
 	}
 	public void setDateUpdated(Timestamp dateUpdated) {
 		this.dateUpdated = dateUpdated;
+	}
+	public String getPriceDate() {
+		return priceDate;
+	}
+	public void setPriceDate(String priceDate) {
+		this.priceDate = priceDate;
+	}
+	public String getNews() {
+		return news;
+	}
+	public void setNews(String news) {
+		this.news = news;
 	}
 }

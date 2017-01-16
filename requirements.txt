@@ -51,7 +51,7 @@ pricing variables table needs to align with additional info 1 column (free) (don
 exr date is showing nth day for some reason (done) (free)
 red highlight on selling price field (done) (free)
 exr date, exchange rate, brand, part no., freight column headers must be completely centre justified (done) (free)
-add price date and news field per brand
+add price date and news field per brand (done)
 how to stop browser from showing local file contents
 remove item ref from consideration (free)
 

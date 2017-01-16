@@ -148,15 +148,11 @@ $(document).ready(function(){
 			</table>
 		</td>
 		<td>
-			<table class="gridtable" style="display:inline-block;table-layout:fixed;width:500px;">
+			<table class="gridtable" style="display:inline-block;table-layout:fixed;width:430px;">
 				<col style="overflow:hidden;width:120px;" id="colDoubleTitle"/>
 				<col style="overflow:hidden;width:130px;" id="colDoubleValue"/>
 				<col style="overflow:hidden;width:100px;" id="colFreightTitle"/>
 				<col style="overflow:hidden;width:50px;" id="colFreightValue"/>
-				<tr>
-					<th colspan="4"><div style="overflow:hidden;">PRICING VARIABLES</div>
-					</th>
-				</tr>
 				<tr>
 					<th><div class="criteria">EXCHANGE RATE:</div>
 					</th>
@@ -168,9 +164,35 @@ $(document).ready(function(){
 					</td>
 				</tr>
 				<tr>
-					<th><div class="criteria">EXR DATE:</div>
+					<th><div class="criteria">EXH RATE DATE:</div>
 					</th>
 					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
+					</td>
+				</tr>
+				<tr>
+					<th><div class="criteria">PRICE DATE:</div>
+					</th>
+					<td colspan="3"><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getPriceDate():"" %></div>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table style="display:inline-block;table-layout:fixed;width:400px;border-collapse:collapse;">
+				<col style="overflow:hidden;width:400px;" id="colNews"/>
+				<tr>
+					<th style="border-top:1px solid;border-bottom:1px solid;border-right:1px solid;border-left:1px solid;">
+						<div class="criteria" align="left">NEWS:</div>
+					</th>
+
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="border-top:1px solid;border-right:1px solid;border-left:1px solid;">
+						<%=(pricingVariableObj!=null)?pricingVariableObj.getNews():"" %>
+					</td>
+				</tr>
+				<tr>
+					<td style="border-bottom:1px solid;border-right:1px solid;border-left:1px solid;">&nbsp;
 					</td>
 				</tr>
 			</table>
@@ -267,7 +289,7 @@ $(document).ready(function(){
 		</td>
 		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
 		</td>
-		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
+		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
 		</td>	
 		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO())  %>
 		</td>

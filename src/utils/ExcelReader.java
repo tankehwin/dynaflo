@@ -158,9 +158,13 @@ public class ExcelReader {
 				Cell cellEXRRate = sheet.findCell("EXCHANGE RATE:");
 				Cell cellEXRDate = sheet.findCell("EXR DATE:");
 				Cell cellFreight = sheet.findCell("FREIGHT (%):");
+				Cell cellNews = sheet.findCell("NEWS:");
+				Cell cellPriceDate = sheet.findCell("PRICE DATE:");
 				Cell cellEXRRateData = sheet.getCell(cellEXRRate.getColumn() + 2, cellEXRRate.getRow());
 				Cell cellEXRDateData = sheet.getCell(cellEXRDate.getColumn() + 2, cellEXRDate.getRow());
 				Cell cellFreightData = sheet.getCell(cellFreight.getColumn() + 1, cellFreight.getRow());
+				Cell cellNewsData = sheet.getCell(cellNews.getColumn(), cellNews.getRow() + 1);
+				Cell cellPriceDateData = sheet.getCell(cellPriceDate.getColumn() + 1, cellPriceDate.getRow());
 				// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
 				// This code counteracts this issue, but we cannot be sure that this will always be the case
 				// Currently just a workaround
@@ -182,6 +186,8 @@ public class ExcelReader {
 						cellEXRRateData.getContents().trim(),
 						dateString,
 						cellFreightData.getContents().trim(),
+						cellPriceDateData.getContents().trim(),
+						cellNewsData.getContents().trim(),
 						conn);
 			// End loop
 			}

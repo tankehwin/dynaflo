@@ -135,3 +135,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - exr date is showing nth day for some reason
 - red highlight on selling price field
 - exr date, exchange rate, brand, part no., freight column headers must be completely centre justified 
+- add price date and news field per brand

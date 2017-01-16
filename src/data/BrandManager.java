@@ -20,11 +20,13 @@ public class BrandManager {
 				BrandModel.COLNAME_FREIGHT_CHARGES + ", " +
 				BrandModel.COLNAME_EXPIRY_DATE + ", " +
 				BrandModel.COLNAME_EXCHANGE_RATE + ", " +
+				BrandModel.COLNAME_PRICE_DATE + ", " +
+				BrandModel.COLNAME_NEWS + ", " +
 				BrandModel.COLNAME_DATE_CREATED + ", " +
 				BrandModel.COLNAME_DATE_UPDATED + 
 				")" +
 				" VALUES ('" +
-				value.getName().trim() + "', '', '', '', '" +
+				value.getName().trim() + "', '', '', '', '', '', '" +
 				TimestampGenerator.getTimestamp() + "', '" +
 				TimestampGenerator.getTimestamp() +
 				"');";
@@ -55,6 +57,8 @@ public static ArrayList<BrandModel> getAllObjects(Connection conn) throws Except
 			brandObj.setExchangeRate(rs.getString(BrandModel.COLNAME_EXCHANGE_RATE));
 			brandObj.setExpiryDate(rs.getString(BrandModel.COLNAME_EXPIRY_DATE));
 			brandObj.setFreightCharges(rs.getString(BrandModel.COLNAME_FREIGHT_CHARGES));
+			brandObj.setPriceDate(rs.getString(BrandModel.COLNAME_PRICE_DATE));
+			brandObj.setNews(rs.getString(BrandModel.COLNAME_NEWS));
 			brandObj.setId(new Integer(rs.getInt(BrandModel.COLNAME_ID)));
 			brandObj.setDateCreated(rs.getTimestamp(LoginModel.COLNAME_DATE_CREATED));
 			brandObj.setDateUpdated(rs.getTimestamp(LoginModel.COLNAME_DATE_UPDATED));
@@ -79,6 +83,8 @@ public static ArrayList<BrandModel> getAllObjects(Connection conn) throws Except
 				brandObj.setFreightCharges(rs.getString(BrandModel.COLNAME_FREIGHT_CHARGES));
 				brandObj.setExpiryDate(rs.getString(BrandModel.COLNAME_EXPIRY_DATE));
 				brandObj.setExchangeRate(rs.getString(BrandModel.COLNAME_EXCHANGE_RATE));
+				brandObj.setPriceDate(rs.getString(BrandModel.COLNAME_PRICE_DATE));
+				brandObj.setNews(rs.getString(BrandModel.COLNAME_NEWS));
 				brandObj.setDateCreated(rs.getTimestamp(BrandModel.COLNAME_DATE_CREATED));
 				brandObj.setDateUpdated(rs.getTimestamp(BrandModel.COLNAME_DATE_UPDATED));
 			}	
@@ -111,11 +117,13 @@ public static ArrayList<BrandModel> getAllObjects(Connection conn) throws Except
 		}
 	}
 		
-	public static void updateObject(String name, String exchangeRate, String expiryDate, String freightCharges, Connection conn) throws Exception {
+	public static void updateObject(String name, String exchangeRate, String expiryDate, String freightCharges, String priceDate, String news, Connection conn) throws Exception {
 		String sql = "UPDATE " + BrandModel.TABLENAME + " SET " +
 				BrandModel.COLNAME_EXCHANGE_RATE + " = '" + exchangeRate + "', " +
 				BrandModel.COLNAME_EXPIRY_DATE + " = '" + expiryDate + "', " +
-				BrandModel.COLNAME_FREIGHT_CHARGES + " = '" + freightCharges + "' " +
+				BrandModel.COLNAME_FREIGHT_CHARGES + " = '" + freightCharges + "', " +
+				BrandModel.COLNAME_PRICE_DATE + " = '" + priceDate + "', " +
+				BrandModel.COLNAME_NEWS + " = '" + news + "' " +
 				"WHERE " + BrandModel.COLNAME_NAME + " = '" + name + "';";
 		Statement st = conn.createStatement();
 //		System.out.println(sql);
