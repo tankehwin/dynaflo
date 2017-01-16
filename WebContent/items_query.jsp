@@ -29,7 +29,7 @@ $(document).ready(function(){
 	String partNum = "";
 	String brand = "";
 	BrandModel pricingVariableObj = null;
-	int colspan = 16;
+	int colspan = 15;
 	boolean ifIracExists = false;	
 	
 
@@ -164,7 +164,7 @@ $(document).ready(function(){
 					</td>
 				</tr>
 				<tr>
-					<th><div class="criteria">EXH RATE DATE:</div>
+					<th><div id="exhRateDateLabel" class="criteria">EXH. RATE DATE:</div>
 					</th>
 					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
 					</td>
@@ -187,14 +187,17 @@ $(document).ready(function(){
 
 				</tr>
 				<tr>
-					<td align="left" valign="top" style="border-top:1px solid;border-right:1px solid;border-left:1px solid;">
+					<td id="newsContent" align="left" valign="top" style="border-bottom:1px solid;border-top:1px solid;border-right:1px solid;border-left:1px solid;">
 						<%=(pricingVariableObj!=null)?pricingVariableObj.getNews():"" %>
 					</td>
 				</tr>
-				<tr>
-					<td style="border-bottom:1px solid;border-right:1px solid;border-left:1px solid;">&nbsp;
-					</td>
-				</tr>
+<script>
+    // this script is used to ensure news box is the same height as price variables box
+	var exhRateDateLabelHeight = document.getElementById("exhRateDateLabel");
+	var height = exhRateDateLabelHeight.scrollHeight * 2 + 11;
+	height = height + 'px';
+	document.getElementById("newsContent").style.height = height;
+</script>				
 			</table>
 		</td>
 	</tr>
@@ -202,7 +205,7 @@ $(document).ready(function(){
 </form>
 <br />
 
-<table id="results" class="gridtable" style="table-layout:fixed;width:2190px;">
+<table id="results" class="gridtable" style="table-layout:fixed;width:2020px;">
 	<col style="overflow:hidden;width:170px;" id="colPartNo"/>
 	<col style="overflow:hidden;width:200px;" id="colDesc"/>
 	<col style="overflow:hidden;width:200px;" id="colAddInfo1"/>
@@ -215,7 +218,6 @@ $(document).ready(function(){
 	<col style="overflow:hidden;width:55px;" id="colGraFamDis"/>
 	<col style="overflow:hidden;width:55px;" id="colGraStdDis"/>
 	<col style="overflow:hidden;width:50px;" id="colLeadARO"/>
-	<col style="overflow:hidden;width:170px;" id="colOldPartNo"/>
 	<col style="overflow:hidden;width:100px;" id="colLastDatePurc"/>
 	<col style="overflow:hidden;width:200px;" id="colLastSupp"/>
 	<col style="overflow:hidden;width:200px;" id="colSuppPartNo"/>
@@ -243,8 +245,6 @@ $(document).ready(function(){
 		<th colspan="3" >GRACO 
 		</th>
 		<th rowspan="2" >LEAD <br/>TIME <br/>(DAYS)
-		</th>
-		<th rowspan="2" >OLD PART <br/>NO.
 		</th>
 		<th rowspan="2" >LATEST DATE <br/>QUOTED/<br/>PURCHASED
 		</th>
@@ -285,15 +285,13 @@ $(document).ready(function(){
 		</td>
 		<td align="center"><%=(itmObj.getDuties().longValue()==0)?"0.0%":((itmObj.getDuties().intValue()==-1)?"-":itmObj.getDuties())+"%" %>
 		</td>	
-		<td align="center"><%=itmObj.getGracoFamType() %>
+		<td align="center"><%=(itmObj.getGracoFamType().trim().equals(""))?"-":itmObj.getGracoFamType().trim() %>
 		</td>
 		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
 		</td>
 		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
 		</td>	
 		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO())  %>
-		</td>
-		<td align="center"><%=itmObj.getOldPartNumber() %>
 		</td>
 		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>

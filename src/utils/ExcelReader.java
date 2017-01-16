@@ -156,38 +156,50 @@ public class ExcelReader {
 				errSheet = dynafloSheetName;
 				System.out.println("Sheet name: " + dynafloSheetName);
 				Cell cellEXRRate = sheet.findCell("EXCHANGE RATE:");
-				Cell cellEXRDate = sheet.findCell("EXR DATE:");
-				Cell cellFreight = sheet.findCell("FREIGHT (%):");
+				Cell cellEXHDate = sheet.findCell("EXH. RATE DATE:");
+				Cell cellFreight = sheet.findCell("FREIGHT:");
 				Cell cellNews = sheet.findCell("NEWS:");
 				Cell cellPriceDate = sheet.findCell("PRICE DATE:");
 				Cell cellEXRRateData = sheet.getCell(cellEXRRate.getColumn() + 2, cellEXRRate.getRow());
-				Cell cellEXRDateData = sheet.getCell(cellEXRDate.getColumn() + 2, cellEXRDate.getRow());
+				Cell cellEXHDateData = sheet.getCell(cellEXHDate.getColumn() + 2, cellEXHDate.getRow());
 				Cell cellFreightData = sheet.getCell(cellFreight.getColumn() + 1, cellFreight.getRow());
 				Cell cellNewsData = sheet.getCell(cellNews.getColumn(), cellNews.getRow() + 1);
-				Cell cellPriceDateData = sheet.getCell(cellPriceDate.getColumn() + 1, cellPriceDate.getRow());
+				Cell cellPriceDateData = sheet.getCell(cellPriceDate.getColumn() + 2, cellPriceDate.getRow());
 				// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
 				// This code counteracts this issue, but we cannot be sure that this will always be the case
 				// Currently just a workaround
 				Calendar calendar = Calendar.getInstance();
-				String dateString = cellEXRDateData.getContents().trim();
-				if(!dateString.equals("-")){
-					int slashIndex = dateString.toString().indexOf("/");
-					int dayOfYear = new Integer(dateString.toString().substring(0, slashIndex)).intValue();
-					slashIndex = dateString.toString().lastIndexOf("/");
-					int year = new Integer(dateString.toString().substring(slashIndex+1)).intValue();
+				String exhDateString = cellEXHDateData.getContents().trim();
+				String priceDateString = cellPriceDateData.getContents().trim();
+				if(!exhDateString.equals("-")){
+					int slashIndex = exhDateString.toString().indexOf("/");
+					int dayOfYear = new Integer(exhDateString.toString().substring(0, slashIndex)).intValue();
+					slashIndex = exhDateString.toString().lastIndexOf("/");
+					int year = new Integer(exhDateString.toString().substring(slashIndex+1)).intValue();
 					calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
 					calendar.set(Calendar.YEAR, year);
 					Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
 					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-					dateString = dateFormat.format(timestamp);
+					exhDateString = dateFormat.format(timestamp);
 				}
-				
+				if(!priceDateString.equals("-")){
+					int slashIndex = priceDateString.toString().indexOf("/");
+					int dayOfYear = new Integer(priceDateString.toString().substring(0, slashIndex)).intValue();
+					slashIndex = priceDateString.toString().lastIndexOf("/");
+					int year = new Integer(priceDateString.toString().substring(slashIndex+1)).intValue();
+					calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+					calendar.set(Calendar.YEAR, year);
+					Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+					priceDateString = dateFormat.format(timestamp);
+				}
+				String newsString = cellNewsData.getContents().trim().replaceAll("'", "''");
 				BrandManager.updateObject(dynafloSheetName, 
 						cellEXRRateData.getContents().trim(),
-						dateString,
+						exhDateString,
 						cellFreightData.getContents().trim(),
-						cellPriceDateData.getContents().trim(),
-						cellNewsData.getContents().trim(),
+						priceDateString,
+						newsString,
 						conn);
 			// End loop
 			}

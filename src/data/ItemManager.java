@@ -20,10 +20,8 @@ public class ItemManager {
 				ItemModel.COLNAME_SELLINGPRICE + ", " +
 				ItemModel.COLNAME_LEADTIMEARO + ", " +
 				ItemModel.COLNAME_DYNAFLODISCOUNTCODE + ", " +
-				ItemModel.COLNAME_OLDPARTNUMBER + ", " +
 				ItemModel.COLNAME_LATESTDATEPURCHASED + ", " +
 				ItemModel.COLNAME_SUPPLIER + ", " +
-				ItemModel.COLNAME_ITEMREFERENCE + ", " +
 				ItemModel.COLNAME_EQUIPMENTPACKAGEREFERENCE + ", " +
 				ItemModel.COLNAME_GRACOREFERENCE + ", " +
 				ItemModel.COLNAME_GRACOFAMILYTYPE + ", " +
@@ -43,10 +41,8 @@ public class ItemManager {
 				value.getSellingPrice().toString() + ", " +
 				value.getLeadTimeARO().toString() + ", '" +
 				value.getDynafloDiscountCode().trim() + "', '" +
-				value.getOldPartNumber().trim() + "', '" +
 				value.getLatestDatePurchased().toString() + "', '" +
 				value.getSupplier().trim() + "', '" +
-				value.getItemReference().trim() + "', '" +
 				value.getEquipmentPackageReference().trim() + "', '" +
 				value.getGracoReference().trim() + "', '" +
 				value.getGracoFamType().trim() + "', " +
@@ -104,10 +100,8 @@ public class ItemManager {
 			itemObj.setGracoReference(rs.getString(ItemModel.COLNAME_GRACOREFERENCE));
 			itemObj.setGracoStdDiscount(rs.getBigDecimal(ItemModel.COLNAME_GRACOSTDDISCOUNT));
 			itemObj.setGracoStdDiscountCode(rs.getString(ItemModel.COLNAME_GRACOSTDDISCOUNTCODE));
-			itemObj.setItemReference(rs.getString(ItemModel.COLNAME_ITEMREFERENCE));
 			itemObj.setLatestDatePurchased(rs.getTimestamp(ItemModel.COLNAME_LATESTDATEPURCHASED));
 			itemObj.setLeadTimeARO(new Integer(rs.getInt(ItemModel.COLNAME_LEADTIMEARO)));
-			itemObj.setOldPartNumber(rs.getString(ItemModel.COLNAME_OLDPARTNUMBER));
 			itemObj.setPartNumber(rs.getString(ItemModel.COLNAME_PARTNUMBER));
 			itemObj.setSellingPrice(rs.getBigDecimal(ItemModel.COLNAME_SELLINGPRICE));
 			itemObj.setSupplier(rs.getString(ItemModel.COLNAME_SUPPLIER));

@@ -136,3 +136,6 @@ looks like that was wrong. Need to find out what it really means before can proc
 - red highlight on selling price field
 - exr date, exchange rate, brand, part no., freight column headers must be completely centre justified 
 - add price date and news field per brand
+- removed item ref and old part number columns
+- graco family type column now displays "-" if empty string
+- synced up height of news box and price variables box

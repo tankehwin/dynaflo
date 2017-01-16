@@ -22,10 +22,8 @@ public class ItemModel {
 	public static final String COLNAME_SELLINGPRICE = "selling_price";
 	public static final String COLNAME_LEADTIMEARO = "lead_time_aro";
 	public static final String COLNAME_DYNAFLODISCOUNTCODE = "dynaflo_discount_code";
-	public static final String COLNAME_OLDPARTNUMBER = "old_part_number";
 	public static final String COLNAME_LATESTDATEPURCHASED = "latest_date_purchased";
 	public static final String COLNAME_SUPPLIER = "supplier";
-	public static final String COLNAME_ITEMREFERENCE = "item_reference";
 	public static final String COLNAME_EQUIPMENTPACKAGEREFERENCE = "equipment_package_reference";
 	public static final String COLNAME_GRACOREFERENCE = "graco_reference";
 	public static final String COLNAME_GRACOFAMILYTYPE = "graco_fam_type";
@@ -49,10 +47,8 @@ public class ItemModel {
 	private BigDecimal sellingPrice;
 	private Integer leadTimeARO;
 	private String dynafloDiscountCode;
-	private String oldPartNumber;
 	private Timestamp latestDatePurchased;
 	private String supplier;
-	private String itemReference;
 	private String equipmentPackageReference;
 	private String gracoReference;
 	private String gracoFamType;
@@ -72,10 +68,8 @@ public class ItemModel {
 		this.sellingPrice = new BigDecimal(0);
 		this.leadTimeARO = new Integer(0);
 		this.dynafloDiscountCode = "";
-		this.oldPartNumber = "";
 		this.latestDatePurchased = Timestamp.valueOf("1970-01-01 00:00:01");
 		this.supplier = "";
-		this.itemReference = "";
 		this.equipmentPackageReference = "";
 		this.gracoReference = "";
 		this.gracoFamType = "";
@@ -158,11 +152,6 @@ public class ItemModel {
 			result = result.replaceAll("'", "''");
 			this.dynafloDiscountCode = result;
 		}
-		else if(FieldNameScheme.FIELDNAME_OLD_PART_NUMBER.equals(fieldName)){
-			String result = value.toString();
-			result = result.replaceAll("'", "''");
-			this.oldPartNumber = result;
-		}
 		else if(FieldNameScheme.FIELDNAME_LATEST_DATE_PURCHASED.equals(fieldName)){			
 			if(!value.toString().trim().equals("")){
 				// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
@@ -194,11 +183,6 @@ public class ItemModel {
 			String result = value.toString();
 			result = result.replaceAll("'", "''");
 			this.supplier = result;
-		}
-		else if(FieldNameScheme.FIELDNAME_ITEM_REF.equals(fieldName)){
-			String result = value.toString();
-			result = result.replaceAll("'", "''");
-			this.itemReference = result;
 		}
 		else if(FieldNameScheme.FIELDNAME_GRACO_FAMILY_TYPE.equals(fieldName)){
 			String result = value.toString();
@@ -304,12 +288,6 @@ public class ItemModel {
 	public void setDynafloDiscountCode(String dynafloDiscountCode) {
 		this.dynafloDiscountCode = dynafloDiscountCode;
 	}
-	public String getOldPartNumber() {
-		return oldPartNumber;
-	}
-	public void setOldPartNumber(String oldPartNumber) {
-		this.oldPartNumber = oldPartNumber;
-	}
 	public Timestamp getLatestDatePurchased() {
 		return latestDatePurchased;
 	}
@@ -321,12 +299,6 @@ public class ItemModel {
 	}
 	public void setSupplier(String supplier) {
 		this.supplier = supplier;
-	}
-	public String getItemReference() {
-		return itemReference;
-	}
-	public void setItemReference(String itemReference) {
-		this.itemReference = itemReference;
 	}
 	public String getEquipmentPackageReference() {
 		return equipmentPackageReference;
