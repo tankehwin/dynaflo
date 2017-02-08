@@ -62,7 +62,7 @@ Import button under Choose File (free) (done)
 phase 3
 split server implementation - 2 servers each with its own tomcat and database. any upload to one instance automatically updates both databases
 using serverlink (remote desktop/vpn)
-going online
+allow jb to access pricebook via serverlink
 
 
 
