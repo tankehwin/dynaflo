@@ -56,6 +56,7 @@ $(document).ready(function(){
 	    String fileName = request.getParameter("fileName");
 	   	String filePath = tomcatLocation + "webapps/data/import.xls";
 		if(!filePath.trim().equals("")){
+
 			ExcelReader excelBook = new ExcelReader();
 			try{
 				int importCount = excelBook.ingestExcelFile(filePath, fileName, conn);
@@ -353,7 +354,7 @@ NOTE : <br/>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">The last imported file was <%=GeneralConfigManager.getConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, conn).getContents() %>
+		<td colspan="2"><%=(GeneralConfigManager.getConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, conn)!=null)?"The last imported file was " + GeneralConfigManager.getConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, conn).getContents():"This database is empty." %>
 		</td>
 	</tr>
 <%
