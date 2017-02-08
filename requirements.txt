@@ -54,6 +54,10 @@ exr date, exchange rate, brand, part no., freight column headers must be complet
 add price date and news field per brand (done)
 how to stop browser from showing local file contents
 remove item ref from consideration (free)
+1. Selling price N/A dashes in the middle (not doing)
+2. Kawasaki lead time N/A dash, all other brands blank (done) (free)
+3. Non-Graco brands Graco columns blank (done) (free)
+Import button under Choose File (free) (done)
 
 phase 3
 split server implementation - 2 servers each with its own tomcat and database. any upload to one instance automatically updates both databases

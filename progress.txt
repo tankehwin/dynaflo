@@ -139,3 +139,5 @@ looks like that was wrong. Need to find out what it really means before can proc
 - removed item ref and old part number columns
 - graco family type column now displays "-" if empty string
 - synced up height of news box and price variables box
+- Import button shifted to the right cell
+- if Kawasaki brand and lead time = N/A then show dash, all other brands always blank

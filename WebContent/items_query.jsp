@@ -285,13 +285,13 @@ $(document).ready(function(){
 		</td>
 		<td align="center"><%=(itmObj.getDuties().longValue()==0)?"0.0%":((itmObj.getDuties().intValue()==-1)?"-":itmObj.getDuties())+"%" %>
 		</td>	
-		<td align="center"><%=(itmObj.getGracoFamType().trim().equals(""))?"-":itmObj.getGracoFamType().trim() %>
+		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoFamType().trim().equals(""))?"-":itmObj.getGracoFamType().trim()) %>
 		</td>
-		<td align="center"><%=(itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%" %>
+		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%") %>
 		</td>
-		<td align="center"><%=(itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%" %>
+		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%") %>
 		</td>	
-		<td align="center"><%=(itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO())  %>
+		<td align="center"><%=(!brand.equals("Kawasaki"))?"":((itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO()))  %>
 		</td>
 		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>
@@ -347,9 +347,9 @@ NOTE : <br/>
 		</td>
 	</tr>
 	<tr>
-		<td><input type="submit" value="Import" />
-		</td>
 		<td>&nbsp;
+		</td>
+		<td><input type="submit" value="Import" />
 		</td>
 	</tr>
 	<tr>
