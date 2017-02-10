@@ -33,7 +33,7 @@ $(document).ready(function(){
 	boolean ifIracExists = false;	
 	
 
-	DecimalFormat formatter = new DecimalFormat("###,###,###,###.00");
+	DecimalFormat formatter = new DecimalFormat("###,###,###,###.##");
 
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
@@ -280,7 +280,7 @@ $(document).ready(function(){
 		</td>
 		<td><%=itmObj.getAddInfo3() %>
 		</td>
-		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice().longValue()) %>
+		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice()) %>
 		</td>
 		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
