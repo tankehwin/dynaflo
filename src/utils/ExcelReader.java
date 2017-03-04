@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import jxl.Cell;
+import jxl.DateCell;
 import jxl.Sheet;
 import jxl.Workbook;
 
@@ -165,34 +166,24 @@ public class ExcelReader {
 				Cell cellFreightData = sheet.getCell(cellFreight.getColumn() + 1, cellFreight.getRow());
 				Cell cellNewsData = sheet.getCell(cellNews.getColumn(), cellNews.getRow() + 1);
 				Cell cellPriceDateData = sheet.getCell(cellPriceDate.getColumn() + 2, cellPriceDate.getRow());
-				// There is a problem with Excel extracting dates - the dates being extracted is nth day of year, e.g. 56/02/2014
-				// This code counteracts this issue, but we cannot be sure that this will always be the case
-				// Currently just a workaround
+				// Take the extracted data and stuff it into a class that understands dates extracted from Excel - direct string manipulation 
+				// and extraction of date values will not yield satisfactory results
 				Calendar calendar = Calendar.getInstance();
 				String exhDateString = cellEXHDateData.getContents().trim();
 				String priceDateString = cellPriceDateData.getContents().trim();
 				if(!exhDateString.equals("-")){
-					int slashIndex = exhDateString.toString().indexOf("/");
-					int dayOfYear = new Integer(exhDateString.toString().substring(0, slashIndex)).intValue();
-					slashIndex = exhDateString.toString().lastIndexOf("/");
-					int year = new Integer(exhDateString.toString().substring(slashIndex+1)).intValue();
-					calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-					calendar.set(Calendar.YEAR, year);
-					Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
 					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-					exhDateString = dateFormat.format(timestamp);
+					DateCell dateCell = null;
+					dateCell = (DateCell) cellEXHDateData;
+					exhDateString = dateFormat.format(dateCell.getDate());
 				}
 				if(!priceDateString.equals("-")){
-					int slashIndex = priceDateString.toString().indexOf("/");
-					int dayOfYear = new Integer(priceDateString.toString().substring(0, slashIndex)).intValue();
-					slashIndex = priceDateString.toString().lastIndexOf("/");
-					int year = new Integer(priceDateString.toString().substring(slashIndex+1)).intValue();
-					calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-					calendar.set(Calendar.YEAR, year);
-					Timestamp timestamp = new java.sql.Timestamp(calendar.getTime().getTime());
 					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-					priceDateString = dateFormat.format(timestamp);
+					DateCell dateCell = null;
+					dateCell = (DateCell) cellPriceDateData;
+					priceDateString = dateFormat.format(dateCell.getDate());
 				}
+				
 				String newsString = cellNewsData.getContents().trim().replaceAll("'", "''");
 				BrandManager.updateObject(dynafloSheetName, 
 						cellEXRRateData.getContents().trim(),

@@ -142,3 +142,5 @@ looks like that was wrong. Need to find out what it really means before can proc
 - synced up height of news box and price variables box
 - Import button shifted to the right cell
 - if Kawasaki brand and lead time = N/A then show dash, all other brands always blank
+- fixed decimalformat not showing cents.
+- fixed date issue not displaying correctly if obscure Excel custom formats for date field is different
