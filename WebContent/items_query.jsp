@@ -29,7 +29,7 @@ $(document).ready(function(){
 	String partNum = "";
 	String brand = "";
 	BrandModel pricingVariableObj = null;
-	int colspan = 15;
+	int colspan = 7;
 	boolean ifIracExists = false;	
 	
 
@@ -206,60 +206,32 @@ $(document).ready(function(){
 </form>
 <br />
 
-<table id="results" class="gridtable" style="table-layout:fixed;width:2020px;">
-	<col style="overflow:hidden;width:170px;" id="colPartNo"/>
-	<col style="overflow:hidden;width:200px;" id="colDesc"/>
-	<col style="overflow:hidden;width:200px;" id="colAddInfo1"/>
-	<col style="overflow:hidden;width:200px;" id="colAddInfo2"/>
-	<col style="overflow:hidden;width:200px;" id="colAddInfo3"/>
+<table id="results" class="gridtable" style="table-layout:fixed;width:1230px;">
+	<col style="overflow:hidden;width:200px;" id="colPartNo"/>
+	<col style="overflow:hidden;width:220px;" id="colDesc"/>
+	<col style="overflow:hidden;width:220px;" id="colAddInfo1"/>
+	<col style="overflow:hidden;width:220px;" id="colAddInfo2"/>
+	<col style="overflow:hidden;width:220px;" id="colAddInfo3"/>
 	<col style="overflow:hidden;width:100px;" id="colSellPrice"/>
 	<col style="overflow:hidden;width:50px;" id="colDynDisCode"/>
-	<col style="overflow:hidden;width:55px;" id="colDuties"/>
-	<col style="overflow:hidden;width:55px;" id="colGraFamType"/>
-	<col style="overflow:hidden;width:55px;" id="colGraFamDis"/>
-	<col style="overflow:hidden;width:55px;" id="colGraStdDis"/>
-	<col style="overflow:hidden;width:50px;" id="colLeadARO"/>
-	<col style="overflow:hidden;width:100px;" id="colLastDatePurc"/>
-	<col style="overflow:hidden;width:200px;" id="colLastSupp"/>
-	<col style="overflow:hidden;width:200px;" id="colSuppPartNo"/>
 	<tr>
 		<th colspan="<%=colspan%>">SEARCH RESULTS
 		</th>
 	</tr>
 	<tr>
-		<th rowspan="2" >PART NO.
+		<th >PART NO.
 		</th>
-		<th rowspan="2" >DESCRIPTION
+		<th >DESCRIPTION
 		</th>
-		<th rowspan="2" >ADD. INFORMATION 1
+		<th >ADD. INFORMATION 1
 		</th>
-		<th rowspan="2" >ADD. INFORMATION 2
+		<th >ADD. INFORMATION 2
 		</th>
-		<th rowspan="2" >ADD. INFORMATION 3
+		<th >ADD. INFORMATION 3
 		</th>		
-		<th rowspan="2" >SELLING PRICE<br/>(RM)
+		<th >SELLING PRICE<br/>(RM)
 		</th>
-		<th rowspan="2" >DYN <br/>DISC. <br/>CODE
-		</th>
-		<th rowspan="2" >DUTIES 
-		</th>
-		<th colspan="3" >GRACO 
-		</th>
-		<th rowspan="2" >LEAD <br/>TIME <br/>(DAYS)
-		</th>
-		<th rowspan="2" >LATEST DATE <br/>QUOTED/<br/>PURCHASED
-		</th>
-		<th rowspan="2" >LATEST SUPPLIER
-		</th>
-		<th rowspan="2" >SUPPLIER <br/>PART NO.
-		</th>
-	</tr>
-	<tr>
-		<th>FAMILY <br/>TYPE
-		</th>
-		<th>FAMILY <br/>DISC.
-		</th>
-		<th>STD DISC.
+		<th >DYN <br/>DISC. <br/>CODE
 		</th>
 	</tr>
 <%
@@ -283,22 +255,6 @@ $(document).ready(function(){
 		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice()) %>
 		</td>
 		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
-		</td>
-		<td align="center"><%=(itmObj.getDuties().longValue()==0)?"0.0%":((itmObj.getDuties().intValue()==-1)?"-":itmObj.getDuties())+"%" %>
-		</td>	
-		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoFamType().trim().equals(""))?"-":itmObj.getGracoFamType().trim()) %>
-		</td>
-		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%") %>
-		</td>
-		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%") %>
-		</td>	
-		<td align="center"><%=(!brand.equals("Kawasaki"))?"":((itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO()))  %>
-		</td>
-		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
-		</td>
-		<td align="center"><%=itmObj.getSupplier() %>
-		</td>
-		<td align="center"><%=itmObj.getSupplierCode() %>
 		</td>
 	</tr>
 <%		
@@ -328,49 +284,6 @@ NOTE : <br/>
 </table>
 <%
 	}
-%>
-
-<%
-	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
-%>
-<br />
-<form action="file_upload.jsp" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-<input type="hidden" name="action" value="importData">
-<table class="gridtable">
-	<tr>
-		<td colspan="2">Import New Data File
-		</td>
-	</tr>
-	<tr>
-		<td>Select file to import: 
-		</td>
-		<td><input type='file' name="filepath"/>
-		</td>
-	</tr>
-	<tr>
-		<td>&nbsp;
-		</td>
-		<td><input type="submit" value="Import" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2"><%=(GeneralConfigManager.getConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, conn)!=null)?"The last imported file was " + GeneralConfigManager.getConfig(GeneralConfigModel.CONFIG_LAST_IMPORTED_FILENAME, conn).getContents():"This database is empty." %>
-		</td>
-	</tr>
-<%
-		if(!importResults.trim().equals("")){
-%>
-	<tr>
-		<td colspan="2"><%=importResults %>
-		</td>
-	</tr>
-<%
-		}
-%>
-</table>
-</form>
-<%
-	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>
 </body>
 <%@include file="includes/footer.jsp" %>   
