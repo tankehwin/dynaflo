@@ -144,3 +144,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - if Kawasaki brand and lead time = N/A then show dash, all other brands always blank
 - fixed decimalformat not showing cents.
 - minor BrandManager cleanup- reduced number of columns displayed for public version- minor BrandManager cleanup
+- added pagination

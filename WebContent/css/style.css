@@ -61,7 +61,6 @@ div.criteria {
     overflow: hidden;
 }
 
-
 .highlight { 
 	background-color: pink; 
 }
@@ -69,5 +68,31 @@ div.criteria {
 .sellDefault { 
 	background-color: #ffff99;
 }
+
+/* The set below is specifically for the pagination buttons */
+tr:hover:not(th) {background-color: rgba(237,28,64,.1);}
+
+input[type="button"] {
+    transition: all .3s;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+input[type="button"]:not(.active) {
+    background-color:transparent;
+}
+
+.active {
+    background-color: #ff4d4d;
+    color :#fff;
+}
+
+input[type="button"]:hover:not(.active) {
+    background-color: #ddd;
+}
+/* Pagination set ends */
 
 </style>
