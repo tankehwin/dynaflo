@@ -9,6 +9,8 @@ import model.ItemModel;
 
 public class ItemManager {
 
+	private static int rowLimit = 10;
+	
 	public static void insertObject(ItemModel value, Connection conn) throws Exception {
 		String sql = "INSERT INTO " + ItemModel.TABLENAME + "(" + 
 				ItemModel.COLNAME_PARTNUMBER + ", " +
@@ -80,7 +82,8 @@ public class ItemManager {
 	public static ArrayList<ItemModel> getObject(String partNumber, String brand, Connection conn) throws Exception {
 		
 		String sql = "SELECT * FROM " + ItemModel.TABLENAME + " WHERE " + ItemModel.COLNAME_PARTNUMBER + " LIKE '" +
-				partNumber + "%' AND " + ItemModel.COLNAME_BRAND + " = '" + brand + "' ORDER BY " + ItemModel.COLNAME_PARTNUMBER + ";";
+				partNumber + "%' AND " + ItemModel.COLNAME_BRAND + " = '" + 
+				brand + "' ORDER BY " + ItemModel.COLNAME_PARTNUMBER + " LIMIT " + rowLimit + ";";
 		Statement st = conn.createStatement();
 //		System.out.println(sql);
 		ResultSet rs = st.executeQuery(sql);
