@@ -33,7 +33,7 @@ $(document).ready(function(){
 	boolean ifIracExists = false;	
 	
 
-	DecimalFormat formatter = new DecimalFormat("###,###,###,###.##");
+	DecimalFormat formatter = new DecimalFormat("###,###,###,###.00");
 
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {

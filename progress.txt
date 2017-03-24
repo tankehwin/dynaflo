@@ -145,3 +145,4 @@ looks like that was wrong. Need to find out what it really means before can proc
 - fixed decimalformat not showing cents.
 - fixed date issue not displaying correctly if obscure Excel custom formats for date field is different
 - minor BrandManager cleanup
+- SQL row limit added
