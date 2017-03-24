@@ -37,7 +37,7 @@ function highlight() {
 	boolean ifIracExists = false;	
 	
 
-	DecimalFormat formatter = new DecimalFormat("###,###,###,###.##");
+	DecimalFormat formatter = new DecimalFormat("###,###,###,###.00");
 
 	ArrayList<ItemModel> result = new ArrayList<ItemModel>();
 	if(action != null && action.equals("searchPart")) {
@@ -153,25 +153,14 @@ function highlight() {
 			</table>
 		</td>
 		<td>
-			<table class="gridtable" style="display:inline-block;table-layout:fixed;width:430px;">
+			<table class="gridtable" style="display:inline-block;table-layout:fixed;width:250px;">
 				<col style="overflow:hidden;width:120px;" id="colDoubleTitle"/>
 				<col style="overflow:hidden;width:130px;" id="colDoubleValue"/>
-				<col style="overflow:hidden;width:100px;" id="colFreightTitle"/>
-				<col style="overflow:hidden;width:50px;" id="colFreightValue"/>
 				<tr>
-					<th><div class="criteria">EXCHANGE RATE:</div>
-					</th>
-					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExchangeRate():"" %></div>
 					</td>
-					<th rowspan="2"><div class="criteria">FREIGHT:</div>
+					<th><div class="criteria">FREIGHT:</div>
 					</th>
-					<td rowspan="2"><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
-					</td>
-				</tr>
-				<tr>
-					<th><div id="exhRateDateLabel" class="criteria">EXH. RATE DATE:</div>
-					</th>
-					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getExpiryDate():"" %></div>
+					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
 					</td>
 				</tr>
 				<tr>
@@ -180,29 +169,9 @@ function highlight() {
 					<td colspan="3"><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getPriceDate():"" %></div>
 					</td>
 				</tr>
-			</table>
-		</td>
-		<td>
-			<table style="display:inline-block;table-layout:fixed;width:400px;border-collapse:collapse;">
-				<col style="overflow:hidden;width:400px;" id="colNews"/>
 				<tr>
-					<th style="border-top:1px solid;border-bottom:1px solid;border-right:1px solid;border-left:1px solid;">
-						<div class="criteria" align="left">NEWS:</div>
-					</th>
-
+					<td colspan="2">&nbsp;</td>
 				</tr>
-				<tr>
-					<td id="newsContent" align="left" valign="top" style="border-bottom:1px solid;border-top:1px solid;border-right:1px solid;border-left:1px solid;">
-						<%=(pricingVariableObj!=null)?pricingVariableObj.getNews():"" %>
-					</td>
-				</tr>
-<script>
-    // this script is used to ensure news box is the same height as price variables box
-	var exhRateDateLabelHeight = document.getElementById("exhRateDateLabel");
-	var height = exhRateDateLabelHeight.scrollHeight * 2 + 11;
-	height = height + 'px';
-	document.getElementById("newsContent").style.height = height;
-</script>				
 			</table>
 		</td>
 	</tr>
