@@ -7,21 +7,21 @@
 // highlight results table row when clicked with jquery. This is called from the pagination buttons now instead of auto-loaded 
 // as before, because after clicking any page number, the event was being listened to anymore. Calling it from the pagination buttons 
 // each time it is clicked now forces the event listener to refresh itself and be ready to respond
-function highlight() {
-	$(document).ready(function(){	
-	    $("#results tr").click(function(){
-	    	var selected = $(this).hasClass("highlight");
-	        $("#results tr").removeClass("highlight");
-	        $("#results tr").children("#sellPriceVal").addClass("sellDefault");
-	        
-	        if(!selected){
-	        	$(this).addClass("highlight");
-	        	$(this).children("#sellPriceVal").removeClass("sellDefault");
-	
-	        }
-	    }); 
-	});
-}
+
+$(document).ready(function(){	
+    $("#results tr").click(function(){
+    	var selected = $(this).hasClass("highlight");
+        $("#results tr").removeClass("highlight");
+        $("#results tr").children("#sellPriceVal").addClass("sellDefault");
+        
+        if(!selected){
+        	$(this).addClass("highlight");
+        	$(this).children("#sellPriceVal").removeClass("sellDefault");
+
+        }
+    }); 
+});
+
 
 </script>
 
@@ -149,28 +149,6 @@ function highlight() {
 					</th>
 					<td><div class="criteria"><input type="text" class="partNumber" name="partnum" value="<%=partNum %>" /><input type="submit" value="Search" /></div>
 					</td>
-				</tr>
-			</table>
-		</td>
-		<td>
-			<table class="gridtable" style="display:inline-block;table-layout:fixed;width:250px;">
-				<col style="overflow:hidden;width:120px;" id="colDoubleTitle"/>
-				<col style="overflow:hidden;width:130px;" id="colDoubleValue"/>
-				<tr>
-					</td>
-					<th><div class="criteria">FREIGHT:</div>
-					</th>
-					<td><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getFreightCharges():"" %></div>
-					</td>
-				</tr>
-				<tr>
-					<th><div class="criteria">PRICE DATE:</div>
-					</th>
-					<td colspan="3"><div align="center" class="criteria"><%=(pricingVariableObj!=null)?pricingVariableObj.getPriceDate():"" %></div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">&nbsp;</td>
 				</tr>
 			</table>
 		</td>
@@ -317,7 +295,7 @@ function pageButtons($pCount,$cur) {
         $buttons += "<input type='button' id='id"+$i+"'value='"+$i+"' onclick='sort("+$i+")'>";
     $buttons += "<input type='button' value='Next &gt;&gt;' onclick='sort("+($cur + 1)+")' "+$nextDis+">";
     
-    highlight(); // refreshes row-highlight event listener code
+    //highlight(); // refreshes row-highlight event listener code
     
     return $buttons;
 }
