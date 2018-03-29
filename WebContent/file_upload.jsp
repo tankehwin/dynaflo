@@ -8,7 +8,7 @@
 <%@include file="includes/authentication.jsp" %>   
 <%
    File file ;
-   int maxFileSize = 5000 * 1024;
+   int maxFileSize = 50000 * 1024;
    int maxMemSize = 5000 * 1024;
    String fileName = "";
 	// load global.properties
