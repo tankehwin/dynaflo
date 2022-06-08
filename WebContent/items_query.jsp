@@ -29,8 +29,14 @@ $(document).ready(function(){
 	String partNum = "";
 	String brand = "";
 	BrandModel pricingVariableObj = null;
-	int colspan = 15;
+	int colspan = 10;
 	boolean ifIracExists = false;	
+	int rowspan = 1;
+	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+		rowspan = 2;
+		colspan = 15;
+	}
+
 	
 
 	DecimalFormat formatter = new DecimalFormat("###,###,###,###.00");
@@ -219,7 +225,7 @@ $(document).ready(function(){
 	<col style="overflow:hidden;width:55px;" id="colGraFamDis"/>
 	<col style="overflow:hidden;width:55px;" id="colGraStdDis"/>
 	<col style="overflow:hidden;width:50px;" id="colLeadARO"/>
-	<col style="overflow:hidden;width:100px;" id="colLastDatePurc"/>
+	<col style="overflow:hidden;width:150px;" id="colLastDatePurc"/>
 	<col style="overflow:hidden;width:200px;" id="colLastSupp"/>
 	<col style="overflow:hidden;width:200px;" id="colSuppPartNo"/>
 	<tr>
@@ -227,33 +233,42 @@ $(document).ready(function(){
 		</th>
 	</tr>
 	<tr>
-		<th rowspan="2" >PART NO.
+		<th rowspan="<%=rowspan%>" >PART NO.
 		</th>
-		<th rowspan="2" >DESCRIPTION
+		<th rowspan="<%=rowspan%>" >DESCRIPTION
 		</th>
-		<th rowspan="2" >ADD. INFORMATION 1
+		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 1
 		</th>
-		<th rowspan="2" >ADD. INFORMATION 2
+		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 2
 		</th>
-		<th rowspan="2" >ADD. INFORMATION 3
+		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 3
 		</th>		
-		<th rowspan="2" >SELLING PRICE<br/>(RM)
+		<th rowspan="<%=rowspan%>" >SELLING PRICE<br/>(RM)
 		</th>
-		<th rowspan="2" >DYN <br/>DISC. <br/>CODE
+		<th rowspan="<%=rowspan%>" >DYN <br/>DISC. <br/>CODE
 		</th>
-		<th rowspan="2" >DUTIES 
+<%
+	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
+		<th rowspan="<%=rowspan%>" >DUTIES 
 		</th>
-		<th colspan="3" >GRACO 
+		<th colspan="<%=rowspan + 1%>" >GRACO 
 		</th>
-		<th rowspan="2" >LEAD <br/>TIME <br/>(DAYS)
+		<th rowspan="<%=rowspan%>" >LEAD <br/>TIME <br/>(DAYS)
 		</th>
-		<th rowspan="2" >LATEST DATE <br/>QUOTED/<br/>PURCHASED
+<%
+	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
+		<th rowspan="<%=rowspan%>" >LATEST DATE <br/>QUOTED/<br/>PURCHASED
 		</th>
-		<th rowspan="2" >LATEST SUPPLIER
+		<th rowspan="<%=rowspan%>" >LATEST SUPPLIER
 		</th>
-		<th rowspan="2" >SUPPLIER <br/>PART NO.
+		<th rowspan="<%=rowspan%>" >SUPPLIER <br/>PART NO.
 		</th>
 	</tr>
+<%
+	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
 	<tr>
 		<th>FAMILY <br/>TYPE
 		</th>
@@ -262,6 +277,9 @@ $(document).ready(function(){
 		<th>STD DISC.
 		</th>
 	</tr>
+<%
+	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
 <%
 	for(int i=0; i<result.size(); i++){
 		ItemModel itmObj = result.get(i);
@@ -284,6 +302,9 @@ $(document).ready(function(){
 		</td>
 		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
+<%
+	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
 		<td align="center"><%=(itmObj.getDuties().longValue()==0)?"0.0%":((itmObj.getDuties().intValue()==-1)?"-":itmObj.getDuties())+"%" %>
 		</td>	
 		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoFamType().trim().equals(""))?"-":itmObj.getGracoFamType().trim()) %>
@@ -294,6 +315,9 @@ $(document).ready(function(){
 		</td>	
 		<td align="center"><%=(!brand.equals("Kawasaki"))?"":((itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO()))  %>
 		</td>
+<%
+	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
 		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>
 		<td align="center"><%=itmObj.getSupplier() %>

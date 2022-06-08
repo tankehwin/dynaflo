@@ -1,0 +1,6 @@
+download tomcat, install as service
+copy web files into webapps folder, remove any foreign web.xml in WEB-INF folder
+setup database (mysql or mariadb), edit global.properties to point to database
+create webapps/data folder
+create empty import.xls file in webapps/data folder
+start tomcat service
