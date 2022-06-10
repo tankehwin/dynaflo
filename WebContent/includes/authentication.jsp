@@ -22,6 +22,8 @@
 		&nbsp;
 		<a href="brands.jsp">Edit Brands</a>
 		&nbsp;
+		<a href="users.jsp">Users</a>
+		&nbsp;
 <%
 		}
 %>

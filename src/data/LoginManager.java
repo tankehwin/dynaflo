@@ -94,6 +94,24 @@ public class LoginManager {
 		
 	}
 	
+	public static void delete(String id, Connection conn) throws Exception {
+
+		try {
+			// TODO: Need to insert transaction lock
+			// Create user
+			String sql = "DELETE FROM " + LoginModel.TABLENAME +
+					" WHERE " + LoginModel.COLNAME_ID + " = '" + id + "';";
+
+			Statement st = conn.createStatement();
+			st.executeUpdate(sql);
+					
+		}
+		catch (Exception ex) {
+			throw ex;
+		}
+		
+	}
+	
 	public static boolean isUserExist(String username, Connection conn) throws Exception {
 		// Checks if a username already exists within the database
 		boolean result = false;
@@ -105,6 +123,26 @@ public class LoginManager {
 		while(rs.next()) {
 			result = true;
 		}
+		return result;
+	}
+
+	public static ArrayList<LoginModel> getAllObjects(Connection conn) throws Exception {
+		
+		String sql = "SELECT * FROM " + LoginModel.TABLENAME + " ORDER BY " + LoginModel.COLNAME_NAME + ";";
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		ArrayList<LoginModel> result = new ArrayList<LoginModel>();
+		LoginModel lgnObj = null;
+		while(rs.next()) {
+			lgnObj = new LoginModel();
+			lgnObj.setId(new Integer(rs.getInt(LoginModel.COLNAME_ID)));
+			lgnObj.setName(rs.getString(LoginModel.COLNAME_NAME));
+			lgnObj.setPassword(rs.getString(LoginModel.COLNAME_PASSWORD));
+			lgnObj.setAccType(rs.getString(LoginModel.COLNAME_ACC_TYPE));
+			lgnObj.setDateCreated(rs.getTimestamp(LoginModel.COLNAME_DATE_CREATED));
+			lgnObj.setDateUpdated(rs.getTimestamp(LoginModel.COLNAME_DATE_UPDATED));
+			result.add(lgnObj);
+		}	
 		return result;
 	}
 	

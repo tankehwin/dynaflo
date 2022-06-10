@@ -103,7 +103,7 @@ public class ExcelReader {
 					ItemModel itmObj = new ItemModel();
 					// Based on field name array created earlier, read in data into product object
 					for(int k=0;k<arrFieldColumns.size();k++){
-						int colNumber = (int) arrFieldColumns.get(k);
+						int colNumber = new Integer(arrFieldColumns.get(k).toString()).intValue();
 						String cellValue = "";
 						if(k==0){ // This if statement is because the first column (PART NUMBER) actually contains 2 cells of info, so requires concatenation
 							cellData = sheet.getCell(colNumber, currentRow);
