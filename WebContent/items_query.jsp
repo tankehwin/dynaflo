@@ -29,7 +29,7 @@ $(document).ready(function(){
 	String partNum = "";
 	String brand = "";
 	BrandModel pricingVariableObj = null;
-	int colspan = 10;
+	int colspan = 11;
 	boolean ifIracExists = false;	
 	int rowspan = 1;
 	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
@@ -214,11 +214,11 @@ $(document).ready(function(){
 
 <table id="results" class="gridtable" style="table-layout:fixed;width:2020px;">
 	<col style="overflow:hidden;width:170px;" id="colPartNo"/>
+	<col style="overflow:hidden;width:100px;" id="colSellPrice"/>
 	<col style="overflow:hidden;width:200px;" id="colDesc"/>
 	<col style="overflow:hidden;width:200px;" id="colAddInfo1"/>
 	<col style="overflow:hidden;width:200px;" id="colAddInfo2"/>
 	<col style="overflow:hidden;width:200px;" id="colAddInfo3"/>
-	<col style="overflow:hidden;width:100px;" id="colSellPrice"/>
 	<col style="overflow:hidden;width:50px;" id="colDynDisCode"/>
 	<col style="overflow:hidden;width:55px;" id="colDuties"/>
 	<col style="overflow:hidden;width:55px;" id="colGraFamType"/>
@@ -235,6 +235,8 @@ $(document).ready(function(){
 	<tr>
 		<th rowspan="<%=rowspan%>" >PART NO.
 		</th>
+		<th rowspan="<%=rowspan%>" >SELLING PRICE<br/>(RM)
+		</th>
 		<th rowspan="<%=rowspan%>" >DESCRIPTION
 		</th>
 		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 1
@@ -242,9 +244,7 @@ $(document).ready(function(){
 		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 2
 		</th>
 		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 3
-		</th>		
-		<th rowspan="<%=rowspan%>" >SELLING PRICE<br/>(RM)
-		</th>
+		</th>				
 		<th rowspan="<%=rowspan%>" >DYN <br/>DISC. <br/>CODE
 		</th>
 <%
@@ -254,11 +254,12 @@ $(document).ready(function(){
 		</th>
 		<th colspan="<%=rowspan + 1%>" >GRACO 
 		</th>
-		<th rowspan="<%=rowspan%>" >LEAD <br/>TIME <br/>(DAYS)
-		</th>
+		
 <%
 	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>
+		<th rowspan="<%=rowspan%>" >LEAD <br/>TIME <br/>(DAYS)
+		</th>
 		<th rowspan="<%=rowspan%>" >LATEST DATE <br/>QUOTED/<br/>PURCHASED
 		</th>
 		<th rowspan="<%=rowspan%>" >LATEST SUPPLIER
@@ -290,6 +291,8 @@ $(document).ready(function(){
 	<tr>
 		<td><%=itmObj.getPartNumber() %>
 		</td>
+		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice()) %>
+		</td>
 		<td><%=itmObj.getDescription() %>
 		</td>
 		<td><%=itmObj.getAddInfo1() %>
@@ -297,9 +300,7 @@ $(document).ready(function(){
 		<td><%=itmObj.getAddInfo2() %>
 		</td>
 		<td><%=itmObj.getAddInfo3() %>
-		</td>
-		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice()) %>
-		</td>
+		</td>	
 		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
 <%
@@ -312,12 +313,12 @@ $(document).ready(function(){
 		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoFamDiscount().longValue()==0)?"-":((itmObj.getGracoFamDiscount().intValue()==-1)?"-":itmObj.getGracoFamDiscount())+"%") %>
 		</td>
 		<td align="center"><%=(!brand.equals("Graco"))?"":((itmObj.getGracoStdDiscount().longValue()==0)?"-":((itmObj.getGracoStdDiscount().intValue()==-1)?"-":itmObj.getGracoStdDiscount())+"%") %>
-		</td>	
-		<td align="center"><%=(!brand.equals("Kawasaki"))?"":((itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO()))  %>
-		</td>
+		</td>			
 <%
 	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 %>
+		<td align="center"><%=(!brand.equals("Kawasaki"))?"":((itmObj.getLeadTimeARO().intValue()==0)?"":((itmObj.getLeadTimeARO().intValue()==-1)?"-":itmObj.getLeadTimeARO()))  %>
+		</td>
 		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>
 		<td align="center"><%=itmObj.getSupplier() %>
