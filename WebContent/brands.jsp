@@ -18,7 +18,9 @@
 			String expiryDate = request.getParameter("expiryDate");
 			String exchangeRate = request.getParameter("exchangeRate");
 			String freightCharges = request.getParameter("freightCharges");
-			BrandManager.updateObject(brand, exchangeRate, expiryDate, freightCharges, conn);
+			String priceDate = request.getParameter("priceDate");
+			String news = request.getParameter("news");
+			BrandManager.updateObject(brand, exchangeRate, expiryDate, freightCharges, priceDate, news, conn);
 			String success = "Update successful for " + brand;
 %>
 <script>
@@ -102,6 +104,22 @@
 		<td>:
 		</td>
 		<td><input name="freightCharges" value="<%=brandObj.getFreightCharges() %>"/>
+		</td>
+	</tr>
+	<tr>
+		<td>Price Date
+		</td>
+		<td>:
+		</td>
+		<td><input name="priceDate" value="<%=brandObj.getPriceDate() %>"/>
+		</td>
+	</tr>
+	<tr>
+		<td>News
+		</td>
+		<td>:
+		</td>
+		<td><input name="news" value="<%=brandObj.getNews() %>"/>
 		</td>
 	</tr>
 	<tr>

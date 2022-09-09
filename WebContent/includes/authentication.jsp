@@ -13,6 +13,8 @@
 	<tr>
 		<td align="right" width="100%">Welcome, <%=userLogin.getName() %>.
 		&nbsp;
+		<a href="items_query.jsp">Home</a>
+		&nbsp;
 		<a href="profile.jsp">Edit User Profile</a>
 		&nbsp;
 <%

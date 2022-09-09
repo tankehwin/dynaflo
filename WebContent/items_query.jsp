@@ -29,12 +29,12 @@ $(document).ready(function(){
 	String partNum = "";
 	String brand = "";
 	BrandModel pricingVariableObj = null;
-	int colspan = 11;
+	int colspan = 8;
 	boolean ifIracExists = false;	
 	int rowspan = 1;
 	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
 		rowspan = 2;
-		colspan = 15;
+		colspan = 12;
 	}
 
 	
@@ -235,15 +235,12 @@ $(document).ready(function(){
 	<tr>
 		<th rowspan="<%=rowspan%>" >PART NO.
 		</th>
-		<th rowspan="<%=rowspan%>" >SELLING PRICE<br/>(RM)
-		</th>
+		
 		<th rowspan="<%=rowspan%>" >DESCRIPTION
 		</th>
-		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 1
+		<th rowspan="<%=rowspan%>" >ADD. INFORMATION
 		</th>
-		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 2
-		</th>
-		<th rowspan="<%=rowspan%>" >ADD. INFORMATION 3
+		<th rowspan="<%=rowspan%>" >SELLING PRICE<br/>(RM)
 		</th>				
 		<th rowspan="<%=rowspan%>" >DYN <br/>DISC. <br/>CODE
 		</th>
@@ -263,8 +260,6 @@ $(document).ready(function(){
 		<th rowspan="<%=rowspan%>" >LATEST DATE <br/>QUOTED/<br/>PURCHASED
 		</th>
 		<th rowspan="<%=rowspan%>" >LATEST SUPPLIER
-		</th>
-		<th rowspan="<%=rowspan%>" >SUPPLIER <br/>PART NO.
 		</th>
 	</tr>
 <%
@@ -291,16 +286,15 @@ $(document).ready(function(){
 	<tr>
 		<td><%=itmObj.getPartNumber() %>
 		</td>
-		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice()) %>
-		</td>
+		
 		<td><%=itmObj.getDescription() %>
 		</td>
 		<td><%=itmObj.getAddInfo1() %>
+		<br/><%=itmObj.getAddInfo2() %>
+		<br/><%=itmObj.getAddInfo3() %>
 		</td>
-		<td><%=itmObj.getAddInfo2() %>
+		<td align="right" id="sellPriceVal" class="sellDefault"><%=(itmObj.getSellingPrice().longValue()==0)?"-":formatter.format(itmObj.getSellingPrice()) %>
 		</td>
-		<td><%=itmObj.getAddInfo3() %>
-		</td>	
 		<td align="center"><%=itmObj.getDynafloDiscountCode() %>
 		</td>
 <%
@@ -322,8 +316,6 @@ $(document).ready(function(){
 		<td align="center"><%=TimestampGenerator.getTruncatedDate(itmObj.getLatestDatePurchased()) %>
 		</td>
 		<td align="center"><%=itmObj.getSupplier() %>
-		</td>
-		<td align="center"><%=itmObj.getSupplierCode() %>
 		</td>
 	</tr>
 <%		
