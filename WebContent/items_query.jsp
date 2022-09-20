@@ -212,22 +212,27 @@ $(document).ready(function(){
 </form>
 <br />
 
-<table id="results" class="gridtable" style="table-layout:fixed;width:2020px;">
-	<col style="overflow:hidden;width:170px;" id="colPartNo"/>
-	<col style="overflow:hidden;width:100px;" id="colSellPrice"/>
+<table id="results" class="gridtable" style="table-layout:fixed;width:1240px;">
+	<colgroup>
+	<col style="overflow:hidden;width:100px;" id="colPartNo"/>	
 	<col style="overflow:hidden;width:200px;" id="colDesc"/>
-	<col style="overflow:hidden;width:200px;" id="colAddInfo1"/>
-	<col style="overflow:hidden;width:200px;" id="colAddInfo2"/>
-	<col style="overflow:hidden;width:200px;" id="colAddInfo3"/>
-	<col style="overflow:hidden;width:50px;" id="colDynDisCode"/>
-	<col style="overflow:hidden;width:55px;" id="colDuties"/>
-	<col style="overflow:hidden;width:55px;" id="colGraFamType"/>
-	<col style="overflow:hidden;width:55px;" id="colGraFamDis"/>
-	<col style="overflow:hidden;width:55px;" id="colGraStdDis"/>
-	<col style="overflow:hidden;width:50px;" id="colLeadARO"/>
-	<col style="overflow:hidden;width:150px;" id="colLastDatePurc"/>
-	<col style="overflow:hidden;width:200px;" id="colLastSupp"/>
-	<col style="overflow:hidden;width:200px;" id="colSuppPartNo"/>
+	<col style="overflow:hidden;width:200px;" id="colAddInfo"/>
+	<col style="overflow:hidden;width:80px;" id="colSellPrice"/>
+	<col style="overflow:hidden;width:30px;" id="colDynDisCode"/>
+<%
+	if(userLogin!=null && userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
+	<col style="overflow:hidden;width:30px;" id="colDuties"/>
+	<col style="overflow:hidden;width:50px;" id="colGraFamType"/>
+	<col style="overflow:hidden;width:30px;" id="colGraFamDis"/>
+	<col style="overflow:hidden;width:30px;" id="colGraStdDis"/>
+<%
+	} // if(userLogin.getAccType().equals(LoginModel.CONST_ACC_TYPE_ADMIN)){
+%>
+	<col style="overflow:hidden;width:30px;" id="colLeadARO"/>
+	<col style="overflow:hidden;width:50px;" id="colLastDatePurc"/>
+	<col style="overflow:hidden;width:100px;" id="colLastSupp"/>
+	</colgroup>
 	<tr>
 		<th colspan="<%=colspan%>">SEARCH RESULTS
 		</th>
